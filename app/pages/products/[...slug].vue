@@ -5,18 +5,18 @@ const router = useRouter()
 const isMobileFilterOpen = ref(false)
 const showVat = useState<boolean>('show_vat_status', () => false)
 
-// واکنش‌گرا کردن اسلاگ برای مسیرهای تودرتو (مثل /products/ورق-استیل/ورق-استیل-310s)
+// استخراج امن اسلاگ (گرفتن آخرین بخش از URL)
 const currentSlug = computed(() => {
-  const slugArray = route.params.slug as string[]
-  return slugArray && slugArray.length > 0 
-    ? decodeURIComponent(slugArray[slugArray.length - 1]) 
-    : null
+  const slugParam = route.params.slug
+  if (!slugParam) return null
+  const slug = Array.isArray(slugParam) ? slugParam[slugParam.length - 1] : slugParam
+  return slug ? decodeURIComponent(String(slug)) : null
 })
 
-// گوش دادن قدرتمند به تغییرات مسیر و فیلترها
+// گرفتن دیتا از بک‌اند (watch مسیر باعث می‌شود با هر کلیک، صفحه آپدیت شود)
 const { data: pageData, pending } = await useFetch('/api/products', {
   query: computed(() => ({ categorySlug: currentSlug.value, ...route.query })),
-  watch: [() => route.query, () => route.params.slug] 
+  watch: [() => route.fullPath] 
 })
 
 const selectedFilters = ref<Record<string, string[]>>({
@@ -88,6 +88,7 @@ useHead({
   ]
 })
 </script>
+
 
 <template>
   <div class="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#84012B] selection:text-white">

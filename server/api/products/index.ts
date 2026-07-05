@@ -5,52 +5,70 @@ const prisma = new PrismaClient()
 
 export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
-  // جدا کردن فیلترهای داینامیک از پارامترهای اصلی
   const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
 
   let targetCategory = null
   const categoryIds: number[] = []
 
-  // ۱. پیدا کردن هوشمند دسته‌بندی و زیردسته‌های آن
   if (categorySlug) {
     targetCategory = await prisma.category.findUnique({
       where: { slug: String(categorySlug) },
       include: { children: true }
     })
 
-    // اضافه کردن آیدی دسته فعلی و تمام زیردسته‌های آن برای کوئری
     if (targetCategory) {
       categoryIds.push(targetCategory.id)
       targetCategory.children.forEach(child => categoryIds.push(child.id))
     }
   }
 
-  const whereClause: any = {}
+  // استفاده از آرایه AND برای جلوگیری از اوررایت شدن شرط‌های کوئری پریسما
+  const whereClause: any = { AND: [] }
 
   if (search) {
-    whereClause.OR = [
-      { name: { contains: String(search) } },
-      { sku: { contains: String(search) } }
-    ]
+    whereClause.AND.push({
+      OR: [
+        { name: { contains: String(search) } },
+        { sku: { contains: String(search) } }
+      ]
+    })
   }
 
-  // گرفتن محصولات دسته مادر و زیردسته‌ها
   if (categoryIds.length > 0) {
-    whereClause.categoryId = { in: categoryIds }
+    const categoryConditions: any[] = [
+      { categoryId: { in: categoryIds } }
+    ]
+
+    // --- سیستم هوشمند جبران دیتای ایمپورت شده ---
+    // اگر در زیردسته هستیم، بگرد و محصولات مرتبطِ دسته مادر را هم بیاور
+    if (targetCategory?.parentId) {
+      const nameParts = targetCategory.name.trim().split(' ')
+      const mainKeyword = nameParts[nameParts.length - 1] // استخراج کلمه کلیدی (مثلاً 310s)
+
+      categoryConditions.push({
+        categoryId: targetCategory.parentId,
+        name: { contains: mainKeyword }
+      })
+    }
+
+    whereClause.AND.push({ OR: categoryConditions })
   } else if (categorySlug && !targetCategory) {
-    // اگر دسته‌بندی در دیتابیس یافت نشد
-    whereClause.id = -1 
+    whereClause.AND.push({ id: -1 })
   }
 
   if (minPrice || maxPrice) {
-    whereClause.price = {
-      ...(minPrice && { gte: Number(minPrice) }),
-      ...(maxPrice && { lte: Number(maxPrice) })
-    }
+    const priceCondition: any = {}
+    if (minPrice) priceCondition.gte = Number(minPrice)
+    if (maxPrice) priceCondition.lte = Number(maxPrice)
+    whereClause.AND.push({ price: priceCondition })
+  }
+
+  // پاک کردن آرایه اگر خالی بود تا پریسما ارور ندهد
+  if (whereClause.AND.length === 0) {
+    delete whereClause.AND
   }
 
   try {
-    // ۲. دریافت محصولات از دیتابیس بدون درگیری با محدودیت JSON در MySQL
     const rawProducts = await prisma.product.findMany({
       where: whereClause,
       include: {
@@ -59,7 +77,6 @@ export default defineCachedEventHandler(async (event) => {
       orderBy: { updatedAt: 'desc' }
     })
 
-    // ۳. اعمال فیلترهای داینامیک در لایه سرور (بسیار سریع و بدون ارور ۵۰۰)
     let filteredProducts = rawProducts
     const activeAttributeFilters = Object.entries(dynamicFiltersQuery)
       .filter(([key, val]) => val !== undefined && val !== '')
@@ -71,7 +88,6 @@ export default defineCachedEventHandler(async (event) => {
         if (Object.keys(pAttr).length === 0) {
           pAttr = extractAttributesFromName(product.name)
         }
-        // بررسی اینکه محصول شرایط همه فیلترهای انتخابی کاربر را دارد
         return activeAttributeFilters.every(filter => {
           const productAttrValue = pAttr[filter.key]
           return productAttrValue && filter.values.includes(productAttrValue)
@@ -79,7 +95,6 @@ export default defineCachedEventHandler(async (event) => {
       })
     }
 
-    // ۴. ساخت خروجی نهایی محصولات و فیلترهای موجود
     const availableFilters: Record<string, Set<string>> = {}
     const mappedProducts = filteredProducts.map(product => {
       let productAttributes = (product.attributes as Record<string, string>) || {}
@@ -119,7 +134,6 @@ export default defineCachedEventHandler(async (event) => {
       Object.entries(availableFilters).map(([key, value]) => [key, Array.from(value)])
     )
 
-    // اضافه شدن دیتای دسته‌بندی برای هدر فرانت‌ایند
     return {
       categoryName: targetCategory ? targetCategory.name : null,
       categoryMetaTitle: targetCategory ? targetCategory.name : null,
@@ -137,7 +151,7 @@ export default defineCachedEventHandler(async (event) => {
   swr: true,
   name: 'products-list',
   getKey: (event) => {
-    const url = getRequestURL(event)
-    return decodeURIComponent(url.search) || 'default'
+    const query = getQuery(event)
+    return JSON.stringify(query) || 'default'
   }
 })
