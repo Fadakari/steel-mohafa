@@ -2,23 +2,23 @@
 const route = useRoute()
 const router = useRouter()
 
-// ۱. مدیریت وضعیت‌های کلاینت‌ساید (بدون درگیری با سرور)
 const isMobileFilterOpen = ref(false)
-const showVat = useState<boolean>('show_vat_status', () => false) // سوییچ آنی مالیات بر ارزش افزوده
+const showVat = useState<boolean>('show_vat_status', () => false)
 
-// استخراج اسلاگ برای کوئری و سئو
-const slugArray = route.params.slug as string[]
-const currentSlug = slugArray && slugArray.length > 0 
-  ? decodeURIComponent(slugArray[slugArray.length - 1]) 
-  : null
-
-// ۲. دریافت داده‌ها از کش نیترو (با گوش دادن به تغییرات URL)
-const { data: pageData, pending } = await useFetch('/api/products', {
-  query: computed(() => ({ categorySlug: currentSlug, ...route.query })),
-  watch: [() => route.query] 
+// واکنش‌گرا کردن اسلاگ برای مسیرهای تودرتو (مثل /products/ورق-استیل/ورق-استیل-310s)
+const currentSlug = computed(() => {
+  const slugArray = route.params.slug as string[]
+  return slugArray && slugArray.length > 0 
+    ? decodeURIComponent(slugArray[slugArray.length - 1]) 
+    : null
 })
 
-// ۳. استیت فیلترهای انتخابی (پر شدن اولیه از URL برای حفظ قابلیت اشتراک‌گذاری لینک)
+// گوش دادن قدرتمند به تغییرات مسیر و فیلترها
+const { data: pageData, pending } = await useFetch('/api/products', {
+  query: computed(() => ({ categorySlug: currentSlug.value, ...route.query })),
+  watch: [() => route.query, () => route.params.slug] 
+})
+
 const selectedFilters = ref<Record<string, string[]>>({
   alloy: route.query.alloy ? String(route.query.alloy).split(',') : [],
   thickness: route.query.thickness ? String(route.query.thickness).split(',') : [],
@@ -26,7 +26,6 @@ const selectedFilters = ref<Record<string, string[]>>({
   surface: route.query.surface ? String(route.query.surface).split(',') : [],
 })
 
-// ۴. تابع اعمال فیلتر (Push به روتر بدون رفرش کامل صفحه)
 const applyFilters = async () => {
   const query: Record<string, string> = {}
   
@@ -38,7 +37,6 @@ const applyFilters = async () => {
   isMobileFilterOpen.value = false
 }
 
-// ۵. توابع کمکی برای UI (فرمت قیمت و ترجمه کلیدهای فیلتر)
 const formatPrice = (value: number) => new Intl.NumberFormat('fa-IR').format(Math.round(value))
 
 const translateFilterKey = (key: string) => {
@@ -51,18 +49,16 @@ const translateFilterKey = (key: string) => {
   return dictionary[key] || key
 }
 
-// ۶. تنظیمات قدرتمند سئو (SEO Meta & JSON-LD)
 useSeoMeta({
-  title: () => pageData.value?.categoryMetaTitle || `قیمت روز ${currentSlug || 'آهن آلات'}`,
-  description: () => pageData.value?.categoryMetaDescription || 'مشاهده لیست قیمت لحظه‌ای و خرید بدون واسطه از استیل مهفا.',
-  ogTitle: () => `استیل مهفا | قیمت روز ${currentSlug || 'آهن آلات'}`,
+  title: () => pageData.value?.categoryMetaTitle ? `قیمت روز ${pageData.value.categoryMetaTitle}` : 'قیمت روز آهن آلات',
+  description: () => 'مشاهده لیست قیمت لحظه‌ای و خرید بدون واسطه از استیل مهفا.',
+  ogTitle: () => pageData.value?.categoryMetaTitle ? `استیل مهفا | قیمت روز ${pageData.value.categoryMetaTitle}` : 'استیل مهفا | محصولات',
   ogType: 'website',
   twitterCard: 'summary_large_image',
   robots: 'index, follow'
 })
 
 useHead({
-  // تگ کنونیکال برای جلوگیری از ایندکس شدن لینک‌های فیلتردار (نجات بودجه خزش گوگل)
   link: [
     { rel: 'canonical', href: `https://steelmahfa.com${route.path}` }
   ],
@@ -102,7 +98,7 @@ useHead({
           {{ pageData?.categoryName || 'محصولات و قیمت‌های لحظه‌ای' }}
         </h1>
         <p class="text-zinc-400 text-sm max-w-2xl">
-          {{ pageData?.categoryMetaDescription || 'برای یافتن محصول مورد نظر، از پنل فیلتر پیشرفته استفاده کنید.' }}
+          برای یافتن محصول مورد نظر، از پنل فیلتر پیشرفته استفاده کنید.
         </p>
       </div>
     </header>
@@ -125,7 +121,7 @@ useHead({
           <button @click="isMobileFilterOpen = false" class="lg:hidden text-zinc-400 text-3xl hover:text-white">&times;</button>
         </div>
 
-        <div v-if="pageData?.filters" class="space-y-6">
+        <div v-if="pageData?.filters && Object.keys(pageData.filters).length > 0" class="space-y-6">
           <div v-for="(options, filterKey) in pageData.filters" :key="filterKey">
               <h3 class="text-sm font-bold text-zinc-400 mb-3">{{ translateFilterKey(filterKey) }}</h3>
               <div class="flex flex-wrap gap-2">
@@ -182,7 +178,6 @@ useHead({
                 <h3 class="text-white font-bold text-sm md:text-base leading-relaxed">{{ product.name }}</h3>
                 <div class="flex items-center gap-4 mt-2">
                   <span class="text-xs text-zinc-500 bg-white/5 px-2 py-1">SKU: {{ product.sku || 'N/A' }}</span>
-                  
                   <span v-if="product.attributes?.thickness" class="text-xs text-zinc-400">ضخامت: {{ product.attributes.thickness }}</span>
                   <span v-if="product.attributes?.alloy" class="text-xs text-zinc-400">آلیاژ: {{ product.attributes.alloy }}</span>
                 </div>
@@ -216,7 +211,6 @@ useHead({
 </template>
 
 <style scoped>
-/* اسکرول‌بار اختصاصی و مینیمال برای سایدبار در حالت موبایل */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }

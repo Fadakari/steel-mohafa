@@ -5,12 +5,28 @@ const prisma = new PrismaClient()
 
 export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
-  const { search, categorySlug, minPrice, maxPrice } = query
+  // جدا کردن فیلترهای داینامیک از پارامترهای اصلی
+  const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
 
-  // ساختار شرط‌های پویا برای فیلترینگ
+  let targetCategory = null
+  const categoryIds: number[] = []
+
+  // ۱. پیدا کردن هوشمند دسته‌بندی و زیردسته‌های آن
+  if (categorySlug) {
+    targetCategory = await prisma.category.findUnique({
+      where: { slug: String(categorySlug) },
+      include: { children: true }
+    })
+
+    // اضافه کردن آیدی دسته فعلی و تمام زیردسته‌های آن برای کوئری
+    if (targetCategory) {
+      categoryIds.push(targetCategory.id)
+      targetCategory.children.forEach(child => categoryIds.push(child.id))
+    }
+  }
+
   const whereClause: any = {}
 
-  // ۱. فیلتر جستجوی متنی (نام محصول یا SKU)
   if (search) {
     whereClause.OR = [
       { name: { contains: String(search) } },
@@ -18,14 +34,14 @@ export default defineCachedEventHandler(async (event) => {
     ]
   }
 
-  // ۲. فیلتر بر اساس دسته‌بندی یا زیردسته‌ها (بر اساس Slug برای سئو)
-  if (categorySlug) {
-    whereClause.category = {
-      slug: String(categorySlug)
-    }
+  // گرفتن محصولات دسته مادر و زیردسته‌ها
+  if (categoryIds.length > 0) {
+    whereClause.categoryId = { in: categoryIds }
+  } else if (categorySlug && !targetCategory) {
+    // اگر دسته‌بندی در دیتابیس یافت نشد
+    whereClause.id = -1 
   }
 
-  // ۳. فیلتر محدوده قیمت
   if (minPrice || maxPrice) {
     whereClause.price = {
       ...(minPrice && { gte: Number(minPrice) }),
@@ -33,61 +49,50 @@ export default defineCachedEventHandler(async (event) => {
     }
   }
 
-  // --- قطعه کد جدیدی که باید اضافه کنی ---
-  // ۴. فیلتر داینامیک بر اساس ویژگی‌های JSON (مثل ضخامت، آلیاژ و...)
-  const ignoredKeys = ['categorySlug', 'search', 'minPrice', 'maxPrice']
-  const attributeConditions: any[] = []
-
-  for (const [key, value] of Object.entries(query)) {
-    if (!ignoredKeys.includes(key) && value) {
-      const valuesArray = String(value).split(',')
-      
-      // ساخت شرط OR برای مقادیر مختلف یک ویژگی (مثلاً اگر کاربر هم ضخامت ۲ و هم ۳ را تیک زده بود)
-      const orConditions = valuesArray.map(val => ({
-        attributes: { 
-          path: [key], 
-          equals: val 
-        }
-      }))
-      
-      attributeConditions.push({ OR: orConditions })
-    }
-  }
-
-  if (attributeConditions.length > 0) {
-    whereClause.AND = attributeConditions
-  }
-
   try {
-    const products = await prisma.product.findMany({
+    // ۲. دریافت محصولات از دیتابیس بدون درگیری با محدودیت JSON در MySQL
+    const rawProducts = await prisma.product.findMany({
       where: whereClause,
       include: {
-        category: {
-          select: { name: true, slug: true }
-        }
+        category: { select: { name: true, slug: true } }
       },
       orderBy: { updatedAt: 'desc' }
     })
 
-    // محاسبه درصد تغییرات قیمت در سمت سرور برای کاهش پردازش فرانت‌ایند
-    const availableFilters: Record<string, Set<string>> = {}
+    // ۳. اعمال فیلترهای داینامیک در لایه سرور (بسیار سریع و بدون ارور ۵۰۰)
+    let filteredProducts = rawProducts
+    const activeAttributeFilters = Object.entries(dynamicFiltersQuery)
+      .filter(([key, val]) => val !== undefined && val !== '')
+      .map(([key, val]) => ({ key, values: String(val).split(',') }))
 
-    const mappedProducts = products.map(product => {
-      // --- منطق Fallback هوشمند شما ---
-      let productAttributes = product.attributes as Record<string, string>
+    if (activeAttributeFilters.length > 0) {
+      filteredProducts = rawProducts.filter(product => {
+        let pAttr = (product.attributes as Record<string, string>) || {}
+        if (Object.keys(pAttr).length === 0) {
+          pAttr = extractAttributesFromName(product.name)
+        }
+        // بررسی اینکه محصول شرایط همه فیلترهای انتخابی کاربر را دارد
+        return activeAttributeFilters.every(filter => {
+          const productAttrValue = pAttr[filter.key]
+          return productAttrValue && filter.values.includes(productAttrValue)
+        })
+      })
+    }
+
+    // ۴. ساخت خروجی نهایی محصولات و فیلترهای موجود
+    const availableFilters: Record<string, Set<string>> = {}
+    const mappedProducts = filteredProducts.map(product => {
+      let productAttributes = (product.attributes as Record<string, string>) || {}
       
-      // اگر ویژگی‌ها در دیتابیس null بود یا کلیدی نداشت، همان لحظه از نام استخراج کن
-      if (!productAttributes || Object.keys(productAttributes).length === 0) {
+      if (Object.keys(productAttributes).length === 0) {
         productAttributes = extractAttributesFromName(product.name)
       }
 
-      // پر کردن لیست فیلترهای داینامیک برای سایدبار UI
       for (const [key, value] of Object.entries(productAttributes)) {
         if (!availableFilters[key]) availableFilters[key] = new Set()
         if (value) availableFilters[key].add(value)
       }
 
-      // --- محاسبه منطق صعود/نزول قیمت (کدهای قبلی) ---
       let priceDiffPercentage = 0
       let trend: 'up' | 'down' | 'stable' = 'stable'
 
@@ -105,18 +110,19 @@ export default defineCachedEventHandler(async (event) => {
         price: product.price,
         trend,
         priceDiffPercentage: Math.abs(priceDiffPercentage),
-        attributes: productAttributes, // ارسال ویژگی‌های نهایی به فرانت
+        attributes: productAttributes,
         metaTitle: product.metaTitle || product.name,
       }
     })
 
-    // تبدیل Set به Array برای ارسال تمیز JSON به فرانت‌ایند
     const dynamicFilters = Object.fromEntries(
       Object.entries(availableFilters).map(([key, value]) => [key, Array.from(value)])
     )
 
-    // تغییر ساختار return برای ارسال هم‌زمان محصولات و فیلترها
+    // اضافه شدن دیتای دسته‌بندی برای هدر فرانت‌ایند
     return {
+      categoryName: targetCategory ? targetCategory.name : null,
+      categoryMetaTitle: targetCategory ? targetCategory.name : null,
       products: mappedProducts,
       filters: dynamicFilters
     }
@@ -127,12 +133,11 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 }, {
-  maxAge: 60 * 60, // دیتا تا ۱ ساعت در کش می‌ماند
-  swr: true, // اگر دیتا منقضی شد، همان دیتای قبلی را سریع نشان بده و در پس‌زمینه کش را آپدیت کن
-  name: 'products-list', // نام گروه کش
+  maxAge: 60 * 60,
+  swr: true,
+  name: 'products-list',
   getKey: (event) => {
-    // کلید کش بر اساس URL و فیلترها ساخته می‌شود تا هر فیلتر کش اختصاصی خودش را داشته باشد
     const url = getRequestURL(event)
-    return url.search || 'default'
+    return decodeURIComponent(url.search) || 'default'
   }
 })
