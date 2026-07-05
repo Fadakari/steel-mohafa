@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+  // خط output پاک شد تا استاندارد بماند
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// جدول دسته‌بندی‌ها
+model Category {
+  id       Int        @id @default(autoincrement())
+  name     String
+  slug     String     @unique
+  parentId Int?
+  parent   Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryToCategory")
+  products Product[] // اتصال به محصولات
+}
+
+// جدول محصولات (فول سئو)
+model Product {
+  id              Int            @id @default(autoincrement())
+  name            String
+  slug            String         @unique
+  price           Float // قیمت فعلی
+  previousPrice   Float? // قیمت قبلی برای محاسبه صعود/نزول (جدید)
+  imageUrl        String?
+  sku             String?        @unique
+  metaTitle       String?
+  metaDescription String?        @db.Text
+  schemaType      String         @default("Product")
+  categoryId      Int
+  category        Category       @relation(fields: [categoryId], references: [id])
+  priceHistory    PriceHistory[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  attributes      Json?
+}
+
+// جدول تاریخچه قیمت
+model PriceHistory {
+  id        Int      @id @default(autoincrement())
+  price     Float // قیمتی که در این تاریخ ثبت شده
+  changedAt DateTime @default(now()) // زمان ثبت این قیمت
+
+  // اتصال به محصول
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+// جدول مقالات وبلاگ
+model Article {
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  metaDescription String?  @db.Text
+  imageUrl        String?
+  publishedAt     DateTime @default(now())
+}
+
+
+
+model Alloy {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique // مثلا 304, 316, 201
+  basePrice  Float     // قیمت پایه که هر روز آپدیت می‌شود
+  density    Float     // چگالی برای محاسبات احتمالی
+  updatedAt  DateTime  @updatedAt
+}
+
+// جدول جامع ضرایب (برای جلوگیری از ساخت ۱۰ جدول مجزا، از یک جدول داینامیک استفاده می‌کنیم)
+model Coefficient {
+  id         Int       @id @default(autoincrement())
+  type       String    // نوع ضریب: 'PRODUCT_TYPE', 'SURFACE', 'PVD', 'BRAND', 'THICKNESS'
+  key        String    // کلید: مثلا 'Mirror', 'POSCO', 'لوله دکوراتیو'
+  value      Float     // مقدار ضریب: مثلا 1.10
+  updatedAt  DateTime  @updatedAt
+
+  @@unique([type, key]) // جلوگیری از داده‌های تکراری
+}
+
+// جدول هزینه‌های ثابت اجرایی
+model ExtraService {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique // مثلا 'اجرت برش لیزر'
+  cost       Float     // مبلغ ثابت به ریال
+}
+
+// جدول تنظیمات کلی سایت (سود، مالیات، تنظیمات عمومی)
+model Setting {
+  id         Int       @id @default(autoincrement())
+  key        String    @unique // مثلا 'PROFIT_MARGIN' یا 'TAX_RATE'
+  value      Float     
+}
