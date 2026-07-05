@@ -3,7 +3,6 @@ import { extractAttributesFromName } from '../../utils/attributeExtractor'
 
 const prisma = new PrismaClient()
 
-// استفاده از هندلر استاندارد به جای کش‌شده برای رفع مشکل تداخل دسته‌بندی‌ها
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
@@ -66,6 +65,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    // ۱. دریافت تمام محصولات خام این دسته‌بندی (بدون اعمال فیلترهای ویژگی)
     const rawProducts = await prisma.product.findMany({
       where: whereClause,
       include: {
@@ -74,17 +74,18 @@ export default defineEventHandler(async (event) => {
       orderBy: { updatedAt: 'desc' }
     })
 
-    let filteredProducts = rawProducts
+    // آماده‌سازی فیلترهای ویژگی که کاربر انتخاب کرده است
     const activeAttributeFilters = Object.entries(dynamicFiltersQuery)
       .filter(([key, val]) => val !== undefined && val !== '')
       .map(([key, val]) => ({ key, values: String(val).split(',') }))
 
+    // ۲. فیلتر کردن نهایی محصولات برای نمایش در لیست (اِعمال همه فیلترها)
+    let filteredProducts = rawProducts
     if (activeAttributeFilters.length > 0) {
       filteredProducts = rawProducts.filter(product => {
         let pAttr = (product.attributes as Record<string, string>) || {}
-        if (Object.keys(pAttr).length === 0) {
-          pAttr = extractAttributesFromName(product.name)
-        }
+        if (Object.keys(pAttr).length === 0) pAttr = extractAttributesFromName(product.name)
+        
         return activeAttributeFilters.every(filter => {
           const productAttrValue = pAttr[filter.key]
           return productAttrValue && filter.values.includes(productAttrValue)
@@ -92,17 +93,51 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    // ۳. سیستم هوشمند ساخت گزینه‌های سایدبار (حل مشکل محو شدن گزینه‌ها)
     const availableFilters: Record<string, Set<string>> = {}
+    
+    // الف) پیدا کردن تمام کلیدهای ویژگی موجود در این دسته‌بندی (مثلاً آلیاژ، ابعاد، ضخامت)
+    const allPossibleKeys = new Set<string>()
+    rawProducts.forEach(product => {
+      let pAttr = (product.attributes as Record<string, string>) || {}
+      if (Object.keys(pAttr).length === 0) pAttr = extractAttributesFromName(product.name)
+      Object.keys(pAttr).forEach(key => allPossibleKeys.add(key))
+    })
+
+    // ب) محاسبه گزینه‌های مجاز برای هر ویژگی به صورت کاملاً مستقل
+    allPossibleKeys.forEach(filterKey => {
+      availableFilters[filterKey] = new Set()
+
+      // جادوی کار اینجاست: برای ساختن گزینه‌های یک ویژگی، فیلترِ خود آن ویژگی را نادیده می‌گیریم!
+      const otherActiveFilters = activeAttributeFilters.filter(f => f.key !== filterKey)
+
+      const validProductsForThisKey = rawProducts.filter(product => {
+        let pAttr = (product.attributes as Record<string, string>) || {}
+        if (Object.keys(pAttr).length === 0) pAttr = extractAttributesFromName(product.name)
+        
+        // بررسی می‌کنیم که آیا این محصول شرایط بقیه فیلترها را دارد یا نه
+        return otherActiveFilters.every(filter => {
+          const productAttrValue = pAttr[filter.key]
+          return productAttrValue && filter.values.includes(productAttrValue)
+        })
+      })
+
+      // مقادیر مجاز را از محصولاتی که از فیلترهای دیگر جان سالم به در برده‌اند استخراج می‌کنیم
+      validProductsForThisKey.forEach(product => {
+        let pAttr = (product.attributes as Record<string, string>) || {}
+        if (Object.keys(pAttr).length === 0) pAttr = extractAttributesFromName(product.name)
+        
+        if (pAttr[filterKey]) {
+          availableFilters[filterKey].add(pAttr[filterKey])
+        }
+      })
+    })
+
+    // ۴. ساختاردهی دیتای محصولات برای ارسال به فرانت‌ایند
     const mappedProducts = filteredProducts.map(product => {
       let productAttributes = (product.attributes as Record<string, string>) || {}
-      
       if (Object.keys(productAttributes).length === 0) {
         productAttributes = extractAttributesFromName(product.name)
-      }
-
-      for (const [key, value] of Object.entries(productAttributes)) {
-        if (!availableFilters[key]) availableFilters[key] = new Set()
-        if (value) availableFilters[key].add(value)
       }
 
       let priceDiffPercentage = 0
