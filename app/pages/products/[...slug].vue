@@ -1,11 +1,15 @@
 <script setup lang="ts">
+// ۱. این دستور جادویی، مشکل گیر کردن روی یک دسته‌بندی را برای همیشه حل می‌کند
+definePageMeta({
+  key: route => String(route.params.slug)
+})
+
 const route = useRoute()
 const router = useRouter()
 
 const isMobileFilterOpen = ref(false)
 const showVat = useState<boolean>('show_vat_status', () => false)
 
-// استخراج امن اسلاگ (گرفتن آخرین بخش از URL)
 const currentSlug = computed(() => {
   const slugParam = route.params.slug
   if (!slugParam) return null
@@ -13,10 +17,13 @@ const currentSlug = computed(() => {
   return slug ? decodeURIComponent(String(slug)) : null
 })
 
-// گرفتن دیتا از بک‌اند (watch مسیر باعث می‌شود با هر کلیک، صفحه آپدیت شود)
+// ۲. کلید فچینگ کاملاً یکتا برای جلوگیری از کش شدنِ اشتباه در مرورگر
+const uniqueFetchKey = computed(() => `products-${currentSlug.value}-${JSON.stringify(route.query)}`)
+
 const { data: pageData, pending } = await useFetch('/api/products', {
+  key: uniqueFetchKey.value,
   query: computed(() => ({ categorySlug: currentSlug.value, ...route.query })),
-  watch: [() => route.fullPath] 
+  watch: [() => route.query] 
 })
 
 const selectedFilters = ref<Record<string, string[]>>({
@@ -88,7 +95,6 @@ useHead({
   ]
 })
 </script>
-
 
 <template>
   <div class="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#84012B] selection:text-white">

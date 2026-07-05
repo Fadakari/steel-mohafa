@@ -3,7 +3,8 @@ import { extractAttributesFromName } from '../../utils/attributeExtractor'
 
 const prisma = new PrismaClient()
 
-export default defineCachedEventHandler(async (event) => {
+// استفاده از هندلر استاندارد به جای کش‌شده برای رفع مشکل تداخل دسته‌بندی‌ها
+export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
 
@@ -22,7 +23,6 @@ export default defineCachedEventHandler(async (event) => {
     }
   }
 
-  // استفاده از آرایه AND برای جلوگیری از اوررایت شدن شرط‌های کوئری پریسما
   const whereClause: any = { AND: [] }
 
   if (search) {
@@ -39,11 +39,9 @@ export default defineCachedEventHandler(async (event) => {
       { categoryId: { in: categoryIds } }
     ]
 
-    // --- سیستم هوشمند جبران دیتای ایمپورت شده ---
-    // اگر در زیردسته هستیم، بگرد و محصولات مرتبطِ دسته مادر را هم بیاور
     if (targetCategory?.parentId) {
       const nameParts = targetCategory.name.trim().split(' ')
-      const mainKeyword = nameParts[nameParts.length - 1] // استخراج کلمه کلیدی (مثلاً 310s)
+      const mainKeyword = nameParts[nameParts.length - 1]
 
       categoryConditions.push({
         categoryId: targetCategory.parentId,
@@ -63,7 +61,6 @@ export default defineCachedEventHandler(async (event) => {
     whereClause.AND.push({ price: priceCondition })
   }
 
-  // پاک کردن آرایه اگر خالی بود تا پریسما ارور ندهد
   if (whereClause.AND.length === 0) {
     delete whereClause.AND
   }
@@ -145,13 +142,5 @@ export default defineCachedEventHandler(async (event) => {
       statusCode: 500,
       statusMessage: 'خطا در دریافت لیست محصولات صنعتی.'
     })
-  }
-}, {
-  maxAge: 60 * 60,
-  swr: true,
-  name: 'products-list',
-  getKey: (event) => {
-    const query = getQuery(event)
-    return JSON.stringify(query) || 'default'
   }
 })
