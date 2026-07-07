@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    '/': { prerender: true }
+    '/': { prerender: true },
+    '/blog/**': { swr: 3600 },
   },
 
   compatibilityDate: '2025-01-15',
