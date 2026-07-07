@@ -9,9 +9,9 @@
 
       <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <NuxtLink 
-          v-for="article in articles" 
-          :key="article.id" 
-          :to="`/blog/${article.slug}`"
+            v-for="article in articles" 
+            :key="article.id" 
+            :to="`/blog/${article.slug}`"
           class="group bg-[#0a0a0c] border border-white/5 rounded-2xl overflow-hidden hover:border-[#84012B] transition-all"
         >
           <img v-if="article.imageUrl" :src="article.imageUrl" :alt="article.title" class="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />

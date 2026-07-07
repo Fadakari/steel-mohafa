@@ -22,8 +22,10 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { data: article } = await useFetch(`/api/articles/${route.params.slug}`)
+const slug = computed(() => decodeURIComponent(route.params.slug as string))
 
+// دریافت دیتا از API (دقت کنید که به مسیر API درخواست می‌زنیم)
+const { data: article, pending } = await useFetch(`/api/articles/${slug.value}`)
 // سئو پیشرفته و JSON-LD
 useSeoMeta({
   title: () => article.value?.title,
