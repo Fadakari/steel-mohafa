@@ -3,7 +3,7 @@ import { extractAttributesFromName } from '../../utils/attributeExtractor'
 
 const prisma = new PrismaClient()
 
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
   const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
 
@@ -177,5 +177,15 @@ export default defineEventHandler(async (event) => {
       statusCode: 500,
       statusMessage: 'خطا در دریافت لیست محصولات صنعتی.'
     })
+  }
+}, {
+  // تنظیمات لایه حافظه موقت (کش ابدی تا زمان لغو با وب‌هوک)
+  maxAge: 60 * 60 * 24 * 365,
+  swr: false,
+  name: 'products-cache',
+  // تفکیک دقیق کش‌ها بر اساس پارامترهای انتخابی کاربر در سایدبار
+  getKey: (event) => {
+    const url = event.node.req.url || ''
+    return 'products:' + url
   }
 })

@@ -95,3 +95,17 @@ model Setting {
   key        String    @unique // مثلا 'PROFIT_MARGIN' یا 'TAX_RATE'
   value      Float     
 }
+
+
+model SiteSetting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique // مثال: 'site_title', 'hero_title'
+  value String @db.Text
+}
+
+model HomepageSection {
+  id        Int     @id @default(autoincrement())
+  section   String  @unique // مثال: 'hero', 'features', 'featured_categories'
+  content   Json    // ذخیره محتوا به صورت JSON برای انعطاف بالا
+  isActive  Boolean @default(true)
+}

@@ -19,7 +19,7 @@
         </div>
       </header>
 
-      <img v-if="article.imageUrl" :src="article.imageUrl" :alt="article.title" class="w-full h-64 md:h-96 object-cover rounded-2xl mb-10" />
+      <img v-if="article.imageUrl" :src="`http://localhost:8055/assets/${article.imageUrl}`" :alt="article.title" class="w-full h-64 md:h-96 object-cover rounded-2xl mb-10" />
 
       <div 
         class="prose prose-invert prose-lg max-w-none prose-headings:font-bold prose-a:text-[#84012B] prose-img:rounded-xl leading-relaxed"
@@ -44,7 +44,7 @@ useSeoMeta({
   description: () => article.value?.metaDescription || '',
   ogTitle: () => article.value?.title || '',
   ogDescription: () => article.value?.metaDescription || '',
-  ogImage: () => article.value?.imageUrl || '',
+  ogImage: () => article.value?.imageUrl ? `http://localhost:8055/assets/${article.value.imageUrl}` : '',
 })
 
 useHead({

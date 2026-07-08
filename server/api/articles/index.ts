@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export default defineEventHandler(async () => {
+export default defineCachedEventHandler(async () => {
   return await prisma.article.findMany({
     orderBy: { publishedAt: 'desc' },
     select: {
@@ -15,4 +15,9 @@ export default defineEventHandler(async () => {
       publishedAt: true
     }
   })
+}, {
+  // کش کردن برای یک سال (تا زمانی که وب‌هوک آن را پاک کند)
+  maxAge: 60 * 60 * 24 * 365,
+  swr: false,
+  name: 'articles-cache'
 })

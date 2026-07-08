@@ -14,7 +14,7 @@
             :to="`/blog/${article.slug}`"
           class="group bg-[#0a0a0c] border border-white/5 rounded-2xl overflow-hidden hover:border-[#84012B] transition-all"
         >
-          <img v-if="article.imageUrl" :src="article.imageUrl" :alt="article.title" class="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+          <img v-if="article.imageUrl" :src="`http://localhost:8055/assets/${article.imageUrl}`" :alt="article.title" class="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
           <div class="p-6">
             <h2 class="text-xl font-bold text-white mb-3 leading-snug">{{ article.title }}</h2>
             <p class="text-sm text-zinc-400 line-clamp-3">{{ article.metaDescription }}</p>
