@@ -15,7 +15,7 @@
         </div>
         <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6">
           استیل مهفا؛ مرجع تخصصی <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">تامین مقاطع استیل</span>
+          <span class="text-transparent bg-clip-text pb-2 bg-gradient-to-l from-[#84012B] to-[#ff477e]">تامین مقاطع استیل</span>
         </h1>
         <p class="text-zinc-400 text-lg max-w-3xl leading-relaxed">
           ما یک ساختار مهندسی شده برای واردات و توزیع ورق‌های استیل ۳۰۴ و ۳۱۶ هستیم. تضمین اصالت، قیمت رقابتی و لجستیک یکپارچه.
@@ -85,8 +85,11 @@
 </template>
 
 <script setup lang="ts">
-const { data: globals, pending } = await useFetch('/api/globals')
-
+const { data: globals } = await useFetch('/api/globals', {
+  getCachedData() {
+    return undefined
+  }
+})
 // سئوی کلاسیک
 useSeoMeta({
   title: 'درباره شرکت استیل مهفا | واردکننده تخصصی ورق استیل',

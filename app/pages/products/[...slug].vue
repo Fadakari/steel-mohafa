@@ -254,7 +254,7 @@ useHead({
 
       <main class="col-span-1 lg:col-span-9 flex flex-col gap-3">
          
-         <div class="sticky top-[80px] z-40 flex justify-between items-center bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 p-3 md:p-4 rounded-xl shadow-lg">
+         <div class="sticky top-[90px] z-40 flex justify-between items-center bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 p-3 md:p-4 rounded-xl shadow-lg">
             <div class="text-xs md:text-sm text-zinc-400 font-mono hidden sm:block">
               <span class="text-white font-bold">{{ pageData?.products?.length || 0 }}</span> ردیف قیمت
             </div>

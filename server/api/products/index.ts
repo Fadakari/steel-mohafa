@@ -180,10 +180,9 @@ export default defineCachedEventHandler(async (event) => {
   }
 }, {
   // تنظیمات لایه حافظه موقت (کش ابدی تا زمان لغو با وب‌هوک)
-  maxAge: 60 * 60 * 24 * 365,
-  swr: false,
+  maxAge: 60, // هر ۶۰ ثانیه کش را اعتبار سنجی می‌کند (نه در هر بار لود)
+  swr: true,  // دیتای قدیمی را نشان بده اما در پس‌زمینه تازه کن
   name: 'products-cache',
-  // تفکیک دقیق کش‌ها بر اساس پارامترهای انتخابی کاربر در سایدبار
   getKey: (event) => {
     const url = event.node.req.url || ''
     return 'products:' + url

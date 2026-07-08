@@ -3,7 +3,7 @@
     
     <section class="relative min-h-[85vh] flex flex-col justify-center pt-24 pb-12">
       
-      <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute mt-30 z-0 pointer-events-none">
         <img 
           src="/hero-bg.png" 
           alt="استیل مهفا" 
@@ -35,7 +35,7 @@
                      isHeroTitleVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
             مرجع تخصصی تامین <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">مقاطع استیل</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e]">مقاطع استیل</span>
           </h1>
 
           <p 
@@ -66,8 +66,8 @@
     </section>
 
     <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 pb-24 -mt-10 lg:-mt-20">
-      <div class="bg-[#09090b] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl opacity-0 animate-fade-in animation-delay-800 relative overflow-hidden">
-        
+      <div class="bg-[#09090b75] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl opacity-0 animate-fade-in animation-delay-800 relative overflow-hidden">
+
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[#84012B] to-transparent opacity-50"></div>
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-white/5 pb-4">
@@ -80,44 +80,24 @@
           </div>
           <button class="text-xs font-medium text-[#ff477e] hover:text-white transition-colors flex items-center gap-1">
             مشاهده لیست کامل
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
           </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-white/5">
-          <div class="flex flex-col pt-4 md:pt-0 pl-0 md:pl-6">
-            <span class="text-gray-400 text-sm mb-2">ورق ۳۰۴ تایوان (۲ میل)</span>
+          <div v-for="product in products" :key="product.id" class="flex flex-col pt-4 md:pt-0 md:px-6">
+            <span class="text-gray-400 text-sm mb-2">{{ product.name }}</span>
             <div class="flex items-end gap-2 mb-1">
-              <span class="text-3xl font-mono font-bold text-white tracking-tight">۱۸۵,۰۰۰</span>
+              <span class="text-3xl font-mono font-bold text-white tracking-tight">{{ product.price.toLocaleString('fa-IR') }}</span>
               <span class="text-gray-500 text-xs mb-1">تومان / کیلو</span>
             </div>
-            <span class="text-green-400 text-xs font-medium flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" /></svg>
-              ۱.۲٪ افزایش
-            </span>
-          </div>
 
-          <div class="flex flex-col pt-4 md:pt-0 pr-0 md:pr-6 pl-0 md:pl-6">
-            <span class="text-gray-400 text-sm mb-2">پروفیل ۲۰۱ دکوراتیو</span>
-            <div class="flex items-end gap-2 mb-1">
-              <span class="text-3xl font-mono font-bold text-white tracking-tight">۹۵,۵۰۰</span>
-              <span class="text-gray-500 text-xs mb-1">تومان / کیلو</span>
-            </div>
-            <span class="text-red-400 text-xs font-medium flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12 13a1 1 0 100 2h5a1 1 0 001-1V9a1 1 0 10-2 0v2.586l-4.293-4.293a1 1 0 00-1.414 0L8 9.586 3.707 5.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0L11 9.414 14.586 13H12z" clip-rule="evenodd" /></svg>
-              ۰.۵٪ کاهش
-            </span>
-          </div>
-
-          <div class="flex flex-col pt-4 md:pt-0 pr-0 md:pr-6">
-            <span class="text-gray-400 text-sm mb-2">ورق ۳۱۶ نگیر صنعتی</span>
-            <div class="flex items-end gap-2 mb-1">
-              <span class="text-3xl font-mono font-bold text-white tracking-tight">۲۴۰,۰۰۰</span>
-              <span class="text-gray-500 text-xs mb-1">تومان / کیلو</span>
-            </div>
-            <span class="text-gray-500 text-xs font-medium flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
-              بدون تغییر
+            <span :class="['text-xs font-medium flex items-center gap-1', product.trend === 'up' ? 'text-green-400' : product.trend === 'down' ? 'text-red-400' : 'text-gray-500']">
+              <svg v-if="product.trend !== 'stable'" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                <path v-if="product.trend === 'up'" fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                <path v-else fill-rule="evenodd" d="M12 13a1 1 0 100 2h5a1 1 0 001-1V9a1 1 0 10-2 0v2.586l-4.293-4.293a1 1 0 00-1.414 0L8 9.586 3.707 5.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0L11 9.414 14.586 13H12z" clip-rule="evenodd" />
+              </svg>
+              {{ product.trend === 'up' ? product.priceDiffPercentage + '% افزایش' : product.trend === 'down' ? product.priceDiffPercentage + '% کاهش' : 'بدون تغییر' }}
             </span>
           </div>
         </div>
@@ -425,7 +405,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-
+const { data: products } = await useFetch('/api/products/best-sellers')
 // فقط متغیرها در فضای باز تعریف می‌شوند
 const advSectionRef = ref(null)
 const isAdvVisible = ref(false)

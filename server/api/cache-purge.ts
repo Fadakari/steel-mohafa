@@ -1,27 +1,40 @@
-// server/api/cache-purge.ts
-
 export default defineEventHandler(async (event) => {
   const body = await readBody(event).catch(() => ({}))
-  
-  // برای امنیت بیشتر، می‌توانید یک توکن در هدر یا بادی چک کنید، اما فعلا برای لوکال ساده پیش می‌رویم
-  try {
-    const storage = useStorage('nitro:handlers')
-    const keys = await storage.getKeys()
+  console.log('🚀 سیگنال وب‌هوک دریافت شد. در حال بازرسی کش نیترو...');
 
-    // پیدا کردن و حذف تمام فایل‌های کش مربوط به هندلرهایی که تعریف کرده‌ایم
+  try {
+    const storage = useStorage('cache');
+    // گرفتن لیست تمام کلیدها برای دیباگ
+    const keys = await storage.getKeys();
+    console.log('🔑 تمام کلیدهای موجود در حافظه کش:', keys);
+
+    let purgedCount = 0;
+
     for (const key of keys) {
-      if (key.includes('globals-cache') || key.includes('homepage-cache') || key.includes('articles-cache') || key.includes('products-cache') || key.includes('header-categories-cache')) {
-        await storage.removeItem(key)
+      // این چک کردن را وسیع‌تر کردیم تا اگر پیشوندی داشتند باز هم حذف شوند
+      if (
+        key.includes('globals') || 
+        key.includes('homepage') || 
+        key.includes('articles') ||
+        key.includes('products') ||
+        key.includes('categories')
+      ) {
+        console.log(`🧹 حذف کلید: ${key}`);
+        await storage.removeItem(key);
+        purgedCount++;
       }
     }
 
+    console.log(`✅ پاکسازی تمام شد. تعداد حذف شده: ${purgedCount}`);
+
     return { 
       success: true, 
-      message: 'تمامی کش‌های متصل به دایرکتوس با موفقیت پاکسازی شدند و در درخواست بعدی بازسازی می‌شوند.',
-      collectionUpdated: body?.collection || 'unknown'
+      message: 'پاکسازی انجام شد.',
+      purgedKeysCount: purgedCount,
+      debugKeys: keys // این لیست را در مرورگر هم می‌بینید که کمک می‌کند
     }
   } catch (error) {
-    console.error('خطا در پاکسازی کش نیترو:', error)
-    return { success: false, error: 'Purge failed' }
+    console.error('❌ خطا:', error);
+    return { success: false, error: 'Purge failed' };
   }
 })

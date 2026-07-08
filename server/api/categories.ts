@@ -21,7 +21,7 @@ export default defineCachedEventHandler(async () => {
     return []
   }
 }, {
-  maxAge: 60 * 60 * 24 * 365,
-  swr: false,
+  maxAge: 60, 
+  swr: true,
   name: 'header-categories-cache'
 })

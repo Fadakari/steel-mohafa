@@ -1,4 +1,5 @@
 export default defineCachedEventHandler(async () => {
+    console.log('Globals API executed', new Date())
   try {
     // گرفتن اطلاعات مستقیما از API دایرکتوس
     // چون Single Collection است، آدرس آن /items/globals است
@@ -10,7 +11,7 @@ export default defineCachedEventHandler(async () => {
     return null
   }
 }, {
-  maxAge: 3600, // کش کردن اطلاعات برای ۱ ساعت تا سرعت سایت نور باشد
-  swr: false,
-  name: 'globals-cache'
+  maxAge: 60, // کش کردن اطلاعات برای ۱ ساعت تا سرعت سایت نور باشد
+  swr: true,
+  name: 'globals-cache',
 })
