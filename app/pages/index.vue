@@ -31,11 +31,11 @@
 
           <h1 
             ref="heroTitleRef" 
-            :class="['text-4xl md:text-5xl lg:text-[4rem] font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ease-out delay-100', 
+            :class="['text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ease-out delay-100', 
                      isHeroTitleVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
-            مرجع تخصصی تامین <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e]">مقاطع استیل</span>
+            تامین پایدار <span class="text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e]">ورق و لوله استیل</span>
+            بدون واسطه‌ در ایران
           </h1>
 
           <p 
@@ -43,7 +43,7 @@
             :class="['text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mb-10 transition-all duration-1000 ease-out delay-200', 
                      isHeroDescVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
-            از ورق‌های دکوراتیو ۳۰۴ تا پروفیل‌های صنعتی؛ با استیل مهفا، زنجیره تامین پروژه خود را با قیمت‌های شفاف و بدون واسطه بهینه‌سازی کنید.
+            استیل مهفا، زنجیره تامین مطمئن شما برای انواع مقاطع استیل دکوراتیو و صنعتی (گرید ۳۰۴، ۳۱۶ و...). با ضمانت اصالت آلیاژ، بارگیری مستقیم از انبار تهران و استعلام قیمت لحظه‌ای بورس.
           </p>
 
           <div 
@@ -106,275 +106,317 @@
 
 
 
-    <section ref="advSectionRef" class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 pb-24 overflow-hidden">
+    <section ref="advSectionRef" class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 pb-16 overflow-hidden">
       
-      <div :class="['mb-12 md:mb-16 transition-all duration-700 ease-out', isAdvVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">مزیت‌های رقابتی <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">مهفا</span></h2>
-        <p class="text-gray-400 max-w-2xl text-sm md:text-base leading-relaxed">زیرساخت قدرتمند ما برای تامین پایدار، سریع و شفاف آهن‌آلات پروژه‌های شما.</p>
+      <div :class="['mb-12 border-b-2 border-white/10 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 transition-all duration-700 ease-out', isAdvVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase mb-2">قدرتِ تامین <span class="text-[#84012B]">مهفا</span></h2>
+          <p class="text-zinc-400 font-mono text-sm tracking-widest uppercase">Industrial Supply Infrastructure</p>
+        </div>
+        <p class="text-gray-400 max-w-md text-sm leading-relaxed text-justify">
+          ما صرفا یک فروشنده نیستیم؛ استیل مهفا با در اختیار داشتن شبکه مستقیم ارتباط با نوردکاران، ریسک خرید آهن‌آلات را برای پروژه‌های ملی به صفر رسانده است.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[280px]">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-1 auto-rows-[220px] !md:auto-rows-[330px] !sm:auto-rows-[330px] bg-white/5 p-1 rounded-xl">
         
-        <div :class="['md:col-span-2 group bg-[#09090b] border border-white/10 hover:border-[#84012B]/50 rounded-2xl p-8 transition-all duration-[800ms] ease-out flex flex-col justify-between overflow-hidden relative', isAdvVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24']">
-          <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#84012B]/20 blur-[50px] rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-          
-          <div class="absolute left-4 top-1/2 -translate-y-1/2 w-48 h-48 opacity-20 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-            <svg viewBox="0 0 100 100" class="w-full h-full transform group-hover:scale-105 transition-transform duration-700">
-              <path d="M30 20 L45 20 L45 45 L55 45 L55 20 L70 20 L70 80 L55 80 L55 55 L45 55 L45 80 L30 80 Z" fill="#ffffff05" stroke="#ffffff20" stroke-width="1.5" stroke-linejoin="round" />
-              <path d="M30 20 L45 20 L45 45 L55 45 L55 20 L70 20 L70 80 L55 80 L55 55 L45 55 L45 80 L30 80 Z" fill="none" stroke="#ff477e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="60 140" stroke-dashoffset="0" class="hidden group-hover:block animate-scan-path" />
-            </svg>
+        <article :class="['md:col-span-2 group bg-[#050505] p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-700', isAdvVisible ? 'opacity-100' : 'opacity-0']">
+          <div class="absolute top-0 right-0 w-16 h-16 bg-[#84012B]/10 group-hover:bg-[#84012B]/20 border-l border-b border-white/5 transition-colors flex items-center justify-center">
+             <span class="font-mono text-zinc-600 text-xs">01</span>
           </div>
-          
-          <div class="relative z-10 w-full md:w-2/3 mt-auto">
-            <h3 class="text-2xl font-bold text-white mb-3">تامین مستقیم از کارخانه</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">حذف واسطه‌های سنتی و ارتباط سیستماتیک با برترین نوردکاران خاورمیانه. ما قیمت‌های کف بازار را برای تناژهای بالا تضمین می‌کنیم.</p>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-white mb-3 tracking-tight">کفِ قیمت بازار (بدون واسطه)</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">
+              تامین مستقیم <strong>ورق استیل، لوله و پروفیل</strong> از مبادی اصلی (بورس کالا و واردکنندگان تراز اول). با حذف دلالان، ما ارزان‌ترین نرخ خروجی از انبار تهران را برای خریدهای تناژ بالا تضمین می‌کنیم.
+            </p>
           </div>
-        </div>
+          <div class="h-1 w-0 bg-[#84012B] group-hover:w-full transition-all duration-500 absolute bottom-0 left-0"></div>
+        </article>
 
-        <div :class="['group bg-[#09090b] border border-white/10 hover:border-blue-500/50 rounded-2xl p-8 transition-all duration-[800ms] ease-out flex flex-col justify-between overflow-hidden relative', isAdvVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24']" style="transition-delay: 150ms;">
-          <div class="absolute top-6 left-6 w-24 h-24 opacity-30 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <svg viewBox="0 0 100 100" class="w-full h-full">
-              <line x1="10" y1="50" x2="90" y2="50" stroke="#ffffff20" stroke-width="3" stroke-linecap="round"/>
-              <g class="group-hover:-translate-x-[30px] transition-transform duration-[1500ms] ease-in-out">
-                <line x1="50" y1="30" x2="50" y2="70" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-                <polygon points="50,50 60,45 60,55" fill="#3b82f6" />
-              </g>
-            </svg>
+        <article :class="['md:col-span-1 group bg-[#050505] p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-700 delay-100', isAdvVisible ? 'opacity-100' : 'opacity-0']">
+          <div class="absolute top-0 right-0 w-12 h-12 bg-white/5 border-l border-b border-white/5 flex items-center justify-center">
+             <span class="font-mono text-zinc-600 text-xs">02</span>
           </div>
-          
           <div class="relative z-10 mt-auto">
-            <h3 class="text-xl font-bold text-white mb-2">ابزارهای مهندسی</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">محاسبه‌گر دقیق وزن مقاطع بر اساس چگالی.</p>
-            <span class="text-xs font-bold text-blue-400 flex items-center gap-1 group-hover:gap-2 transition-all">تست محاسبات <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg></span>
+            <h3 class="text-lg font-black text-white mb-2">تضمین متالورژی</h3>
+            <p class="text-zinc-500 text-xs leading-relaxed">ارائه <strong>سرتیفیکیت معتبر</strong> و آنالیز شیمیایی دقیق برای تمامی گریدهای ۳۰۴، ۳۱۶ و نسوز.</p>
           </div>
-        </div>
+        </article>
 
-        <div :class="['group bg-[#09090b] border border-white/10 hover:border-emerald-500/50 rounded-2xl p-8 transition-all duration-[800ms] ease-out flex flex-col justify-between relative overflow-hidden', isAdvVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-24']" style="transition-delay: 200ms;">
-          <div class="absolute top-4 left-4 w-32 h-32 opacity-30 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <svg viewBox="0 0 100 100" class="w-full h-full">
-              <polygon points="20,40 50,25 80,40 50,55" fill="#ffffff05" stroke="#ffffff20" stroke-width="1.5" stroke-linejoin="round" class="group-hover:-translate-y-4 transition-transform duration-700" />
-              <polygon points="20,50 50,35 80,50 50,65" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round" class="group-hover:translate-y-0 transition-transform duration-700 opacity-0 group-hover:opacity-100" />
-              <polygon points="20,60 50,45 80,60 50,75" fill="#ffffff05" stroke="#ffffff20" stroke-width="1.5" stroke-linejoin="round" class="group-hover:translate-y-4 transition-transform duration-700" />
-            </svg>
+        <article :class="['md:col-span-1 group bg-[#050505] p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-700 delay-200', isAdvVisible ? 'opacity-100' : 'opacity-0']">
+          <div class="absolute top-0 right-0 w-12 h-12 bg-white/5 border-l border-b border-white/5 flex items-center justify-center">
+             <span class="font-mono text-zinc-600 text-xs">03</span>
           </div>
-          
           <div class="relative z-10 mt-auto">
-            <h3 class="text-xl font-bold text-white mb-2">تنوع گریدها</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">پشتیبانی از سبد آلیاژی ۳۰۴ تا ورق‌های نسوز.</p>
+            <h3 class="text-lg font-black text-white mb-2">تنوع مقاطع</h3>
+            <p class="text-zinc-500 text-xs leading-relaxed">پوشش کامل نیاز پروژه: از <strong>لوله مانیسمان</strong> تا ورق‌های دکوراتیو میرور و PVD.</p>
           </div>
-        </div>
+        </article>
 
-        <div :class="['md:col-span-2 group bg-[#09090b] border border-white/10 hover:border-[#84012B]/50 rounded-2xl p-8 transition-all duration-[800ms] ease-out flex items-center justify-between overflow-hidden relative', isAdvVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24']" style="transition-delay: 300ms;">
+        <article :class="['md:col-span-4 group bg-[#050505] p-8 flex flex-col md:flex-row items-start md:items-center justify-between relative overflow-hidden transition-all duration-700 delay-300', isAdvVisible ? 'opacity-100' : 'opacity-0']">
           
-          <div class="absolute top-1/2 left-0 w-full h-full -translate-y-1/2 opacity-10 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
-            <svg viewBox="0 0 200 50" class="w-full h-full">
-              <path d="M10 25 Q 50 5, 100 25 T 190 25" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 4"/>
-              <circle r="3" fill="#ff477e">
-                <animateMotion dur="4s" repeatCount="indefinite" path="M10 25 Q 50 5, 100 25 T 190 25" />
-              </circle>
-            </svg>
-          </div>
+          <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
 
-          <div class="absolute bottom-0 left-0 h-1 bg-[#84012B] w-0 group-hover:w-full transition-all duration-1000 ease-out"></div>
-          
-          <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-6 mt-auto">
-            <div class="w-full md:w-2/3">
-              <h3 class="text-2xl font-bold text-white mb-2">لجستیک یکپارچه و تحویل ایمن</h3>
-              <p class="text-gray-400 text-sm leading-relaxed">از تایید پیش‌فاکتور تا تحویل در سایت؛ ناوگان ترابری ما با تضمین سلامت بار و بیمه‌نامه رسمی، سفارش شما را تحویل می‌دهد.</p>
-            </div>
-            <div class="shrink-0 w-full md:w-auto">
-               <button class="w-full px-6 py-3 bg-white text-gray-900 text-sm font-bold rounded-lg transition-transform hover:scale-105 active:scale-95">
-                 پیگیری سفارش
-               </button>
-            </div>
+          <div class="relative z-10 md:w-2/3">
+            <h3 class="text-xl font-black text-white mb-2 uppercase tracking-wide">لجستیک یکپارچه و فاکتور رسمی</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">
+              صدور پیش‌فاکتور آنی، امکان تسویه حساب منعطف برای شرکت‌ها، و ارسال بار از انبار شادآباد با <strong>بیمه‌نامه معتبر باربری</strong> به سراسر کارخانجات و سایت‌های پروژه‌های ساختمانی ایران.
+            </p>
           </div>
-        </div>
+          
+          <div class="relative z-10 mt-6 md:mt-0 shrink-0 border-r-4 border-[#84012B] pr-4">
+             <span class="block text-3xl font-mono font-bold text-white tracking-tighter">100%</span>
+             <span class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mt-1">تضمین اصالت بار</span>
+          </div>
+        </article>
 
       </div>
     </section>
 
-
     <div 
       ref="marqueeRef" 
-      :class="['w-full border-y border-white/5 bg-[#09090b] py-6 overflow-hidden relative flex items-center mt-12 transition-all duration-[1200ms] ease-out', isMarqueeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']" 
-      dir="ltr"
+      class="w-full bg-[#050505] border-y border-white/5 py-4 overflow-hidden relative flex items-center mb-24" 
+      dir="rtl"
     >
-      <div class="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-10"></div>
       <div class="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#050505] to-transparent z-10"></div>
+      <div class="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-10"></div>
       
-      <div class="flex animate-marquee whitespace-nowrap items-center">
-        <div class="flex items-center justify-around w-max min-w-full gap-16 md:gap-32 px-8">
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 bg-[#84012B] rotate-45"></div> MOBAREKEH STEEL</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 bg-gray-600 rounded-full"></div> ESFAHAN IRON</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-5 h-1 bg-[#ff477e]"></div> OXIN AHVAZ</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 border-2 border-gray-600"></div> KAVIAN STEEL</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> GILAN CO</span>
+      <div class="flex animate-marquee-rtl whitespace-nowrap items-center">
+        <div class="flex items-center justify-around w-max min-w-full gap-12 md:gap-24 px-8">
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 bg-[#84012B]"></span> فولاد مبارکه اصفهان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-zinc-600"></span> مجتمع فولاد گیلان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-1 h-4 bg-[#ff477e]"></span> لوله و پروفیل صفا</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 border border-zinc-600"></span> فولاد اکسین خوزستان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="font-mono text-xs border border-zinc-600 px-1">TS</span> تیسکو (TISCO)</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="font-mono text-xs border border-[#84012B] px-1 text-[#84012B]">YK</span> یوسکو (YUSCO)</span>
         </div>
-        <div class="flex items-center justify-around w-max min-w-full gap-16 md:gap-32 px-8" aria-hidden="true">
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 bg-[#84012B] rotate-45"></div> MOBAREKEH STEEL</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 bg-gray-600 rounded-full"></div> ESFAHAN IRON</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-5 h-1 bg-[#ff477e]"></div> OXIN AHVAZ</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><div class="w-3 h-3 border-2 border-gray-600"></div> KAVIAN STEEL</span>
-          <span class="text-gray-600 font-bold text-xl md:text-2xl tracking-widest uppercase flex items-center gap-3"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> GILAN CO</span>
+        <div class="flex items-center justify-around w-max min-w-full gap-12 md:gap-24 px-8" aria-hidden="true">
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 bg-[#84012B]"></span> فولاد مبارکه اصفهان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-zinc-600"></span> مجتمع فولاد گیلان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-1 h-4 bg-[#ff477e]"></span> لوله و پروفیل صفا</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="w-2 h-2 border border-zinc-600"></span> فولاد اکسین خوزستان</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="font-mono text-xs border border-zinc-600 px-1">TS</span> تیسکو (TISCO)</span>
+          <span class="text-zinc-600 font-bold text-lg md:text-xl tracking-wide flex items-center gap-3"><span class="font-mono text-xs border border-[#84012B] px-1 text-[#84012B]">YK</span> یوسکو (YUSCO)</span>
         </div>
       </div>
     </div>
 
-    <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24 md:py-32">
+    <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24 border-t border-white/5">
       
       <div 
         ref="processTitleRef" 
-        :class="['mb-16 md:mb-20 text-center transition-all duration-700 ease-out', isProcessTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']"
+        :class="['mb-16 border-r-4 border-[#84012B] pr-6 transition-all duration-700 ease-out', isProcessTitleVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12']"
       >
-        <h2 class="text-3xl md:text-5xl font-black text-white mb-6">ساختار <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">تامین پایدار</span></h2>
-        <p class="text-gray-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-          ما فرآیند سنتی خرید آهن‌آلات را به یک الگوریتم دقیق تبدیل کرده‌ایم. مراحل کار ما را ببینید:
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4 uppercase tracking-tighter">الگوریتم <span class="text-[#84012B]">تامین و لجستیک</span></h2>
+        <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
+          تبدیل فرآیند سنتی خرید آهن‌آلات به یک فلوچارت مهندسی‌شده؛ از سورسینگ در بورس کالا تا تحویل در سایت پروژه با تاییدیه متالورژی.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        <div class="hidden md:block absolute top-[4.5rem] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent -z-10"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+        <div class="hidden md:block absolute top-[3rem] left-0 right-0 h-px border-t border-dashed border-white/20 -z-10"></div>
         
-        <div 
+        <article 
           ref="step1Ref" 
-          :class="['group relative bg-transparent transition-all duration-[800ms] ease-out', isStep1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
+          :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-700 ease-out relative overflow-hidden', isStep1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
         >
-          <div class="w-16 h-16 md:w-20 md:h-20 bg-[#09090b] border-2 border-white/10 group-hover:border-[#84012B] rounded-full flex items-center justify-center mx-auto mb-8 transition-colors duration-500 relative">
-            <span class="text-2xl font-black text-white">01</span>
-            <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#ff477e] rounded-full animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></span>
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#84012B] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center mb-8 relative">
+            <span class="font-mono text-2xl font-black text-white">01</span>
+            <div class="absolute -right-2 -top-2 w-4 h-4 border-t border-r border-[#ff477e]"></div>
           </div>
-          <div class="text-center bg-[#09090b] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.02] transition-colors duration-500 h-[calc(100%-6rem)]">
-            <h3 class="text-xl font-bold text-white mb-4">سورسینگ هوشمند</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">ارتباط با بورس کالا و برترین نوردکاران. قیمت‌های جهانی و موجودی انبارها تحلیل می‌شوند تا بهترین نرخ به شما پیشنهاد شود.</p>
-          </div>
-        </div>
+          <h3 class="text-xl font-black text-white mb-4">سورسینگ و کشف قیمت</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed text-justify">
+            رصد لحظه‌ای <strong>بورس کالا</strong> و انبارهای مبدا. تحلیل نوسانات ارزی برای ارائه <strong>بهترین قیمت ورق و لوله استیل</strong> در تناژ درخواستی شما.
+          </p>
+        </article>
 
-        <div 
+        <article 
           ref="step2Ref" 
-          :class="['group relative bg-transparent transition-all duration-[800ms] ease-out md:translate-y-8', isStep2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
+          :class="['group bg-[#050505] border border-white/10 hover:border-blue-500/50 p-8 transition-all duration-700 ease-out relative overflow-hidden md:mt-8', isStep2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
         >
-          <div class="w-16 h-16 md:w-20 md:h-20 bg-[#09090b] border-2 border-white/10 group-hover:border-[#84012B] rounded-full flex items-center justify-center mx-auto mb-8 transition-colors duration-500 relative">
-            <span class="text-2xl font-black text-white">02</span>
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center mb-8 relative">
+            <span class="font-mono text-2xl font-black text-white">02</span>
+            <div class="absolute -right-2 -top-2 w-4 h-4 border-t border-r border-blue-500"></div>
           </div>
-          <div class="text-center bg-[#09090b] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.02] transition-colors duration-500 h-[calc(100%-6rem)]">
-            <h3 class="text-xl font-bold text-white mb-4">کنترل کیفی و متالورژی</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">تطبیق سرتیفیکیت کالا با استانداردهای ASTM. تضمین درصد نیکل و کروم در مقاطع دکوراتیو و صنعتی پیش از بارگیری.</p>
-          </div>
-        </div>
+          <h3 class="text-xl font-black text-white mb-4">تاییدیه کنترل کیفی (QC)</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed text-justify">
+            تطبیق بار با استانداردهای ASTM. بررسی <strong>سرتیفیکیت کارخانه</strong> و تایید درصد عناصر (کروم و نیکل) پیش از اجازه بارگیری مقاطع.
+          </p>
+        </article>
 
-        <div 
+        <article 
           ref="step3Ref" 
-          :class="['group relative bg-transparent transition-all duration-[800ms] ease-out', isStep3Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
+          :class="['group bg-[#050505] border border-white/10 hover:border-emerald-500/50 p-8 transition-all duration-700 ease-out relative overflow-hidden', isStep3Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']"
         >
-          <div class="w-16 h-16 md:w-20 md:h-20 bg-[#09090b] border-2 border-white/10 group-hover:border-[#84012B] rounded-full flex items-center justify-center mx-auto mb-8 transition-colors duration-500 relative">
-            <span class="text-2xl font-black text-white">03</span>
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center mb-8 relative">
+            <span class="font-mono text-2xl font-black text-white">03</span>
+            <div class="absolute -right-2 -top-2 w-4 h-4 border-t border-r border-emerald-500"></div>
           </div>
-          <div class="text-center bg-[#09090b] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.02] transition-colors duration-500 h-[calc(100%-6rem)]">
-            <h3 class="text-xl font-bold text-white mb-4">لجستیک نقطه به نقطه</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">بسته‌بندی ایمن و ارسال سریع. ناوگان ترابری ما بار شما را با بیمه‌نامه‌ی معتبر در سایت پروژه تحویل می‌دهد.</p>
-          </div>
-        </div>
+          <h3 class="text-xl font-black text-white mb-4">لجستیک و صدور فاکتور</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed text-justify">
+            بسته‌بندی استاندارد، صدور <strong>فاکتور رسمی</strong>، و ارسال بار با ناوگان ترابری مجهز به همراه <strong>بیمه‌نامه معتبر</strong> تا سایت پروژه.
+          </p>
+        </article>
 
       </div>
     </section>
 
-    <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24">
+    <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24 border-t border-white/5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmZmZmYwNSIvPjwvc3ZnPg==')]">
       
-      <div :class="['mb-16 text-center transition-all duration-700 ease-out', isProdTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']" ref="prodTitleRef">
-        <h2 class="text-3xl md:text-5xl font-black text-white mb-6">سبد محصولات <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">استیل مهفا</span></h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">تنوع بی‌نظیر آلیاژها و مقاطع مهندسی‌شده برای پروژه‌های شما.</p>
+      <div 
+        ref="prodTitleRef" 
+        :class="['mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 transition-all duration-700 ease-out', isProdTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']"
+      >
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white mb-2 tracking-tight uppercase">دپارتمان <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#84012B] to-[#ff477e]">فروش مقاطع</span></h2>
+          <p class="text-zinc-400 font-mono text-sm uppercase tracking-widest">Stainless Steel Portfolio</p>
+        </div>
+        <NuxtLink to="/products" class="shrink-0 px-6 py-3 border border-white/20 text-white text-sm font-bold hover:bg-white/10 transition-colors flex items-center gap-2">
+          کاتالوگ کامل محصولات
+          <span class="font-mono">→</span>
+        </NuxtLink>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <div ref="card1Ref" :class="['group bg-[#09090b] border border-white/10 rounded-3xl p-8 hover:border-[#84012B]/50 transition-all duration-700 ease-out', isCard1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
-          <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#84012B]/20 transition-colors">
-            <svg class="w-7 h-7 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+        <div ref="card1Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 relative flex flex-col', isCard1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/ورق-استیل">انواع ورق استیل</NuxtLink></h3>
+            <span class="font-mono text-zinc-600 text-sm">CAT.01</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">ورق‌های استیل</h3>
-          <p class="text-gray-400 text-sm mb-6 leading-relaxed">انواع ورق ۳۰۴، ۳۱۶ و ۴۳۰ با پرداخت‌های خش‌دار، آینه‌ای و مات در ضخامت‌های مختلف.</p>
-          <button class="text-white text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">مشاهده ورق‌ها →</button>
+          <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">تامین شیت فابریک و رول استیل در ضخامت‌های ۰.۳ تا ۵۰ میل. تضمین سطح بدون تاب و خط و خش.</p>
+          
+          <ul class="flex flex-wrap gap-2 mt-auto">
+            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۰۴ (نگیر)</NuxtLink></li>
+            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-316" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۱۶ (ضد اسید)</NuxtLink></li>
+            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-براق" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق استیل براق</NuxtLink></li>
+            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-430" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۴۳۰ (بگیر)</NuxtLink></li>
+          </ul>
         </div>
 
-        <div ref="card2Ref" :class="['group bg-[#09090b] border border-white/10 hover:border-[#84012B]/50 rounded-3xl p-8 transition-all duration-700 ease-out delay-150', isCard2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
-          <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#84012B]/20 transition-colors">
-            <svg class="w-7 h-7 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" /></svg>
+        <div ref="card2Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 delay-100 relative flex flex-col', isCard2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنعتی">لوله استیل صنعتی</NuxtLink></h3>
+            <span class="font-mono text-zinc-600 text-sm">CAT.02</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">پروفیل و لوله</h3>
-          <p class="text-gray-400 text-sm mb-6 leading-relaxed">پروفیل‌های دکوراتیو و صنعتی با بالاترین کیفیت جوش و دقت ابعادی برای سازه‌های مدرن.</p>
-          <button class="text-white text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">مشاهده پروفیل‌ها →</button>
+          <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">انتقال ایمن سیالات. واردات مستقیم لوله‌های بدون درز و درزدار با سرتیفیکیت‌های تست فشار و کشش.</p>
+          
+          <ul class="flex flex-wrap gap-2 mt-auto">
+            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-مانیسمان" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">مانیسمان (بدون درز)</NuxtLink></li>
+            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنعتی" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله استیل صنعتی</NuxtLink></li>
+            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنایع-غذایی" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله صنایع غذایی (دارویی)</NuxtLink></li>
+            <li><NuxtLink to="/products/لوله-استیل/لوله-دکوراتیو-استیل" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله دکوراتیو استیل</NuxtLink></li>
+          </ul>
         </div>
 
-        <div ref="card3Ref" :class="['group bg-[#09090b] border border-white/10 hover:border-[#84012B]/50 rounded-3xl p-8 transition-all duration-700 ease-out delay-300', isCard3Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
-          <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#84012B]/20 transition-colors">
-            <svg class="w-7 h-7 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+        <div ref="card3Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 delay-200 relative flex flex-col', isCard3Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/پروفیل-استیل/پروفیل-دکوراتیو-استیل">پروفیل و دکوراتیو</NuxtLink></h3>
+            <span class="font-mono text-zinc-600 text-sm">CAT.03</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">اتصالات و مقاطع</h3>
-          <p class="text-gray-400 text-sm mb-6 leading-relaxed">تامین انواع زانو، سه‌راهی و فلنج‌های استیل صنعتی با گواهی سلامت و آنالیز دقیق شیمیایی.</p>
-          <button class="text-white text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">مشاهده اتصالات →</button>
+          <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">قوطی و پروفیل‌های استیل با دقت ابعادی بالا. جوش‌پذیری عالی جهت استفاده در سازه‌ها و معماری مدرن.</p>
+          
+          <ul class="flex flex-wrap gap-2 mt-auto">
+            <li><NuxtLink to="/products/پروفیل-استیل?alloy=201" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل ۲۰۱</NuxtLink></li>
+            <li><NuxtLink to="/products/پروفیل-استیل?alloy=304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل ۳۰۴</NuxtLink></li>
+            <li><NuxtLink to="/products/پروفیل-استیل?surface=رزگلد+میرور+(براق)" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">رزگلد میرور(براق)</NuxtLink></li>
+            <li><NuxtLink to="/products/پروفیل-استیل/پروفیل-صنعتی-استیل" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل صنعتی استیل</NuxtLink></li>
+          </ul>
         </div>
 
       </div>
     </section>
 
 
-    <section class="relative z-20 max-w-3xl mx-auto px-6 py-24">
-      <div class="mb-16 text-center">
+    <section ref="faqSectionRef" class="relative z-20 max-w-4xl mx-auto px-6 py-24">
+      <div :class="['mb-16 text-center transition-all duration-700 ease-out', isFaqSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">پاسخ به ابهامات شما</h2>
-        <p class="text-gray-400">سوالات رایجی که همکاران شما در صنعت آهن می‌پرسند.</p>
+        <p class="text-gray-400">مهم‌ترین سوالات خریداران صنعتی و همکاران بازار آهن</p>
       </div>
     
       <div class="space-y-4">
-        <div ref="faq1Ref" :class="['bg-[#09090b] border transition-all duration-[800ms] ease-out rounded-2xl overflow-hidden', isFaq1Visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-24', activeFaq === 1 ? 'border-[#84012B]/50 shadow-[0_0_20px_rgba(132,1,43,0.1)]' : 'border-white/5']">
-          <div @click="toggleFaq(1)" class="group flex justify-between items-center p-6 cursor-pointer text-white font-bold text-lg hover:bg-white/5 transition-colors relative">
+        <div 
+          v-for="(faq, index) in faqs" 
+          :key="index"
+          :class="[
+            'bg-[#09090b] border transition-all duration-[600ms] ease-out rounded-2xl overflow-hidden', 
+            isFaqSectionVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12',
+            activeFaq === index ? 'border-[#84012B]/50 shadow-[0_0_20px_rgba(132,1,43,0.1)]' : 'border-white/5'
+          ]"
+          :style="{ transitionDelay: `${index * 100}ms` }"
+        >
+          <div @click="toggleFaq(index)" class="group flex justify-between items-center p-6 cursor-pointer text-white font-bold text-base md:text-lg hover:bg-white/5 transition-colors relative">
             <span class="relative z-10 flex items-center gap-3">
-              <span :class="['w-2 h-2 rounded-full transition-colors', activeFaq === 1 ? 'bg-[#ff477e]' : 'bg-gray-600']"></span>
-              چطور از اصالت آلیاژ استیل مطمئن شویم؟
+              <span :class="['w-2 h-2 rounded-full transition-colors shrink-0', activeFaq === index ? 'bg-[#ff477e]' : 'bg-gray-600']"></span>
+              <h3 class="m-0 p-0 text-base md:text-lg">{{ faq.question }}</h3>
             </span>
-            <span :class="['transition-transform duration-500 text-2xl relative z-10', activeFaq === 1 ? 'rotate-45 text-[#ff477e]' : 'text-gray-500 group-hover:text-white']">+</span>
+            <span :class="['transition-transform duration-500 text-2xl relative z-10 shrink-0 ml-2', activeFaq === index ? 'rotate-45 text-[#ff477e]' : 'text-gray-500 group-hover:text-white']">+</span>
           </div>
-          <div :class="['faq-custom-grid', activeFaq === 1 ? 'is-open' : '']">
+          <div :class="['faq-custom-grid', activeFaq === index ? 'is-open' : '']">
             <div class="overflow-hidden">
-              <p class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4 mt-2 mx-6">
-                ما در استیل مهفا، تمامی مقاطع را با سرتیفیکیت (آنالیز شیمیایی) معتبر ارائه می‌دهیم. در صورت نیاز، می‌توانید نمونه بار را به آزمایشگاه‌های مورد تایید ما ارسال کنید تا از درصد دقیق نیکل و کروم اطمینان حاصل کنید.
+              <p class="px-6 pb-6 text-gray-400 text-sm md:text-base leading-relaxed border-t border-white/5 pt-4 mt-2 mx-6">
+                {{ faq.answer }}
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
+      <div class="bg-[#09090b]/50 border border-white/5 rounded-3xl p-6 md:p-10 relative overflow-hidden transition-all duration-500 hover:border-white/10 shadow-2xl">
+        
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-2 h-10 bg-gradient-to-b from-[#84012B] to-[#ff477e] rounded-full shadow-[0_0_15px_rgba(132,1,43,0.5)]"></div>
+          <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">قیمت روز و خرید بی‌واسطه استنلس استیل؛ مرجع تخصصی فولاد ضد زنگ</h2>
         </div>
 
-        <div ref="faq2Ref" :class="['bg-[#09090b] border transition-all duration-[800ms] ease-out rounded-2xl overflow-hidden delay-100', isFaq2Visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24', activeFaq === 2 ? 'border-[#84012B]/50 shadow-[0_0_20px_rgba(132,1,43,0.1)]' : 'border-white/5']">
-          <div @click="toggleFaq(2)" class="group flex justify-between items-center p-6 cursor-pointer text-white font-bold text-lg hover:bg-white/5 transition-colors relative">
-            <span class="relative z-10 flex items-center gap-3">
-              <span :class="['w-2 h-2 rounded-full transition-colors', activeFaq === 2 ? 'bg-[#ff477e]' : 'bg-gray-600']"></span>
-              حداقل تناژ سفارش چقدر است؟
-            </span>
-            <span :class="['transition-transform duration-500 text-2xl relative z-10', activeFaq === 2 ? 'rotate-45 text-[#ff477e]' : 'text-gray-500 group-hover:text-white']">+</span>
-          </div>
-          <div :class="['faq-custom-grid', activeFaq === 2 ? 'is-open' : '']">
-            <div class="overflow-hidden">
-              <p class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4 mt-2 mx-6">
-                برای محصولاتِ خاص، حداقل سفارش یک بندیل یا رول است. اما برای مقاطع دکوراتیو، امکان ارسال شاخه‌ای نیز فراهم است. جهت دریافت قیمت همکاری با کارشناسان ما تماس بگیرید.
-              </p>
+        <!-- کانتینر متن با قابلیت باز و بسته شدن -->
+        <div :class="['relative transition-all duration-[800ms] overflow-hidden', isSeoTextExpanded ? 'max-h-[2500px]' : 'max-h-[160px]']">
+          
+          <div class="text-zinc-400 text-sm md:text-base leading-loose space-y-7 text-justify pb-12">
+            <p>
+              صنعت فولاد نیازمند شفافیت در قیمت‌گذاری و تضمین اصالت متریال است. مجموعه <strong>استیل مهفا</strong> به عنوان یکی از مراجع اصلی تامین و توزیع مقاطع استنلس استیل در بازار آهن شادآباد و پامنار، بستری امن برای <strong>خرید ورق استیل</strong>، لوله، پروفیل و اتصالات صنعتی فراهم کرده است. ما با حذف واسطه‌های سنتی، امکان استعلام لحظه‌ای <strong>قیمت روز آهن‌آلات</strong> را بر اساس نوسانات بورس کالا و نرخ ارز جهانی برای پیمانکاران، کارخانجات و کارگاه‌های تولیدی مهیا ساخته‌ایم.
+            </p>
+            
+            <h3 class="text-xl font-bold text-zinc-200 mt-8 mb-4 border-b border-white/5 pb-2 inline-block">تنوع گریدها در خرید ورق استیل (شیت و رول)</h3>
+            <p>
+              تامین متریال پایه برای صنایع حساس نیازمند دقت متالورژیکی است. سبد محصولات ما شامل <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۰۴ (نگیر)</NuxtLink> به عنوان پرکاربردترین آلیاژ بازار، و <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۱۶ (ضد اسید)</NuxtLink> ویژه صنایع پتروشیمی، دارویی و محیط‌های خورنده می‌باشد. افزون بر این، گریدهای تخصصی نظیر <strong>ورق استیل نسوز ۳۰۹ و ۳۱۰</strong> (مقاوم تا دمای ۱۱۵۰ درجه) و گریدهای اقتصادی <strong>ورق ۲۰۱ و ۴۳۰ (بگیر)</strong> به صورت رول، شیت‌ فابریک و برشی با پرداخت‌های سطحی براق (BA)، مات (2B)، خش‌دار (No.4) و آینه‌ای (Mirror) قابل عرضه می‌باشند.
+            </p>
+
+            <h3 class="text-xl font-bold text-zinc-200 mt-8 mb-4 border-b border-white/5 pb-2 inline-block">پروفیل دکوراتیو و لوله استیل صنعتی</h3>
+            <p>
+              در معماری مدرن و سازه‌های دکوراتیو، کیفیت سطح و جوش‌پذیری حرف اول را می‌زند. استیل مهفا تنوع بی‌نظیری از <strong>پروفیل استیل دکوراتیو</strong> و لوله‌های درزدار را با روکش‌های تیتانیوم PVD در رنگ‌های طلایی، رزگلد، مشکی و برنز تامین می‌کند. همچنین در بخش انتقال سیالات تحت فشار، امکان تامین <strong>لوله مانیسمان استیل (بدون درز)</strong> در رده‌های ۱۰، ۴۰ و ۸۰ به همراه لوله‌های صنایع غذایی (پولیش دارویی) با تاییدیه سلامت و سرتیفیکیت معتبر فراهم است.
+            </p>
+
+            <h3 class="text-xl font-bold text-zinc-200 mt-8 mb-4 border-b border-white/5 pb-2 inline-block">اتصالات استیل و خدمات ارزش افزوده</h3>
+            <p>
+              تکمیل زنجیره تامین شما رسالت ماست. انواع <strong>اتصالات استیل جوشی و دنده‌ای</strong> (شامل زانو، سه‌راهی، فلنج، تبدیل و گسکت) با آلیاژهای منطبق بر استانداردهای ASTM و DIN در انبار ما موجود است. ما تنها یک فروشنده نیستیم؛ با ارائه خدمات ارزش افزوده نظیر <strong>برش لیزر CNC</strong>، نواربری (Slitting)، خدمات پولیش و روکش‌دار کردن مقاطع، متریال را دقیقاً مطابق نقشه‌های مهندسی شما آماده‌سازی و ارسال می‌کنیم. 
+            </p>
+
+            <div class="bg-white/5 border-l-2 border-[#84012B] p-4 rounded-r-lg mt-6">
+              <strong class="text-white">لجستیک یکپارچه:</strong> تمامی سفارشات، پس از صدور پیش‌فاکتور و تاییدیه کنترل کیفیت (QC)، از انبارهای تهران بارگیری شده و همراه با فاکتور رسمی و بیمه‌نامه معتبر، در کوتاه‌ترین زمان به سراسر ایران ارسال می‌گردند.
             </div>
           </div>
+
+          <!-- هاله محو‌کننده متن در حالت بسته -->
+          <div v-show="!isSeoTextExpanded" class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent pointer-events-none"></div>
         </div>
 
-        <div ref="faq3Ref" :class="['bg-[#09090b] border transition-all duration-[800ms] ease-out rounded-2xl overflow-hidden delay-200', isFaq3Visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-24', activeFaq === 3 ? 'border-[#84012B]/50 shadow-[0_0_20px_rgba(132,1,43,0.1)]' : 'border-white/5']">
-          <div @click="toggleFaq(3)" class="group flex justify-between items-center p-6 cursor-pointer text-white font-bold text-lg hover:bg-white/5 transition-colors relative">
-            <span class="relative z-10 flex items-center gap-3">
-              <span :class="['w-2 h-2 rounded-full transition-colors', activeFaq === 3 ? 'bg-[#ff477e]' : 'bg-gray-600']"></span>
-              آیا امکان ارسال نمونه وجود دارد؟
-            </span>
-            <span :class="['transition-transform duration-500 text-2xl relative z-10', activeFaq === 3 ? 'rotate-45 text-[#ff477e]' : 'text-gray-500 group-hover:text-white']">+</span>
-          </div>
-          <div :class="['faq-custom-grid', activeFaq === 3 ? 'is-open' : '']">
-            <div class="overflow-hidden">
-              <p class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4 mt-2 mx-6">
-                بله؛ جهت اطمینان از کیفیت سطح و ابعاد دقیق، امکان ارسال نمونه‌های کوتاه (Sample Cut) برای پروژه‌های بزرگ و صنعتی فراهم است.
-              </p>
-            </div>
-          </div>
+        <!-- دکمه باز و بسته کردن -->
+        <div class="mt-2 flex justify-center relative z-10">
+          <button 
+            @click="isSeoTextExpanded = !isSeoTextExpanded" 
+            class="group flex items-center gap-2 text-sm font-bold text-zinc-300 hover:text-white bg-[#0a0a0c] hover:bg-[#84012B]/20 border border-white/10 hover:border-[#84012B]/50 px-8 py-3 rounded-full transition-all duration-300"
+          >
+            {{ isSeoTextExpanded ? 'بستن توضیحات' : 'مطالعه کامل درباره استیل مهفا' }}
+            <svg :class="['w-4 h-4 transition-transform duration-500', isSeoTextExpanded ? 'rotate-180 text-[#ff477e]' : 'group-hover:translate-y-1 text-zinc-500']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
         </div>
+        
       </div>
     </section>
 
@@ -386,14 +428,14 @@
           <h3 class="text-2xl md:text-4xl font-black text-white mb-6">همین حالا مشاوره رایگان بگیرید</h3>
           <p class="text-white/80 mb-10 text-lg">کارشناسان ما پشت خط هستند تا بهترین قیمت بازار را به شما اعلام کنند.</p>
 
-          <div class="flex flex-col md:flex-row gap-6 justify-center">
-            <a href="tel:02166393755" class="flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#84012B] font-bold rounded-xl text-xl hover:scale-105 transition-transform">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.6-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.4-1.2-.6-2.4-.6-3.6 0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2 0 10.5 8.5 19 19 19 1.1 0 2-.9 2-2v-3.5c0-1.1-.9-2-2-2z"/></svg>
-              ۰۲۱-۶۶۳۹۳۷۵۵
+          <div class="flex flex-col md:flex-row gap-6 justify-center mt-8">
+            <a href="tel:02166393755" aria-label="تماس با دفتر فروش خط یک" class="flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#84012B] font-black rounded-xl text-xl hover:scale-105 transition-transform shadow-lg shadow-white/10">
+              <svg class="w-6 h-6 animate-bounce" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.6-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.4-1.2-.6-2.4-.6-3.6 0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2 0 10.5 8.5 19 19 19 1.1 0 2-.9 2-2v-3.5c0-1.1-.9-2-2-2z"/></svg>
+              <span dir="ltr">۰۲۱ - ۶۶۳۹ ۳۷۵۵</span>
             </a>
-            <a href="tel:02166391417" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 text-white font-bold rounded-xl text-xl border border-white/20 hover:bg-white/20 transition-all">
+            <a href="tel:02166391417" aria-label="تماس با دفتر فروش خط دو" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 text-white font-bold rounded-xl text-xl border border-white/20 hover:bg-white/20 transition-all">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.6-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.4-1.2-.6-2.4-.6-3.6 0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2 0 10.5 8.5 19 19 19 1.1 0 2-.9 2-2v-3.5c0-1.1-.9-2-2-2z"/></svg>
-              ۰۲۱-۶۶۳۹۱۴۱۷
+              <span dir="ltr">۰۲۱ - ۶۶۳۹ ۱۴۱۷</span>
             </a>
           </div>
         </div>
@@ -405,6 +447,103 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
+const isSeoTextExpanded = ref(false)
+const faqs = ref([
+  {
+    question: 'قیمت ورق و لوله استیل در سایت به‌روز است یا نیاز به استعلام دارد؟',
+    answer: 'با توجه به نوسانات قیمت ارز و بورس کالا، قیمت‌های تابلوی معاملات زنده استیل مهفا به صورت روزانه آپدیت می‌شوند. با این حال، برای ثبت سفارش نهایی و دریافت پیش‌فاکتور دقیق همراه با تخفیف تناژ، تماس با دفتر فروش الزامی است.'
+  },
+  {
+    question: 'چطور از اصالت آلیاژ استیل (۳۰۴، ۳۱۶ و...) مطمئن شویم؟',
+    answer: 'تمامی مقاطع استیل صنعتی و دکوراتیو در استیل مهفا همراه با سرتیفیکیت معتبر کارخانه (آنالیز شیمیایی) ارائه می‌شوند. همچنین امکان ارسال نمونه (Sample) برای تست در آزمایشگاه‌های متالورژی پیش از بارگیری اصلی فراهم است.'
+  },
+  {
+    question: 'آیا استیل مهفا فروش خرد (شاخه‌ای یا برشی) هم دارد؟',
+    answer: 'تمرکز اصلی ما بر روی تامین بار پروژه‌ها و فروش عمده (بندیلی و پالتی) است. اما در بخش مقاطع دکوراتیو (مثل لوله و پروفیل‌های طلایی و میرور)، امکان فروش شاخه‌ای برای همکاران و کارگاه‌ها وجود دارد.'
+  },
+  {
+    question: 'شرایط تسویه حساب و پرداخت برای پروژه‌های بزرگ چگونه است؟',
+    answer: 'تسویه حساب به صورت نقدی پیش از بارگیری انجام می‌شود. برای شرکت‌های معتبر و پروژه‌های ملی، پس از اعتبارسنجی مالی، امکان عقد قرارداد با شرایط پرداخت مرحله‌ای (چک صیادی معتبر) قابل مذاکره می‌باشد.'
+  },
+  {
+    question: 'تفاوت ورق استیل ۳۰۴ و ۳۱۶ در چیست و کدام را بخرم؟',
+    answer: 'گرید ۳۰۴ (نگیر) پرکاربردترین استیل بازار برای محیط‌های معمولی است. اما گرید ۳۱۶ (ضد اسید) به دلیل داشتن مولیبدن، در برابر خوردگیِ اسیدی و محیط‌های دریایی مقاومت بسیار بالاتری دارد و برای صنایع پتروشیمی و غذایی حساس پیشنهاد می‌شود.'
+  },
+  {
+    question: 'آیا خدمات برش لیزر، خم‌کاری و پولیش استیل هم انجام می‌دهید؟',
+    answer: 'بله؛ استیل مهفا با در اختیار داشتن مجهزترین کارگاه‌های خدمات فولادی، تمامی درخواست‌های برش لیزر CNC، نواربری (Slitting)، روکش‌دار کردن ورق و پولیش مقاطع را با بالاترین دقت انجام می‌دهد.'
+  },
+  {
+    question: 'ارسال بار به شهرستان‌ها چقدر زمان می‌برد؟',
+    answer: 'پس از تایید مالی پیش‌فاکتور، فرآیند بارگیری از انبارهای تهران (شادآباد یا شورآباد) بلافاصله آغاز شده و از طریق معتبرترین باربری‌ها همراه با بیمه‌نامه رسمی، نهایتاً ظرف ۲۴ تا ۴۸ ساعت به تمام نقاط ایران ارسال می‌گردد.'
+  }
+])
+
+const faqSchema = computed(() => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.value.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.text || faq.answer
+      }
+    }))
+  }
+})
+
+useSeoMeta({
+  title: 'استیل مهفا | بورس انواع ورق، لوله و پروفیل استیل در ایران',
+  description: 'خرید مستقیم و بدون واسطه مقاطع استیل (۳۰۴، ۳۱۶، دکوراتیو و صنعتی). استعلام قیمت لحظه‌ای آهن‌آلات، ارسال به سراسر کشور با تضمین کیفیت و سرتیفیکیت معتبر.',
+  ogTitle: 'استیل مهفا - مرجع تخصصی تامین استیل',
+  ogDescription: 'تامین یکپارچه سبد محصولات استیل پروژه‌های صنعتی و ساختمانی با قیمت رقابتی.',
+  ogImage: 'https://mohafa.com/hero-bg.png', // در پروداکشن آدرس کامل سایت را بگذارید
+  twitterCard: 'summary_large_image',
+})
+
+useHead({
+  script: [
+    {
+      // 1. اسکیما شرکت و کسب‌وکار محلی (LocalBusiness) - برای لینک شدن به مپ و شماره تماس
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "استیل مهفا",
+        "image": "https://mohafa.com/hero-bg.png",
+        "@id": "https://mohafa.com",
+        "url": "https://mohafa.com",
+        "telephone": "+982166393755",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Tehran Province, Tehran، بزرگراه فتح٫، M8G2+27M مجتمع استیل، فتح یازده, Iran", // آدرس دقیق را بعدا تکمیل کنید
+          "addressLocality": "تهران",
+          "addressRegion": "استان تهران",
+          "addressCountry": "IR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 35.67383406781865, // مختصات دقیق مپ را جایگزین کنید
+          "longitude": 51.300444117791024
+        },
+        "sameAs": [
+          // آدرس شبکه‌های اجتماعی خود را اینجا بگذارید
+          "https://instagram.com/steelmahfa",
+          "https://ble.ir/steelsara"
+        ]
+      })
+    },
+    {
+      // 2. اسکیما سوالات متداول (FAQ) - باعث می‌شود سوالات زیر لینک شما در گوگل نمایش داده شوند
+      type: 'application/ld+json',
+      innerHTML: computed(() => JSON.stringify(faqSchema.value))
+    }
+  ]
+})
+
 const { data: products } = await useFetch('/api/products/best-sellers')
 // فقط متغیرها در فضای باز تعریف می‌شوند
 const advSectionRef = ref(null)
@@ -469,9 +608,11 @@ const isHeroBtnsVisible = ref(false)
 
 // وضعیت مدیریت آکاردئون‌های FAQ (برای باز و بسته شدن نرم)
 const activeFaq = ref(null)
-const toggleFaq = (id) => {
-  activeFaq.value = activeFaq.value === id ? null : id
+const toggleFaq = (index) => {
+  activeFaq.value = activeFaq.value === index ? null : index
 }
+const faqSectionRef = ref(null)
+const isFaqSectionVisible = ref(false)
 
 onMounted(() => {
   const advObserver = new IntersectionObserver((entries) => {
@@ -538,19 +679,11 @@ onMounted(() => {
 
   const faqObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.target === faqTitleRef.value) isFaqTitleVisible.value = entry.isIntersecting
-      if (entry.target === faq1Ref.value) isFaq1Visible.value = entry.isIntersecting
-      if (entry.target === faq2Ref.value) isFaq2Visible.value = entry.isIntersecting
-      if (entry.target === faq3Ref.value) isFaq3Visible.value = entry.isIntersecting
-      if (entry.target === ctaRef.value) isCtaVisible.value = entry.isIntersecting
+      if (entry.target === faqSectionRef.value) isFaqSectionVisible.value = entry.isIntersecting
     })
   }, { threshold: 0.1 })
   
-  if (faqTitleRef.value) faqObserver.observe(faqTitleRef.value)
-  if (faq1Ref.value) faqObserver.observe(faq1Ref.value)
-  if (faq2Ref.value) faqObserver.observe(faq2Ref.value)
-  if (faq3Ref.value) faqObserver.observe(faq3Ref.value)
-  if (ctaRef.value) faqObserver.observe(ctaRef.value)
+  if (faqSectionRef.value) faqObserver.observe(faqSectionRef.value)
 })
 </script>
 
@@ -590,9 +723,14 @@ details[open] .faq-content {
 .animate-scan-path {
   animation: scan-path 3s linear infinite;
 }
-@keyframes marquee {
+@keyframes marquee-rtl {
   0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-marquee-rtl {
+  animation: marquee-rtl 40s linear infinite;
+  display: flex;
+  width: max-content;
 }
 .animate-marquee {
   animation: marquee 35s linear infinite;

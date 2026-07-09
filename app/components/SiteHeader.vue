@@ -97,9 +97,14 @@ const closeMobileMenu = () => {
       </ul>
 
       <div class="flex items-center gap-4 z-50">
-        <NuxtLink to="/quote" class="hidden md:block px-5 py-2.5 bg-[#84012B] hover:bg-[#a30034] text-white text-sm font-bold rounded-lg transition-all shadow-[0_4px_14px_0_rgba(132,1,43,0.39)]">
-          استعلام قیمت
+        <NuxtLink to="/contact" class="hidden lg:block px-4 py-2.5 text-zinc-300 hover:text-white text-sm font-bold transition-colors">
+          استعلام آنلاین
         </NuxtLink>
+
+        <a href="tel:02166393755" class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#84012B] hover:bg-[#a30034] text-white text-sm font-bold rounded-lg transition-all shadow-[0_4px_14px_0_rgba(132,1,43,0.39)] group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+          <span dir="ltr">۰۲۱ - ۶۶۳۹ ۳۷۵۵</span>
+        </a>
 
         <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="md:hidden p-2 text-white relative w-10 h-10 focus:outline-none bg-white/5 rounded-lg">
           <div class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform">
@@ -171,9 +176,13 @@ const closeMobileMenu = () => {
           </li>
         </ul>
 
-        <div class="px-6 mt-4">
-          <NuxtLink to="/quote" class="block w-full py-4 text-center bg-white text-black font-bold rounded-xl active:scale-95 transition-transform" @click="closeMobileMenu">
-            ثبت سفارش / استعلام
+        <div class="px-6 mt-4 flex flex-col gap-3">
+          <a href="tel:02166393755" class="block w-full py-4 text-center bg-[#84012B] text-white font-bold rounded-xl active:scale-95 transition-transform flex items-center justify-center gap-2" @click="closeMobileMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+            تماس مستقیم با دفتر
+          </a>
+          <NuxtLink to="/contact" class="block w-full py-4 text-center bg-white/5 text-white border border-white/10 font-bold rounded-xl active:scale-95 transition-transform" @click="closeMobileMenu">
+            اطلاعات تماس و استعلام آنلاین
           </NuxtLink>
         </div>
       </div>
