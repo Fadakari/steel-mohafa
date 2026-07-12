@@ -331,6 +331,106 @@
     </section>
 
 
+
+    <section ref="trustSectionRef" class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24 border-t border-white/5 overflow-hidden">
+      
+      <div :class="['mb-16 text-center md:text-right transition-all duration-700 ease-out', isTrustVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
+        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">
+          پشت پرده‌ی <span class="text-[#84012B]">استیل مهفا</span>
+        </h2>
+        <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed md:ml-auto">
+          ما یک پلتفرم مجازی نیستیم؛ استیل مهفا مجموعه‌ای فیزیکی متشکل از انبارهای مجهز در بازار آهن و تیمی از مهندسین متالورژی است که از لحظه استعلام تا تخلیه بار در سایت، در کنار شما هستند.
+        </p>
+      </div>
+
+      <!-- گالری تصاویر شرکت -->
+      <div :class="['grid grid-cols-1 md:grid-cols-3 gap-4 mb-20 transition-all duration-[1000ms] ease-out', isTrustVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95']">
+        
+        <!-- عکس بزرگ (انبار) -->
+        <div class="md:col-span-2 relative h-64 md:h-80 rounded-2xl overflow-hidden group">
+          <!-- بعداً آدرس عکس انبار خودتان را جایگزین کنید -->
+          <img src="https://picsum.photos/800/400?random=1" alt="انبار استیل مهفا" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 right-6">
+            <span class="text-white font-bold text-lg flex items-center gap-2">
+              <svg class="w-5 h-5 text-[#84012B]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
+              مگاسنتر شادآباد
+            </span>
+            <span class="text-zinc-400 text-xs font-mono">ظرفیت دپوی بیش از ۵۰۰۰ تن مقاطع استیل</span>
+          </div>
+        </div>
+
+        <!-- عکس‌های کوچک (دفتر و بارگیری) -->
+        <div class="flex flex-col gap-4">
+          <div class="relative h-[120px] md:h-[152px] rounded-2xl overflow-hidden group">
+            <img src="https://picsum.photos/400/200?random=2" alt="دفتر فروش استیل مهفا" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+            <span class="absolute bottom-3 right-4 text-white text-sm font-bold">دفتر مرکزی فروش</span>
+          </div>
+          <div class="relative h-[120px] md:h-[152px] rounded-2xl overflow-hidden group">
+            <img src="https://picsum.photos/400/200?random=3" alt="بارگیری مقاطع استیل" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+            <span class="absolute bottom-3 right-4 text-white text-sm font-bold">لجستیک و بارگیری روزانه</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- کاروسل تیم فروش -->
+      <div :class="['transition-all duration-700 delay-300 ease-out', isTrustVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
+        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+          ارتباط مستقیم با مهندسین فروش
+        </h3>
+        
+        <Swiper
+          :modules="[Navigation, Pagination]"
+          :slides-per-view="1"
+          :space-between="20"
+          :loop="true"
+          :navigation="{ nextEl: '.next-btn', prevEl: '.prev-btn' }"
+          :pagination="{ clickable: true, el: '.custom-pagination' }"
+          :breakpoints="{
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 }
+          }"
+          class="pb-16"
+        >
+          <SwiperSlide v-for="member in salesTeam" :key="member.id" class="h-auto">
+            <div class="bg-[#0a0a0c] border border-white/5 hover:border-[#84012B]/50 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 group relative overflow-hidden h-full">
+              <div class="absolute top-0 left-0 w-full h-1 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+
+              <div class="w-20 h-20 rounded-full p-1 border-2 border-white/10 group-hover:border-[#84012B] transition-colors mb-4 relative">
+                <img :src="member.image" :alt="member.name" class="w-full h-full rounded-full object-cover" />
+                <div class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-[#0a0a0c] rounded-full"></div>
+              </div>
+              
+              <h4 class="text-white font-bold text-lg mb-1">{{ member.name }}</h4>
+              <span class="text-[#ff477e] text-xs font-bold mb-4 bg-[#84012B]/10 px-3 py-1 rounded-full">{{ member.role }}</span>
+              
+              <div class="w-full h-px bg-white/5 mb-4"></div>
+              
+              <a :href="`tel:${member.phone}`" class="w-full flex items-center justify-between px-4 py-2.5 bg-white/5 hover:bg-[#84012B] rounded-xl text-zinc-300 hover:text-white transition-colors group/btn">
+                <div class="flex flex-col text-right">
+                  <span class="text-xs font-mono text-zinc-500 group-hover/btn:text-white/70">تماس مستقیم</span>
+                  <span class="font-bold font-mono" dir="ltr">{{ member.phone }}</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+              </a>
+            </div>
+          </SwiperSlide>
+
+          <div class="flex items-center justify-center gap-6 mt-6">
+            <button class="prev-btn w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#84012B] transition-all">→</button>
+            <button class="next-btn w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#84012B] transition-all">←</button>
+          </div>
+        </Swiper>
+      </div>
+    </section>
+
+
     <section ref="faqSectionRef" class="relative z-20 max-w-4xl mx-auto px-6 py-24">
       <div :class="['mb-16 text-center transition-all duration-700 ease-out', isFaqSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">پاسخ به ابهامات شما</h2>
@@ -447,8 +547,63 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const isSeoTextExpanded = ref(false)
+
+const salesTeam = ref([
+  {
+    id: 1,
+    name: 'مهندس آرش کریمی',
+    role: 'مدیر فروش دپارتمان ورق',
+    phone: '02166393755',
+    internal: '101',
+    // از آدرس موقت استفاده شده تا ارور ندهد. بعداً عکس واقعی پرسنل را جایگزین کنید
+    image: 'https://ui-avatars.com/api/?name=Arash+Karimi&background=84012B&color=fff&size=200'
+  },
+  {
+    id: 2,
+    name: 'مهندس مریم حسینی',
+    role: 'کارشناس فروش لوله و پروفیل',
+    phone: '02166393755',
+    internal: '102',
+    image: 'https://ui-avatars.com/api/?name=Maryam+Hosseini&background=111113&color=fff&size=200'
+  },
+  {
+    id: 3,
+    name: 'مهندس رضا طاهری',
+    role: 'سرپرست مقاطع دکوراتیو',
+    phone: '02166391417',
+    internal: '103',
+    image: 'https://ui-avatars.com/api/?name=Reza+Taheri&background=84012B&color=fff&size=200'
+  },
+  {
+    id: 4,
+    name: 'مهندس الناز راد',
+    role: 'کارشناس فروش اتصالات صنعتی',
+    phone: '02166391417',
+    internal: '104',
+    image: 'https://ui-avatars.com/api/?name=Elnaz+Rad&background=111113&color=fff&size=200'
+  },
+  {
+    id: 4,
+    name: 'مهندس الناز راد',
+    role: 'کارشناس فروش اتصالات صنعتی',
+    phone: '02166391417',
+    internal: '104',
+    image: 'https://ui-avatars.com/api/?name=Elnaz+Rad&background=111113&color=fff&size=200'
+  }
+])
+
+// Observer برای انیمیشن بخش اعتماد
+const trustSectionRef = ref(null)
+const isTrustVisible = ref(false)
+
+
 const faqs = ref([
   {
     question: 'قیمت ورق و لوله استیل در سایت به‌روز است یا نیاز به استعلام دارد؟',
@@ -517,6 +672,11 @@ useHead({
         "@id": "https://mohafa.com",
         "url": "https://mohafa.com",
         "telephone": "+982166393755",
+        "employee": salesTeam.value.map(member => ({
+          "@type": "Person",
+          "name": member.name,
+          "jobTitle": member.role
+        })),
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Tehran Province, Tehran، بزرگراه فتح٫، M8G2+27M مجتمع استیل، فتح یازده, Iran", // آدرس دقیق را بعدا تکمیل کنید
@@ -544,7 +704,12 @@ useHead({
   ]
 })
 
-const { data: products } = await useFetch('/api/products/best-sellers')
+const { data: products } = await useFetch('/api/products/best-sellers', {
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache'
+  }
+})
 // فقط متغیرها در فضای باز تعریف می‌شوند
 const advSectionRef = ref(null)
 const isAdvVisible = ref(false)
@@ -684,6 +849,14 @@ onMounted(() => {
   }, { threshold: 0.1 })
   
   if (faqSectionRef.value) faqObserver.observe(faqSectionRef.value)
+
+  const trustObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.target === trustSectionRef.value) isTrustVisible.value = entry.isIntersecting
+    })
+  }, { threshold: 0.1 })
+  
+  if (trustSectionRef.value) trustObserver.observe(trustSectionRef.value)
 })
 </script>
 

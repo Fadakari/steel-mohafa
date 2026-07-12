@@ -21,7 +21,11 @@ const uniqueFetchKey = computed(() => `products-${currentSlug.value}-${JSON.stri
 const { data: pageData, pending } = await useFetch('/api/products', {
   key: uniqueFetchKey.value,
   query: computed(() => ({ categorySlug: currentSlug.value, ...route.query })),
-  watch: [() => route.query] 
+  watch: [() => route.query],
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache'
+  }
 })
 
 // === متغیرهای جدید برای آکاردئون و جستجوی داخلی فیلترها ===
@@ -839,7 +843,7 @@ useHead(() => {
     })
   }
 
-  // ۳. اسکیمای FAQ داینامیک (ترفند قاتل آهن آنلاین)
+  // ۳. اسکیمای FAQ داینامیک
   if (currentSeoData.value.faqs && currentSeoData.value.faqs.length > 0) {
     schemas.push({
       type: 'application/ld+json',
@@ -858,10 +862,39 @@ useHead(() => {
     })
   }
 
+  // استخراج هوشمند تایتل و دیسکریپشن از دیکشنری سئو
+  const pageTitle = currentSeoData.value.title || `${pageData.value?.categoryName || 'محصولات استیل'} | قیمت روز و خرید مستقیم`
+  
+  // برای توضیحات متا (Meta Description)، ۱۵۰ کاراکتر اولِ متنِ دیکشنری را برمی‌داریم
+  const pageDescription = currentSeoData.value.content 
+    ? currentSeoData.value.content.replace(/\n/g, ' ').substring(0, 155) + '...'
+    : `خرید بی‌واسطه ${pageData.value?.categoryName || 'انواع مقاطع استیل'}. استعلام قیمت لحظه‌ای، بارگیری از انبار با سرتیفیکیت معتبر.`
+
+  // آدرس کانونیکال برای جلوگیری از جریمه داپلیکیت کانتنت (Duplicate Content) در زمان استفاده از فیلترها
+  const canonicalUrl = `https://mohafa.com/products${currentSlug.value ? '/' + currentSlug.value : ''}`
+
   return {
-    title: `${pageData.value?.categoryName || 'محصولات استیل'} | قیمت روز و خرید مستقیم`,
+    title: pageTitle,
     meta: [
-      { name: 'description', content: `خرید بی‌واسطه ${pageData.value?.categoryName || 'انواع مقاطع استیل'}. استعلام قیمت لحظه‌ای، بارگیری از انبار شادآباد با سرتیفیکیت معتبر.` }
+      { name: 'description', content: pageDescription },
+      
+      // تگ‌های Open Graph (برای نمایش جذاب و لینک‌دار در تلگرام، واتساپ و لینکدین)
+      { property: 'og:title', content: pageTitle },
+      { property: 'og:description', content: pageDescription },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: canonicalUrl },
+      { property: 'og:locale', content: 'fa_IR' },
+      { property: 'og:site_name', content: 'استیل مهفا' },
+      
+      // تگ‌های توییتر (X)
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:title', content: pageTitle },
+      { name: 'twitter:description', content: pageDescription },
+      { name: 'theme-color', content: '#050505' }
+    ],
+    link: [
+      // تگ بسیار مهم Canonical
+      { rel: 'canonical', href: canonicalUrl }
     ],
     script: schemas
   }
@@ -1043,84 +1076,118 @@ useHead(() => {
            <p class="text-xs text-zinc-400 max-w-sm">لطفاً فیلترهای انتخابی خود را تغییر دهید.</p>
          </div>
 
-         <div v-else class="space-y-2 mt-2">
-            <div class="hidden md:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-bold text-zinc-500 uppercase tracking-widest">
-               <div class="col-span-5">شرح محصول</div>
+         <div v-else class="flex flex-col mt-4">
+            <!-- هدر جدول (مخصوص دسکتاپ) -->
+            <div class="hidden md:grid grid-cols-12 gap-4 px-6 py-3.5 text-[11px] font-black text-zinc-500 uppercase tracking-widest bg-[#0a0a0c] border border-white/5 rounded-t-xl shadow-sm">
+               <div class="col-span-5">شرح محصول و شناسه</div>
                <div class="col-span-3">مشخصات فنی</div>
-               <div class="col-span-2 text-center">نوسان بازار</div>
-               <div class="col-span-2 text-left">قیمت نهایی</div>
+               <div class="col-span-1 text-center">نوسان</div>
+               <div class="col-span-3 text-left pl-2">قیمت نهایی و استعلام</div>
             </div>
 
-            <article 
-              v-for="product in visibleProducts" 
-              :key="product.id"
-              class="flex flex-row items-center justify-between md:grid md:grid-cols-12 gap-2 md:gap-4 p-3 md:p-4 bg-[#0c0c0e] border border-white/5 rounded-lg hover:border-white/20 transition-colors"
-            >
-              <div class="flex flex-col justify-center w-2/3 md:w-auto md:col-span-5">
-                <h3 class="text-zinc-100 font-bold text-[11px] md:text-sm leading-tight line-clamp-2 mb-1.5 md:mb-1">{{ product.name }}</h3>
-                <div class="flex flex-wrap items-center gap-1.5">
-                  <span class="text-[9px] md:text-[10px] text-zinc-500 font-mono">SKU: {{ product.sku || '-' }}</span>
-                  <div class="flex items-center gap-1.5 md:hidden mt-0.5">
-                    <span v-if="product.attributes?.thickness" class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] md:text-[10px] bg-white/5 text-zinc-400">
-                      ضخامت: {{ product.attributes.thickness }}
-                    </span>
-                    <span v-if="product.attributes?.alloy" class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] md:text-[10px] bg-white/5 text-zinc-400">
-                      آلیاژ: {{ product.attributes.alloy }}
+            <!-- لیست کارت محصولات -->
+            <div class="flex flex-col gap-2.5 md:gap-0">
+              <article 
+                v-for="(product, index) in visibleProducts" 
+                :key="product.id"
+                class="group relative flex flex-col md:grid md:grid-cols-12 md:items-center gap-3 md:gap-4 p-4 bg-[#0a0a0c]/80 hover:bg-[#111113] border border-white/5 hover:border-white/10 rounded-xl md:rounded-none transition-all duration-300 overflow-hidden"
+                :class="{'md:last:rounded-b-xl md:border-b-0 md:border-t-0 md:first:border-t': true}"
+              >
+                <!-- نوار رنگیِ Hover در سمت چپ (استایل صنعتی) -->
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#84012B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
+
+                <!-- بخش اول: عنوان، SKU و نشانگر موجودی -->
+                <div class="flex justify-between items-start md:col-span-5 w-full">
+                  <div class="flex flex-col gap-1.5">
+                    <h3 class="text-zinc-200 font-bold text-sm md:text-base leading-tight group-hover:text-white transition-colors pr-1">
+                      {{ product.name }}
+                    </h3>
+                    <div class="flex flex-wrap items-center gap-2 mt-1">
+                      <span class="text-[10px] text-zinc-500 font-mono bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                        SKU: {{ product.sku || 'N/A' }}
+                      </span>
+                      <span class="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        موجود در انبار
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <!-- نمایش نوسان در حالت موبایل (گوشه بالا سمت چپ) -->
+                  <div class="md:hidden shrink-0 mt-0.5">
+                    <span 
+                      v-if="product.trend !== 'stable'"
+                      :class="product.trend === 'up' ? 'text-rose-500 bg-rose-500/10' : 'text-emerald-500 bg-emerald-500/10'"
+                      class="px-2 py-1 rounded text-[10px] font-bold flex items-center gap-1"
+                    >
+                      {{ product.trend === 'up' ? '▲' : '▼' }} {{ product.priceDiffPercentage }}%
                     </span>
                   </div>
                 </div>
-              </div>
 
-              <div class="hidden md:flex md:col-span-3 items-center flex-wrap gap-2">
-                <span v-if="product.attributes?.thickness" class="inline-flex items-center px-2 py-1 rounded text-[10px] md:text-xs font-medium bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">
-                  ضخامت: {{ product.attributes.thickness }}
-                </span>
-                <span v-if="product.attributes?.alloy" class="inline-flex items-center px-2 py-1 rounded text-[10px] md:text-xs font-medium bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">
-                  آلیاژ: {{ product.attributes.alloy }}
-                </span>
-              </div>
+                <!-- بخش دوم: مشخصات فنی (تگ‌ها) -->
+                <div class="flex flex-wrap items-center gap-2 md:col-span-3 w-full">
+                  <span v-if="product.attributes?.thickness" class="inline-flex items-center px-2 py-1 rounded text-[10px] md:text-xs font-bold bg-[#050505] text-zinc-300 border border-zinc-800 shadow-inner">
+                    ضخامت: {{ product.attributes.thickness }}
+                  </span>
+                  <span v-if="product.attributes?.alloy" class="inline-flex items-center px-2 py-1 rounded text-[10px] md:text-xs font-bold bg-[#050505] text-zinc-300 border border-zinc-800 shadow-inner">
+                    آلیاژ: {{ product.attributes.alloy }}
+                  </span>
+                  <span v-if="product.attributes?.size" class="inline-flex items-center px-2 py-1 rounded text-[10px] md:text-xs font-bold bg-[#050505] text-zinc-300 border border-zinc-800 shadow-inner">
+                    ابعاد: {{ product.attributes.size }}
+                  </span>
+                </div>
 
-              <div class="hidden md:flex md:col-span-2 items-center justify-center">
-                <span 
-                  v-if="product.trend !== 'stable'"
-                  :class="product.trend === 'up' ? 'text-rose-500 bg-rose-500/10' : 'text-emerald-500 bg-emerald-500/10'"
-                  class="px-2 py-0.5 rounded text-[10px] md:text-xs font-bold flex items-center gap-1"
-                >
-                  {{ product.trend === 'up' ? '▲' : '▼' }} {{ product.priceDiffPercentage }}%
-                </span>
-                <span 
-                  v-else 
-                  class="px-2 py-0.5 rounded text-[10px] md:text-xs font-bold flex items-center gap-1 text-zinc-500 bg-white/5"
-                >
-                  - ۰٪
-                </span>
-              </div>
+                <!-- بخش سوم: نوسان قیمت (مخصوص دسکتاپ) -->
+                <div class="hidden md:flex md:col-span-1 justify-center items-center">
+                  <span 
+                    v-if="product.trend !== 'stable'"
+                    :class="product.trend === 'up' ? 'text-rose-500 bg-rose-500/10' : 'text-emerald-500 bg-emerald-500/10'"
+                    class="px-2.5 py-1 rounded text-[11px] font-bold flex items-center gap-1 shadow-sm"
+                  >
+                    {{ product.trend === 'up' ? '▲' : '▼' }} {{ product.priceDiffPercentage }}%
+                  </span>
+                  <span v-else class="px-2 py-0.5 rounded text-[11px] font-bold text-zinc-600 bg-white/5">
+                    0%
+                  </span>
+                </div>
 
-              <div class="flex flex-col items-end justify-center w-1/3 md:w-auto md:col-span-2 pl-1 md:pl-0 shrink-0 border-l border-white/5 md:border-none">
-                <span 
-                  class="text-sm md:text-lg font-black block transition-colors duration-300"
-                  :class="showVat ? 'text-amber-400' : 'text-white'"
-                >
-                  {{ formatPrice(showVat ? product.price * 1.1 : product.price) }}
-                </span>
-                <span class="text-[8px] md:text-[9px] text-zinc-500 uppercase tracking-wider mt-0.5" :class="showVat ? 'text-amber-500/70 font-bold' : ''">
-                  ریال / کیلوگرم
-                </span>
-              </div>
-            </article>
+                <!-- بخش چهارم: قیمت و دکمه استعلام -->
+                <div class="flex items-center justify-between md:justify-end md:col-span-3 w-full pt-3 md:pt-0 border-t border-white/5 md:border-none mt-1 md:mt-0">
+                  <div class="flex flex-col items-start md:items-end justify-center ml-auto md:ml-0 md:pr-4">
+                    <span 
+                      class="text-lg md:text-xl font-black tracking-tight transition-colors duration-300"
+                      :class="showVat ? 'text-amber-400' : 'text-white'"
+                    >
+                      {{ formatPrice(showVat ? product.price * 1.1 : product.price) }}
+                    </span>
+                    <span class="text-[9px] md:text-[10px] text-zinc-500 uppercase tracking-wider mt-0.5 font-bold" :class="showVat ? 'text-amber-500/70' : ''">
+                      ریال / کیلوگرم
+                    </span>
+                  </div>
 
+                  <!-- دکمه CTA (دعوت به اقدام) -->
+                  <!-- شماره تلفن مجموعه را در href وارد کنید -->
+                  <a href="tel:02112345678" class="mr-4 md:mr-6 flex items-center justify-center bg-[#050505] group-hover:bg-[#84012B] text-zinc-400 group-hover:text-white p-2.5 md:px-4 md:py-2.5 rounded-lg border border-white/10 group-hover:border-[#84012B] transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(132,1,43,0.4)] active:scale-95 shrink-0">
+                    <svg class="w-4 h-4 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <span class="hidden lg:block mr-2 text-xs font-bold">تماس و خرید</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <!-- دکمه Load More -->
             <div v-if="hasMoreProducts" class="flex justify-center mt-8 mb-4">
               <button 
                 @click="loadMore" 
-                class="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs md:text-sm font-bold text-zinc-300 hover:text-white transition-all flex items-center gap-2 active:scale-95"
+                class="px-8 py-3.5 bg-white/5 hover:bg-[#84012B] border border-white/10 hover:border-[#84012B] rounded-xl text-xs md:text-sm font-bold text-zinc-300 hover:text-white transition-all duration-300 flex items-center gap-3 active:scale-95 shadow-[0_4px_14px_0_rgba(0,0,0,0.1)]"
               >
                 مشاهده ۵۰ محصول بعدی
-                <span class="text-zinc-500 text-[10px] md:text-xs bg-black/30 px-2 py-1 rounded-md">
+                <span class="text-zinc-400 group-hover:text-white/80 text-[10px] md:text-xs bg-black/40 px-2 py-1 rounded-md">
                   (مجموع: {{ pageData?.products?.length }})
                 </span>
               </button>
             </div>
-            
          </div>
 
          
