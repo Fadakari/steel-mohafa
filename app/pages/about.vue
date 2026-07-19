@@ -251,7 +251,7 @@ useHead({
           "legalName": "شرکت مهندسی فروش استیل مهفا",
           "url": "https://mohafa.com",
           "logo": "https://mohafa.com/logo.png",
-          "image": "https://mohafa.com/images/about-warehouse.jpg",
+          "image": "https://mohafa.com/header-logo.png",
           "foundingDate": "2008",
           "description": "مرجع تخصصی فروش بی‌واسطه آهن‌آلات و فولاد ضد زنگ در بازار آهن تهران.",
           "address": {

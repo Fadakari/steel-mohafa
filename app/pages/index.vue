@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden">
+  <main class="bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#84012B]">
     
     <section class="relative min-h-[85vh] flex flex-col justify-center pt-24 pb-12">
       
@@ -34,7 +34,7 @@
             :class="['text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ease-out delay-100', 
                      isHeroTitleVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
-            تامین پایدار <span class="text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e]">ورق و لوله استیل</span>
+            تامین پایدار <span class="text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e] selection:bg-[#ffc5d8]">ورق و لوله استیل</span>
             بدون واسطه‌ در ایران
           </h1>
 
@@ -655,7 +655,7 @@ useSeoMeta({
   description: 'خرید مستقیم و بدون واسطه مقاطع استیل (۳۰۴، ۳۱۶، دکوراتیو و صنعتی). استعلام قیمت لحظه‌ای آهن‌آلات، ارسال به سراسر کشور با تضمین کیفیت و سرتیفیکیت معتبر.',
   ogTitle: 'استیل مهفا - مرجع تخصصی تامین استیل',
   ogDescription: 'تامین یکپارچه سبد محصولات استیل پروژه‌های صنعتی و ساختمانی با قیمت رقابتی.',
-  ogImage: 'https://mohafa.com/hero-bg.png', // در پروداکشن آدرس کامل سایت را بگذارید
+  ogImage: 'https://mohafa.com/logo.png', // در پروداکشن آدرس کامل سایت را بگذارید
   twitterCard: 'summary_large_image',
 })
 
@@ -668,7 +668,7 @@ useHead({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "استیل مهفا",
-        "image": "https://mohafa.com/hero-bg.png",
+        "image": "https://mohafa.com/logo.png",
         "@id": "https://mohafa.com",
         "url": "https://mohafa.com",
         "telephone": "+982166393755",

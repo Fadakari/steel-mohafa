@@ -1,0 +1,13 @@
+{
+  "name": "admin-cms",
+  "private": true,
+  "scripts": {
+    "start": "directus start"
+  },
+  "dependencies": {
+    "directus": "12.1.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

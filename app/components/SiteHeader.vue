@@ -26,7 +26,12 @@ const closeMobileMenu = () => {
     <nav itemscope itemtype="https://schema.org/SiteNavigationElement" aria-label="منوی اصلی" class="max-w-7xl mx-auto px-4 md:px-6 h-[80px] flex items-center justify-between">
       
       <NuxtLink to="/" class="flex items-center gap-2 z-50" aria-label="صفحه اصلی استیل مهفا">
-        <div class="w-8 h-8 bg-[#84012B] rounded-lg shadow-[0_0_15px_rgba(132,1,43,0.5)]"></div>
+        <img src="/header-logo.png" alt="" class="brand-logo w-18 h-15"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="34"
+          height="34">
         <span class="text-xl font-black text-white tracking-tight">استیل مهفا</span>
       </NuxtLink>
 
@@ -191,6 +196,12 @@ const closeMobileMenu = () => {
 </template>
 
 <style scoped>
+.brand-logo{
+  filter:
+    drop-shadow(0 2px 5px rgba(142, 141, 141, 0.35))
+    drop-shadow(0 0 7px rgba(177,15,79,.18));
+    transition: all 0.5 ease;
+}
 .dropdown-enter-active,
 .dropdown-leave-active {
   transition: opacity 0.2s ease, transform 0.2s ease;
