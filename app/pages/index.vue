@@ -6,8 +6,10 @@
       <div class="absolute mt-30 z-0 pointer-events-none">
         <img 
           src="/hero-bg.png" 
-          alt="استیل مهفا" 
+          alt="استیل مهفا مرجع تخصصی خرید و قیمت روز ورق و لوله استیل در ایران" 
+          title="استیل مهفا - فروشنده و تامین‌کننده بی‌واسطه فولاد ضد زنگ"
           class="w-full h-full object-cover object-left opacity-60"
+          fetchpriority="high"
         />
         <div class="absolute inset-0 bg-gradient-to-l from-[#050505] via-[#050505]/90 to-transparent"></div>
         <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] to-transparent"></div>
@@ -343,89 +345,158 @@
         </p>
       </div>
 
-      <!-- گالری تصاویر شرکت -->
-      <div :class="['grid grid-cols-1 md:grid-cols-3 gap-4 mb-20 transition-all duration-[1000ms] ease-out', isTrustVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95']">
-        
-        <!-- عکس بزرگ (انبار) -->
-        <div class="md:col-span-2 relative h-64 md:h-80 rounded-2xl overflow-hidden group">
-          <!-- بعداً آدرس عکس انبار خودتان را جایگزین کنید -->
-          <img src="https://picsum.photos/800/400?random=1" alt="انبار استیل مهفا" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
-          <div class="absolute bottom-4 right-6">
-            <span class="text-white font-bold text-lg flex items-center gap-2">
-              <svg class="w-5 h-5 text-[#84012B]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
-              مگاسنتر شادآباد
-            </span>
-            <span class="text-zinc-400 text-xs font-mono">ظرفیت دپوی بیش از ۵۰۰۰ تن مقاطع استیل</span>
-          </div>
-        </div>
+      <!-- گالری نامنظم و صنعتی بنتو گرید (نمایش کامل واترمارک) -->
+      <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4 auto-rows-[190px] grid-flow-dense mb-10">
 
-        <!-- عکس‌های کوچک (دفتر و بارگیری) -->
-        <div class="flex flex-col gap-4">
-          <div class="relative h-[120px] md:h-[152px] rounded-2xl overflow-hidden group">
-            <img src="https://picsum.photos/400/200?random=2" alt="دفتر فروش استیل مهفا" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
-            <span class="absolute bottom-3 right-4 text-white text-sm font-bold">دفتر مرکزی فروش</span>
-          </div>
-          <div class="relative h-[120px] md:h-[152px] rounded-2xl overflow-hidden group">
-            <img src="https://picsum.photos/400/200?random=3" alt="بارگیری مقاطع استیل" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
-            <span class="absolute bottom-3 right-4 text-white text-sm font-bold">لجستیک و بارگیری روزانه</span>
+        <!-- ۱. تصویر اصلی انبار (باکس عریض ۴ ستونه) -->
+        <div class="md:col-span-4 lg:col-span-4 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
+          <img 
+            src="/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp"
+            alt="انبار مرکزی مگاسنتر استیل مهفا - بزرگترین فروشنده لوله و مقاطع استیل در بازار آهن شادآباد" 
+            title="انبار استیل مهفا - مرجع قیمت و خرید بی‌واسطه استنلس استیل"
+            class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <!-- گریدینت سبک که روی واترمارک پایین-چپ نیاید -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#050505]/30 to-[#050505]/80 pointer-events-none"></div>
+          <div class="absolute top-4 right-4 text-right">
+            <span class="px-2.5 py-1 bg-[#84012B] text-white text-[10px] font-bold rounded mb-1 inline-block border border-red-500/30 shadow-md">مگاسنتر شادآباد</span>
+            <h3 class="text-base font-black text-white drop-shadow-md">انبار مرکزی لوله و مقاطع</h3>
           </div>
         </div>
+      
+        <!-- ۲. بارگیری جرثقیل (باکس بسیار بلند ۳ ردیفه جهت شکستن تقارن) -->
+        <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
+          <img 
+            src="/images/gallery/Steel-sheet-unloading-and-loading-equipment-at-Mohafa-Steel.webp" 
+            alt="عملیات بارگیری سنگین کویل ورق استیل با جرثقیل در انبارهای شرکت استیل مهفا" 
+            title="تجهیزات تخلیه و بارگیری ورق استیل در استیل مهفا"
+            class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#050505]/70 pointer-events-none"></div>
+          <div class="absolute top-4 right-4 text-right">
+            <span class="px-2 py-0.5 bg-zinc-800/80 backdrop-blur-md text-zinc-300 text-[10px] font-bold rounded border border-zinc-600 mb-1 inline-block">تجهیزات تخلیه</span>
+            <h3 class="text-sm font-bold text-white">عملیات بارگیری سنگین</h3>
+          </div>
+        </div>
+      
+        <!-- ۳. درب طلایی دکوراتیو (باکس ۲ در ۲) -->
+        <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-amber-500/20 bg-[#08080a] shadow-lg">
+          <img 
+            src="/images/gallery/Buy-Golden-Mirror-Decorative-Steel-Sheet-from-Mohafa-Steel.webp" 
+            alt="فروش ورق استیل طلایی طرح‌دار میرور دکوراتیو با بهترین قیمت روز در استیل مهفا" 
+            title="خرید ورق استیل دکوراتیو میرور طلایی از استیل مهفا"
+            class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-[#050505]/70 via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute top-4 right-4 text-right">
+            <span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold rounded mb-1 inline-block">محصولات خاص</span>
+            <h3 class="text-sm font-bold text-white">ورق استیل طلایی دکوراتیو</h3>
+          </div>
+        </div>
+      
+        <!-- ۴. دپوی کویل (باکس تک‌ردیفه افقی) -->
+        <div class="md:col-span-2 lg:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+          <img 
+            src="/images/gallery/Steel-coil-and-roll-inventory-with-valid-certificates-Mohafa-Steel.webp" 
+            alt="دپوی تخصصی کویل و رول استیل ۳۰۴ و ۳۱۶ در مرکز فروش استیل مهفا" 
+            title="موجودی کویل و رول استیل با سرتیفیکیت معتبر - استیل مهفا"
+            class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-l from-[#050505]/80 via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-3 right-3 text-right">
+            <h3 class="text-xs font-bold text-white">دپوی تخصصی کویل و رول</h3>
+          </div>
+        </div>
+      
+        <!-- ۵. ناوگان حمل و نقل (باکس عریض پایین) -->
+        <div class="md:col-span-1 lg:col-span-1 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+          <img 
+            src="/images/gallery/Mohafa-Steel-Transport-Fleet-is-sending-steel-sheet-cargo-to-industrial-projects-and-buyers.webp" 
+            alt="ناوگان حمل و نقل استیل مهفا در حال ارسال محموله ورق استیل به پروژه‌های صنعتی و خریداران" 
+            title="ارسال مستقیم و مطمئن مقاطع استیل از تهران به سراسر ایران"
+            class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent to-[#050505]/60 pointer-events-none"></div>
+          <div class="absolute top-3 right-3 text-right">
+            <h3 class="text-xs font-bold text-white">ناوگان حمل و ارسال کشوری</h3>
+          </div>
+        </div>
+      
+        <!-- ۶. بارگیری بندل (باکس مکمل) -->
+        <div class="md:col-span-2 lg:col-span-3 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+          <img 
+            src="/images/gallery/Immediate-delivery-and-competitive-prices-for-all-types-of-stainless-steel-sections.webp" 
+            alt="بسته‌بندی استاندارد و تحویل سریع محموله لوله و ورق استیل توسط فروشندگان استیل مهفا" 
+            title="تحویل فوری و قیمت رقابتی انواع مقاطع استنلس استیل"
+            class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent to-[#050505]/60 pointer-events-none"></div>
+          <div class="absolute top-3 right-3 text-right">
+            <h3 class="text-xs font-bold text-white">بسته‌بندی و تحویل استاندارد</h3>
+          </div>
+        </div>
+      
       </div>
 
       <!-- کاروسل تیم فروش -->
-      <div :class="['transition-all duration-700 delay-300 ease-out', isTrustVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
-        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-          ارتباط مستقیم با مهندسین فروش
-        </h3>
+      <div class="mb-32">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-white/5 pb-6 gap-6">
+          <div>
+            <h2 class="text-3xl font-black text-white mb-2">تیم مهندسی و فروش</h2>
+            <p class="text-zinc-400 text-sm">ارتباط مستقیم با کارشناسان متالورژی استیل مهفا.</p>
+          </div>
+          
+          <!-- فلش‌های ناوبری کاستوم -->
+          <div class="flex items-center gap-3">
+            <button class="team-swiper-prev w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </button>
+            <button class="team-swiper-next w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
+              <svg class="w-5 h-5 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </button>
+          </div>
+        </div>
         
         <Swiper
-          :modules="[Navigation, Pagination]"
+          :modules="[Navigation, Autoplay]"
           :slides-per-view="1"
-          :space-between="20"
+          :space-between="24"
           :loop="true"
-          :navigation="{ nextEl: '.next-btn', prevEl: '.prev-btn' }"
-          :pagination="{ clickable: true, el: '.custom-pagination' }"
-          :breakpoints="{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 }
-          }"
-          class="pb-16"
+          :autoplay="{ delay: 5000, disableOnInteraction: false }"
+          :navigation="{ nextEl: '.team-swiper-next', prevEl: '.team-swiper-prev' }"
+          :breakpoints="{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } }"
+          class="pb-4"
         >
-          <SwiperSlide v-for="member in salesTeam" :key="member.id" class="h-auto">
-            <div class="bg-[#0a0a0c] border border-white/5 hover:border-[#84012B]/50 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 group relative overflow-hidden h-full">
-              <div class="absolute top-0 left-0 w-full h-1 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-
-              <div class="w-20 h-20 rounded-full p-1 border-2 border-white/10 group-hover:border-[#84012B] transition-colors mb-4 relative">
-                <img :src="member.image" :alt="member.name" class="w-full h-full rounded-full object-cover" />
-                <div class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-[#0a0a0c] rounded-full"></div>
+          <SwiperSlide v-for="member in teamMembers" :key="member.id">
+            <!-- کل کارت حالا یک لینک است -->
+            <a :href="`tel:${member.phone}`" class="block bg-[#0a0a0c] border border-white/5 rounded-2xl p-8 flex flex-col items-center text-center h-full hover:border-[#84012B]/50 transition-all duration-300 group relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-full h-1.5 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              
+              <div class="relative w-28 h-28 mb-5">
+                <img :src="member.image"
+                  :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای استعلام قیمت روز استیل'" 
+                  :title="'تماس با ' + member.name + ' جهت خرید مقاطع استنلس استیل از مهفا'"
+                  class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
               </div>
               
-              <h4 class="text-white font-bold text-lg mb-1">{{ member.name }}</h4>
-              <span class="text-[#ff477e] text-xs font-bold mb-4 bg-[#84012B]/10 px-3 py-1 rounded-full">{{ member.role }}</span>
+              <h3 class="font-black text-white text-lg mb-1">{{ member.name }}</h3>
+              <p class="text-[#ff477e] text-xs font-bold mb-5 bg-[#84012B]/10 px-3 py-1.5 rounded-md">{{ member.role }}</p>
               
-              <div class="w-full h-px bg-white/5 mb-4"></div>
+              <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-5"></div>
               
-              <a :href="`tel:${member.phone}`" class="w-full flex items-center justify-between px-4 py-2.5 bg-white/5 hover:bg-[#84012B] rounded-xl text-zinc-300 hover:text-white transition-colors group/btn">
-                <div class="flex flex-col text-right">
-                  <span class="text-xs font-mono text-zinc-500 group-hover/btn:text-white/70">تماس مستقیم</span>
-                  <span class="font-bold font-mono" dir="ltr">{{ member.phone }}</span>
-                </div>
-                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                </div>
-              </a>
-            </div>
+              <!-- دکمه بصری تماس -->
+              <div class="w-full bg-[#050505] border border-white/5 group-hover:bg-[#84012B] group-hover:border-[#84012B] py-3 rounded-xl flex flex-col items-center justify-center transition-colors">
+                <span class="text-[10px] text-zinc-500 font-mono mb-0.5 group-hover:text-white/70 transition-colors">تماس مستقیم</span>
+                <span class="text-white font-bold tracking-wider" dir="ltr">{{ member.phone }}</span>
+              </div>
+            </a>
           </SwiperSlide>
-
-          <div class="flex items-center justify-center gap-6 mt-6">
-            <button class="prev-btn w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#84012B] transition-all">→</button>
-            <button class="next-btn w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#84012B] transition-all">←</button>
-          </div>
         </Swiper>
       </div>
     </section>
@@ -555,49 +626,14 @@ import 'swiper/css/pagination';
 
 const isSeoTextExpanded = ref(false)
 
-const salesTeam = ref([
-  {
-    id: 1,
-    name: 'مهندس آرش کریمی',
-    role: 'مدیر فروش دپارتمان ورق',
-    phone: '02166393755',
-    internal: '101',
-    // از آدرس موقت استفاده شده تا ارور ندهد. بعداً عکس واقعی پرسنل را جایگزین کنید
-    image: 'https://ui-avatars.com/api/?name=Arash+Karimi&background=84012B&color=fff&size=200'
-  },
-  {
-    id: 2,
-    name: 'مهندس مریم حسینی',
-    role: 'کارشناس فروش لوله و پروفیل',
-    phone: '02166393755',
-    internal: '102',
-    image: 'https://ui-avatars.com/api/?name=Maryam+Hosseini&background=111113&color=fff&size=200'
-  },
-  {
-    id: 3,
-    name: 'مهندس رضا طاهری',
-    role: 'سرپرست مقاطع دکوراتیو',
-    phone: '02166391417',
-    internal: '103',
-    image: 'https://ui-avatars.com/api/?name=Reza+Taheri&background=84012B&color=fff&size=200'
-  },
-  {
-    id: 4,
-    name: 'مهندس الناز راد',
-    role: 'کارشناس فروش اتصالات صنعتی',
-    phone: '02166391417',
-    internal: '104',
-    image: 'https://ui-avatars.com/api/?name=Elnaz+Rad&background=111113&color=fff&size=200'
-  },
-  {
-    id: 4,
-    name: 'مهندس الناز راد',
-    role: 'کارشناس فروش اتصالات صنعتی',
-    phone: '02166391417',
-    internal: '104',
-    image: 'https://ui-avatars.com/api/?name=Elnaz+Rad&background=111113&color=fff&size=200'
-  }
-])
+
+const teamMembers = ref([
+  { id: 1, name: 'مهندس آرش کریمی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
+  { id: 2, name: 'مهندس مریم حسینی', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
+  { id: 3, name: 'مهندس رضا طاهری', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
+  { id: 4, name: 'مهندس الناز راد', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop' },
+  { id: 5, name: 'مهندس امید کاظمی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
+]);
 
 // Observer برای انیمیشن بخش اعتماد
 const trustSectionRef = ref(null)
@@ -672,7 +708,7 @@ useHead({
         "@id": "https://mohafa.com",
         "url": "https://mohafa.com",
         "telephone": "+982166393755",
-        "employee": salesTeam.value.map(member => ({
+        "employee": teamMembers.value.map(member => ({
           "@type": "Person",
           "name": member.name,
           "jobTitle": member.role

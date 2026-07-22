@@ -34,7 +34,11 @@
         
         <div class="relative group">
           <div class="absolute -inset-2 bg-gradient-to-r from-[#84012B] to-[#ff477e] rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity blur-lg"></div>
-          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1400&auto=format&fit=crop" alt="انبار مقاطع استیل مهفا در بازار آهن شادآباد" class="relative rounded-2xl border border-white/10 shadow-2xl w-full h-[450px] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
+          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1400&auto=format&fit=crop" 
+              alt="انبار مقاطع فولاد ضد زنگ استیل مهفا در بازار آهن تهران - تامین کننده و فروشنده مستقیم ورق استیل" 
+              title="انبار مرکزی استیل مهفا جهت استعلام موجودی و قیمت روز مقاطع استیل"
+              class="relative rounded-2xl border border-white/10 shadow-2xl w-full h-[450px] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+              loading="lazy" />
           <div class="absolute bottom-6 right-6 bg-[#050505]/90 backdrop-blur-md border border-[#84012B]/50 px-5 py-3 rounded-xl shadow-lg">
             <span class="text-white font-black block text-base mb-1">انبار مرکزی مهفا</span>
             <span class="text-zinc-400 text-xs font-mono">ظرفیت دپوی مقاطع صنعتی و دکوراتیو</span>
@@ -101,27 +105,102 @@
           <p class="text-zinc-400 text-sm max-w-2xl mx-auto">تصاویری از دپارتمان‌های مختلف شرکت؛ از دفتر مرکزی فروش تا لجستیک و انبارداری در شادآباد.</p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-auto md:h-[400px]">
-          <!-- عکس سمت راست (بزرگ) -->
-          <div class="md:col-span-2 relative rounded-2xl overflow-hidden group h-[250px] md:h-full">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c75b8e?q=80&w=800&auto=format&fit=crop" alt="عملیات بارگیری لوله و ورق استیل در انبار مرکزی استیل مهفا در شادآباد" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050505]/90 to-transparent"></div>
-            <span class="absolute bottom-4 right-5 text-white font-bold text-lg">عملیات لجستیک و بارگیری روزانه</span>
-          </div>
-          
-          <!-- دو عکس سمت چپ (کوچک زیر هم) -->
-          <div class="flex flex-col gap-4 h-full">
-            <div class="relative rounded-2xl overflow-hidden group h-[200px] md:h-1/2">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="دپارتمان مالی و صدور پیش‌فاکتور رسمی ورق استیل در دفتر مهفا" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#050505]/90 to-transparent"></div>
-              <span class="absolute bottom-4 right-5 text-white font-bold text-sm">دپارتمان حسابداری و امور مالی</span>
-            </div>
-            <div class="relative rounded-2xl overflow-hidden group h-[200px] md:h-1/2">
-              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop" alt="جلسات دپارتمان فروش مهفا" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#050505]/90 to-transparent"></div>
-              <span class="absolute bottom-4 right-5 text-white font-bold text-sm">دفتر مرکزی مهندسی فروش</span>
+        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4 auto-rows-[190px] grid-flow-dense mb-10">
+
+          <!-- ۱. تصویر اصلی انبار (باکس عریض ۴ ستونه) -->
+          <div class="md:col-span-4 lg:col-span-4 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
+            <img 
+              src="/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp"
+              alt="انبار مرکزی مگاسنتر استیل مهفا - بزرگترین فروشنده لوله و مقاطع استیل در بازار آهن شادآباد" 
+              title="انبار استیل مهفا - مرجع قیمت و خرید بی‌واسطه استنلس استیل"
+              class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <!-- گریدینت سبک که روی واترمارک پایین-چپ نیاید -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#050505]/30 to-[#050505]/80 pointer-events-none"></div>
+            <div class="absolute top-4 right-4 text-right">
+              <span class="px-2.5 py-1 bg-[#84012B] text-white text-[10px] font-bold rounded mb-1 inline-block border border-red-500/30 shadow-md">مگاسنتر شادآباد</span>
+              <h3 class="text-base font-black text-white drop-shadow-md">انبار مرکزی لوله و مقاطع</h3>
             </div>
           </div>
+        
+          <!-- ۲. بارگیری جرثقیل (باکس بسیار بلند ۳ ردیفه جهت شکستن تقارن) -->
+          <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
+            <img 
+              src="/images/gallery/Steel-sheet-unloading-and-loading-equipment-at-Mohafa-Steel.webp" 
+              alt="عملیات بارگیری سنگین کویل ورق استیل با جرثقیل در انبارهای شرکت استیل مهفا" 
+              title="تجهیزات تخلیه و بارگیری ورق استیل در استیل مهفا"
+              class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#050505]/70 pointer-events-none"></div>
+            <div class="absolute top-4 right-4 text-right">
+              <span class="px-2 py-0.5 bg-zinc-800/80 backdrop-blur-md text-zinc-300 text-[10px] font-bold rounded border border-zinc-600 mb-1 inline-block">تجهیزات تخلیه</span>
+              <h3 class="text-sm font-bold text-white">عملیات بارگیری سنگین</h3>
+            </div>
+          </div>
+        
+          <!-- ۳. درب طلایی دکوراتیو (باکس ۲ در ۲) -->
+          <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-amber-500/20 bg-[#08080a] shadow-lg">
+            <img 
+              src="/images/gallery/Buy-Golden-Mirror-Decorative-Steel-Sheet-from-Mohafa-Steel.webp" 
+              alt="فروش ورق استیل طلایی طرح‌دار میرور دکوراتیو با بهترین قیمت روز در استیل مهفا" 
+              title="خرید ورق استیل دکوراتیو میرور طلایی از استیل مهفا"
+              class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#050505]/70 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute top-4 right-4 text-right">
+              <span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold rounded mb-1 inline-block">محصولات خاص</span>
+              <h3 class="text-sm font-bold text-white">ورق استیل طلایی دکوراتیو</h3>
+            </div>
+          </div>
+        
+          <!-- ۴. دپوی کویل (باکس تک‌ردیفه افقی) -->
+          <div class="md:col-span-2 lg:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+            <img 
+              src="/images/gallery/Steel-coil-and-roll-inventory-with-valid-certificates-Mohafa-Steel.webp" 
+              alt="دپوی تخصصی کویل و رول استیل ۳۰۴ و ۳۱۶ در مرکز فروش استیل مهفا" 
+              title="موجودی کویل و رول استیل با سرتیفیکیت معتبر - استیل مهفا"
+              class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-l from-[#050505]/80 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-3 right-3 text-right">
+              <h3 class="text-xs font-bold text-white">دپوی تخصصی کویل و رول</h3>
+            </div>
+          </div>
+        
+          <!-- ۵. ناوگان حمل و نقل (باکس عریض پایین) -->
+          <div class="md:col-span-1 lg:col-span-1 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+            <img 
+              src="/images/gallery/Mohafa-Steel-Transport-Fleet-is-sending-steel-sheet-cargo-to-industrial-projects-and-buyers.webp" 
+              alt="ناوگان حمل و نقل استیل مهفا در حال ارسال محموله ورق استیل به پروژه‌های صنعتی و خریداران" 
+              title="ارسال مستقیم و مطمئن مقاطع استیل از تهران به سراسر ایران"
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent to-[#050505]/60 pointer-events-none"></div>
+            <div class="absolute top-3 right-3 text-right">
+              <h3 class="text-xs font-bold text-white">ناوگان حمل و ارسال کشوری</h3>
+            </div>
+          </div>
+        
+          <!-- ۶. بارگیری بندل (باکس مکمل) -->
+          <div class="md:col-span-2 lg:col-span-3 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
+            <img 
+              src="/images/gallery/Immediate-delivery-and-competitive-prices-for-all-types-of-stainless-steel-sections.webp" 
+              alt="بسته‌بندی استاندارد و تحویل سریع محموله لوله و ورق استیل توسط فروشندگان استیل مهفا" 
+              title="تحویل فوری و قیمت رقابتی انواع مقاطع استنلس استیل"
+              class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent to-[#050505]/60 pointer-events-none"></div>
+            <div class="absolute top-3 right-3 text-right">
+              <h3 class="text-xs font-bold text-white">بسته‌بندی و تحویل استاندارد</h3>
+            </div>
+          </div>
+        
         </div>
       </section>
 
@@ -160,7 +239,10 @@
               <div class="absolute top-0 left-0 w-full h-1.5 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               
               <div class="relative w-28 h-28 mb-5">
-                <img :src="member.image" :alt="member.name" class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
+                <img :src="member.image"
+                  :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای استعلام قیمت روز استیل'" 
+                  :title="'تماس با ' + member.name + ' جهت خرید مقاطع استنلس استیل از مهفا'"
+                  class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
               </div>
               
               <h3 class="font-black text-white text-lg mb-1">{{ member.name }}</h3>
@@ -209,6 +291,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+
 // اطلاعات استاتیک تیم (تصاویر باکیفیت به عنوان Placeholder قرار داده شده)
 const teamMembers = ref([
   { id: 1, name: 'مهندس آرش کریمی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
@@ -226,7 +309,10 @@ useSeoMeta({
   ogDescription: 'تامین بی‌واسطه ورق، لوله و پروفیل استنلس استیل برای پروژه‌های صنعتی ایران. دارای مگاسنتر اختصاصی در بازار آهن تهران.',
   ogType: 'website', // اصلاح شد
   ogUrl: 'https://mohafa.com/about',
-  twitterCard: 'summary_large_image'
+  ogImage: 'https://mohafa.com/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp',
+  ogImageAlt: 'انبار مرکزی شرکت استیل مهفا در بازار آهن شادآباد تهران',
+  twitterCard: 'summary_large_image',
+  twitterImage: 'https://mohafa.com/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp'
 })
 
 // ۲. تزریق استروئید به اسکیمای سازمان (E-E-A-T)
@@ -243,6 +329,11 @@ useHead({
         "url": "https://mohafa.com/about",
         "name": "درباره شرکت استیل مهفا",
         "description": "استیل مهفا واردکننده و توزیع‌کننده تخصصی مقاطع استنلس استیل شامل ورق، لوله و پروفیل در گریدهای 304 و 316 در ایران.",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://mohafa.com/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp",
+          "caption": "انبار مرکزی استیل مهفا در بازار آهن شادآباد"
+        },
         "mainEntity": {
           "@type": "Organization",
           "@id": "https://mohafa.com/#organization",
