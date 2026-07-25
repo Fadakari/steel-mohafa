@@ -215,7 +215,7 @@ useHead(() => {
 
   const schemas = []
 
-  // ۱. اسکیمای Article (بسیار مهم برای سئوی محتوا)
+  // ۱. اسکیمای Article
   schemas.push({
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
@@ -319,7 +319,7 @@ const processedContent = computed(() => {
     // ۲. تبدیل کدهای مخرب مثل &zwnj; به نیم‌فاصله واقعی و &nbsp; به فاصله
     cleanText = cleanText.replace(/&zwnj;/g, '\u200C').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
     
-    // ۳. ساخت ID تمیز (پشتیبانی از حروف فارسی و نیم‌فاصله)
+    // ۳. ساخت ID
     const id = cleanText.replace(/\s+/g, '-').replace(/[^\w\u0600-\u06FF\u200C-]/g, '')
     
     currentToc.push({
@@ -345,24 +345,21 @@ const scrollToSection = (id: string) => {
 </script>
 
 <style scoped>
-/* ۱. رفع مشکل رنگ مشکی و پس‌زمینه سفید:
-  استفاده از important! باعث می‌شود تمام رنگ‌های مخفی که از ادیتور مدیریت می‌آیند بی‌اثر شوند.
-*/
 :deep(.custom-article-content),
 :deep(.custom-article-content *) {
-  color: #e4e4e7 !important; /* رنگ نقره‌ای روشن و خوانا برای کل متن */
-  background-color: transparent !important; /* حذف هرگونه پس‌زمینه سفیدی که از Word کپی شده */
+  color: #e4e4e7 !important;
+  background-color: transparent !important;
   line-height: 1.8;
   text-align: justify;
 }
 
 @media (min-width: 768px) {
   :deep(.custom-article-content) {
-    line-height: 2.2; /* فاصله مناسب خطوط در دسکتاپ (معادل md:leading-loose) */
+    line-height: 2.2;
   }
 }
 
-/* ۲. استایل‌دهی به تگ‌های خاص (تیترها، لینک‌ها و...) */
+
 :deep(.custom-article-content h2), 
 :deep(.custom-article-content h2 *) {
   color: #ffffff !important;
@@ -453,8 +450,8 @@ const scrollToSection = (id: string) => {
   height: auto;
 }
 
-/* ۳. جداول قدرتمند مهندسی (کاملا ریسپانسیو) 
-*/
+
+
 :deep(.custom-article-content table) {
   width: 100%;
   font-size: 0.875rem;
@@ -463,9 +460,9 @@ const scrollToSection = (id: string) => {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin: 2.5rem 0;
-  display: block; /* برای اسکرول افقی در موبایل */
+  display: block;
   overflow-x: auto;
-  white-space: nowrap; /* جلوگیری از به هم ریختگی جدول در موبایل */
+  white-space: nowrap;
 }
 @media (min-width: 768px) {
   :deep(.custom-article-content table) {

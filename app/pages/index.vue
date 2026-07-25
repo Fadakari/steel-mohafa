@@ -345,7 +345,7 @@
         </p>
       </div>
 
-      <!-- گالری نامنظم و صنعتی بنتو گرید (نمایش کامل واترمارک) -->
+      <!-- گالری نامنظم و صنعتی بنتو گرید -->
       <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4 auto-rows-[190px] grid-flow-dense mb-10">
 
         <!-- ۱. تصویر اصلی انبار (باکس عریض ۴ ستونه) -->
@@ -474,7 +474,6 @@
           class="pb-4"
         >
           <SwiperSlide v-for="member in teamMembers" :key="member.id">
-            <!-- کل کارت حالا یک لینک است -->
             <a :href="`tel:${member.phone}`" class="block bg-[#0a0a0c] border border-white/5 rounded-2xl p-8 flex flex-col items-center text-center h-full hover:border-[#84012B]/50 transition-all duration-300 group relative overflow-hidden">
               <div class="absolute top-0 left-0 w-full h-1.5 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               
@@ -691,7 +690,7 @@ useSeoMeta({
   description: 'خرید مستقیم و بدون واسطه مقاطع استیل (۳۰۴، ۳۱۶، دکوراتیو و صنعتی). استعلام قیمت لحظه‌ای آهن‌آلات، ارسال به سراسر کشور با تضمین کیفیت و سرتیفیکیت معتبر.',
   ogTitle: 'استیل مهفا - مرجع تخصصی تامین استیل',
   ogDescription: 'تامین یکپارچه سبد محصولات استیل پروژه‌های صنعتی و ساختمانی با قیمت رقابتی.',
-  ogImage: 'https://mohafa.com/logo.png', // در پروداکشن آدرس کامل سایت را بگذارید
+  ogImage: 'https://mohafa.com/logo.png',
   twitterCard: 'summary_large_image',
 })
 

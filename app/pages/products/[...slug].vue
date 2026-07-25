@@ -28,8 +28,6 @@ const { data: pageData, pending } = await useFetch('/api/products', {
   }
 })
 
-// === متغیرهای جدید برای آکاردئون و جستجوی داخلی فیلترها ===
-// وضعیت باز/بسته بودن آکاردئون‌ها (آلیاژ و ضخامت پیش‌فرض باز هستند)
 const openAccordions = ref<Record<string, boolean>>({
   alloy: true,
   thickness: true,
@@ -50,7 +48,6 @@ const getFilteredOptions = (key: string, options: string[]) => {
   if (!query) return options
   return options.filter(opt => opt.toLowerCase().includes(query.toLowerCase()))
 }
-// ==========================================================
 
 const visibleCount = ref(50) 
 watch(() => pageData.value, () => {
@@ -105,7 +102,6 @@ const breadcrumbs = computed(() => {
   ]
   
   // اگر داخل یک دسته‌بندی خاص باشیم، نام آن را به مسیر اضافه می‌کنیم
-  // فرض می‌کنیم pageData شما نام دسته‌بندی را برمی‌گرداند (pageData.value.categoryName)
   if (currentSlug.value && pageData.value) {
     paths.push({ 
       name: pageData.value.categoryName || 'دسته‌بندی محصولات', 
@@ -115,7 +111,6 @@ const breadcrumbs = computed(() => {
   return paths
 })
 
-// 2. ساخت AggregateOffer (ترفند رتبه ۱ شدن قیمت‌ها در گوگل)
 const aggregateOfferSchema = computed(() => {
   if (!pageData.value || !pageData.value.products || pageData.value.products.length === 0) return null
   
@@ -136,7 +131,7 @@ const aggregateOfferSchema = computed(() => {
         "name": prod.name,
         "offers": {
           "@type": "Offer",
-          "priceCurrency": "IRT", // تومان
+          "priceCurrency": "IRR",
           "price": prod.price,
           "availability": "https://schema.org/InStock"
         }
@@ -151,7 +146,6 @@ const toggleFaq = (index: number) => {
   activeFaq.value = activeFaq.value === index ? null : index
 }
 
-// دیتابیس لوکال و فوق‌سریع برای محتوای اختصاصی هر دسته
 const categorySeoContent: Record<string, any> = {
   
   // ==========================================
@@ -801,7 +795,6 @@ const categorySeoContent: Record<string, any> = {
   },
 };
 
-// اگر slug فعلی در دیکشنری ما نبود، یک محتوای پیش‌فرض سئو شده نمایش بده
 const defaultSeoContent = {
   title: 'خرید بی‌واسطه مقاطع استنلس استیل',
   content: 'استیل مهفا تامین‌کننده تخصصی انواع مقاطع فولاد ضد زنگ با تضمین قیمت و اصالت آلیاژ می‌باشد. جهت دریافت پیش‌فاکتور و کاتالوگ محصولات با کارشناسان ما در تماس باشید.',
@@ -862,10 +855,9 @@ useHead(() => {
     })
   }
 
-  // استخراج هوشمند تایتل و دیسکریپشن از دیکشنری سئو
+  // استخراج تایتل و دیسکریپشن از دیکشنری سئو
   const pageTitle = currentSeoData.value.title || `${pageData.value?.categoryName || 'محصولات استیل'} | قیمت روز و خرید مستقیم`
   
-  // برای توضیحات متا (Meta Description)، ۱۵۰ کاراکتر اولِ متنِ دیکشنری را برمی‌داریم
   const pageDescription = currentSeoData.value.content 
     ? currentSeoData.value.content.replace(/\n/g, ' ').substring(0, 155) + '...'
     : `خرید بی‌واسطه ${pageData.value?.categoryName || 'انواع مقاطع استیل'}. استعلام قیمت لحظه‌ای، بارگیری از انبار با سرتیفیکیت معتبر.`
@@ -878,7 +870,7 @@ useHead(() => {
     meta: [
       { name: 'description', content: pageDescription },
       
-      // تگ‌های Open Graph (برای نمایش جذاب و لینک‌دار در تلگرام، واتساپ و لینکدین)
+      // تگ‌های Open Graph
       { property: 'og:title', content: pageTitle },
       { property: 'og:description', content: pageDescription },
       { property: 'og:type', content: 'website' },
@@ -1167,7 +1159,6 @@ useHead(() => {
                   </div>
 
                   <!-- دکمه CTA (دعوت به اقدام) -->
-                  <!-- شماره تلفن مجموعه را در href وارد کنید -->
                   <a href="tel:02112345678" class="mr-4 md:mr-6 flex items-center justify-center bg-[#050505] group-hover:bg-[#84012B] text-zinc-400 group-hover:text-white p-2.5 md:px-4 md:py-2.5 rounded-lg border border-white/10 group-hover:border-[#84012B] transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(132,1,43,0.4)] active:scale-95 shrink-0">
                     <svg class="w-4 h-4 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                     <span class="hidden lg:block mr-2 text-xs font-bold">تماس و خرید</span>

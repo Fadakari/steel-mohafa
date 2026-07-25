@@ -183,6 +183,7 @@ export default defineCachedEventHandler(async (event) => {
   maxAge: 60, // هر ۶۰ ثانیه کش را اعتبار سنجی می‌کند (نه در هر بار لود)
   swr: true,  // دیتای قدیمی را نشان بده اما در پس‌زمینه تازه کن
   name: 'products-cache',
+  base:'redis',
   getKey: (event) => {
     const url = event.node.req.url || ''
     return 'products:' + url

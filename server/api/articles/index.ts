@@ -19,5 +19,6 @@ export default defineCachedEventHandler(async () => {
   // کش کردن برای یک سال (تا زمانی که وب‌هوک آن را پاک کند)
   maxAge: 60, 
   swr: true,
-  name: 'articles-cache'
+  name: 'articles-cache',
+  base:'redis'
 })

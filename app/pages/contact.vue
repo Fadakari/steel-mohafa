@@ -90,7 +90,7 @@
         <section class="lg:col-span-7 bg-[#0a0a0c] border border-white/10 rounded-2xl p-2 relative h-[500px] lg:h-auto group flex flex-col">
           
           <div class="w-full flex-1 rounded-xl overflow-hidden relative">
-            <!-- اورلی تاریک روی نقشه برای حفظ ظاهر سایت (با هاور شدن محو می‌شود) -->
+            <!-- اورلی تاریک روی نقشه برای حفظ ظاهر سایت -->
             <div class="absolute inset-0 bg-[#050505]/40 mix-blend-color pointer-events-none group-hover:opacity-0 transition-opacity duration-700 z-10"></div>
             
             <!-- Iframe گوگل مپ -->
@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-// ۱. تنظیم سئوی متا تگ‌ها به صورت کاملا استاتیک و قدرتمند
+// ۱. تنظیم سئوی متا تگ‌ها به صورت استاتیک
 useSeoMeta({
   title: 'تماس با استیل مهفا | آدرس دفتر و انبار بازار آهن شادآباد',
   description: 'برای استعلام قیمت روز ورق و لوله استیل، مشاوره خرید تناژ بالا و هماهنگی بارگیری، با کارشناسان فروش استیل مهفا در بازار آهن تهران تماس بگیرید.',
@@ -137,7 +137,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-// ۲. اسکیمای LocalBusiness فوق‌پیشرفته (متصل به گوگل مپ)
+// ۲. اسکیمای LocalBusiness
 useHead({
   link: [
     { rel: 'canonical', href: 'https://mohafa.com/contact' }
@@ -163,7 +163,6 @@ useHead({
         },
         "geo": {
           "@type": "GeoCoordinates",
-          // مختصات استخراج شده از لینک مپ شما
           "latitude": 35.673810, 
           "longitude": 51.452882
         },

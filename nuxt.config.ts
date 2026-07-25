@@ -35,5 +35,16 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  nitro: {
+    storage: {
+      cache: {
+        driver: 'redis',
+        base: 'cache',
+        host: '127.0.0.1',
+        port: 6379
+      }
+    }
   }
 })

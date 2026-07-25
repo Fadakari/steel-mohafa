@@ -14,4 +14,5 @@ export default defineCachedEventHandler(async () => {
   maxAge: 60, // کش کردن اطلاعات برای ۱ ساعت تا سرعت سایت نور باشد
   swr: true,
   name: 'globals-cache',
+  base:'redis'
 })

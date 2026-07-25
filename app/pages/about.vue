@@ -11,7 +11,6 @@
           <span class="w-2 h-2 rounded-full bg-[#ff477e] animate-pulse"></span>
           درباره استیل مهفا
         </div>
-        <!-- H1 کوتاه‌تر و متمرکزتر -->
         <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight leading-tight">
           تامین‌کننده بی‌واسطه <span class="text-transparent bg-clip-text bg-gradient-to-l pb-5 from-[#84012B] to-[#ff477e]">فولاد ضد زنگ</span>
         </h1>
@@ -20,7 +19,7 @@
         </p>
       </header>
 
-      <!-- ۲. داستان برند و تصویر مستند (اعتمادسازی E-E-A-T) -->
+      <!-- ۲. داستان برند و تصویر مستند -->
       <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32" aria-labelledby="about-story">
         <div class="space-y-6 text-justify">
           <h2 id="about-story" class="text-2xl md:text-3xl font-black text-white border-r-4 border-[#84012B] pr-4">داستان شکل‌گیری استیل مهفا</h2>
@@ -46,7 +45,7 @@
         </div>
       </section>
 
-      <!-- بخش جدید: آمار و شبکه توزیع (Company Stats) -->
+      <!-- آمار و شبکه توزیع (Company Stats) -->
       <section class="mb-32 border-y border-white/5 bg-gradient-to-r from-transparent via-[#0a0a0c] to-transparent py-12" aria-label="آمار عملکرد شرکت">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-x-reverse divide-white/5">
           <div class="flex flex-col items-center justify-center">
@@ -68,7 +67,7 @@
         </div>
       </section>
 
-      <!-- ۳. مقادیر کلیدی (Trust Signals برای سئو) -->
+      <!-- ۳. مقادیر کلیدی -->
       <section class="mb-32" aria-labelledby="core-values">
         <h2 id="core-values" class="sr-only">ارزش‌های سازمانی و مزایای رقابتی</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -98,7 +97,7 @@
         </div>
       </section>
 
-      <!-- بخش جدید: گالری زیرساخت‌ها و دپارتمان‌ها -->
+      <!-- گالری زیرساخت‌ها و دپارتمان‌ها -->
       <section class="mb-32">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-black text-white mb-4">زیرساخت‌های استیل مهفا</h2>
@@ -116,7 +115,7 @@
               class="w-full h-full object-cover object-left-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"
             />
-            <!-- گریدینت سبک که روی واترمارک پایین-چپ نیاید -->
+            <!-- گریدینت -->
             <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#050505]/30 to-[#050505]/80 pointer-events-none"></div>
             <div class="absolute top-4 right-4 text-right">
               <span class="px-2.5 py-1 bg-[#84012B] text-white text-[10px] font-bold rounded mb-1 inline-block border border-red-500/30 shadow-md">مگاسنتر شادآباد</span>
@@ -204,7 +203,7 @@
         </div>
       </section>
 
-      <!-- ۴. کاروسل تیم متخصصین (با Swiper و فلش‌های شیک) -->
+      <!-- ۴. کاروسل تیم متخصصینS -->
       <section class="mb-32">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-white/5 pb-6 gap-6">
           <div>
@@ -234,7 +233,6 @@
           class="pb-4"
         >
           <SwiperSlide v-for="member in teamMembers" :key="member.id">
-            <!-- کل کارت حالا یک لینک است -->
             <a :href="`tel:${member.phone}`" class="block bg-[#0a0a0c] border border-white/5 rounded-2xl p-8 flex flex-col items-center text-center h-full hover:border-[#84012B]/50 transition-all duration-300 group relative overflow-hidden">
               <div class="absolute top-0 left-0 w-full h-1.5 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               
@@ -292,7 +290,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 
-// اطلاعات استاتیک تیم (تصاویر باکیفیت به عنوان Placeholder قرار داده شده)
+// اطلاعات استاتیک تیم
 const teamMembers = ref([
   { id: 1, name: 'مهندس آرش کریمی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
   { id: 2, name: 'مهندس مریم حسینی', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
@@ -301,7 +299,7 @@ const teamMembers = ref([
   { id: 5, name: 'مهندس امید کاظمی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
 ]);
 
-// ۱. سئوی متادیتاها (Meta Tags)
+// ۱. سئوی متادیتاها
 useSeoMeta({
   title: 'درباره ما | استیل مهفا - مرجع تخصصی تامین ورق و لوله استیل',
   description: 'آشنایی با شرکت استیل مهفا. بیش از یک دهه تجربه در واردات و تامین مقاطع استیل ۳۰۴ و ۳۱۶ با سرتیفیکیت معتبر در بازار آهن شادآباد.',
@@ -315,7 +313,7 @@ useSeoMeta({
   twitterImage: 'https://mohafa.com/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp'
 })
 
-// ۲. تزریق استروئید به اسکیمای سازمان (E-E-A-T)
+// ۲. تزریق استروئید به اسکیمای سازمان
 useHead({
   link: [
     { rel: 'canonical', href: 'https://mohafa.com/about' }
@@ -347,15 +345,15 @@ useHead({
           "description": "مرجع تخصصی فروش بی‌واسطه آهن‌آلات و فولاد ضد زنگ در بازار آهن تهران.",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "بزرگراه فتح، کیلومتر 4، پاساژ غدیر – پلاک 238", // آدرس دقیق‌تر بنویسید
+            "streetAddress": "بزرگراه فتح، کیلومتر 4، پاساژ غدیر – پلاک 238",
             "addressLocality": "تهران",
             "addressRegion": "تهران",
-            "postalCode": "1386853895", // در صورت داشتن اضافه کنید
+            "postalCode": "1386853895",
             "addressCountry": "IR"
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 35.67383406781865, // طول و عرض جغرافیایی دفتر خود را بگذارید
+            "latitude": 35.67383406781865,
             "longitude": 51.300444117791024
           },
           "contactPoint": {
@@ -366,7 +364,7 @@ useHead({
             "availableLanguage": ["Persian", "English"]
           },
           "sameAs": [
-            "https://www.instagram.com/steelmahfa", // لینک شبکه‌های اجتماعی خودتان
+            "https://www.instagram.com/steelmahfa",
             "https://www.linkedin.com/company/steelmahfa"
           ]
         }

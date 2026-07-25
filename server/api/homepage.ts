@@ -13,4 +13,4 @@ export default defineCachedEventHandler(async () => {
     sections,
     latestArticles
   }
-}, { maxAge: 3600, swr: true, name: 'homepage-cache' })
+}, { maxAge: 3600, swr: true, name: 'homepage-cache',base:'redis' })
