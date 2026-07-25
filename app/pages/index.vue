@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#84012B]">
+  <main class="bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#84012b7a]">
     
     <section class="relative min-h-[85vh] flex flex-col justify-center pt-24 pb-12">
       
@@ -36,7 +36,7 @@
             :class="['text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ease-out delay-100', 
                      isHeroTitleVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
-            تامین پایدار <span class="text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e] selection:bg-[#ffc5d8]">ورق و لوله استیل</span>
+            تامین پایدار <span class="text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e] selection:bg-[#84012b7a]">ورق و لوله استیل</span>
             بدون واسطه‌ در ایران
           </h1>
 

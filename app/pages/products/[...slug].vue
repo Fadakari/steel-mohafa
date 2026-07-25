@@ -894,7 +894,7 @@ useHead(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#050505] text-zinc-200 font-sans selection:bg-[#84012B] selection:text-white pb-24 lg:pb-8 pt-[90px] md:pt-[110px]">
+  <div class="min-h-screen bg-[#050505] text-zinc-200 font-sans selection:bg-[#84012b7a] selection:text-white pb-24 lg:pb-8 pt-[90px] md:pt-[110px]">
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-3 md:p-8">
       

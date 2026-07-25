@@ -20,7 +20,7 @@
     </NuxtLink>
   </div>
 
-  <article v-else class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012B] selection:text-white">
+  <article v-else class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012b7a] selection:text-white">
     <div class="max-w-[850px] mx-auto">
       
       <nav aria-label="Breadcrumb" class="mb-8 md:mb-12">

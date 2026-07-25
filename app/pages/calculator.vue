@@ -1,407 +1,751 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import SteelCalculator from '~/components/SteelCalculator.vue'
 
-// --- State Management ---
-const profileType = ref('plate') // plate, roundBar, pipe, box, hex
-const material = ref('stainless') // stainless (7.93), iron (7.85)
-
-// ابعاد
-const length = ref<number | ''>('')
-const width = ref<number | ''>('')       // عرض ورق یا قوطی
-const height = ref<number | ''>('')      // ارتفاع قوطی
-const thickness = ref<number | ''>('')   // ضخامت
-const diameter = ref<number | ''>('')    // قطر میلگرد/لوله
-const hexSize = ref<number | ''>('')     // سایز آچارخور شش‌پر
-
-// قیمت
-const unitPrice = ref<number | ''>('')
-
-const isCopied = ref(false)
-
-// نام فارسی مقاطع برای فاکتور کپی
-const profileNames: Record<string, string> = {
-  plate: 'ورق',
-  roundBar: 'میلگرد / شافت',
-  pipe: 'لوله',
-  box: 'قوطی / پروفیل',
-  hex: 'شِش‌پَر'
-}
-
-// محاسبه چگالی
-const currentDensity = computed(() => (material.value === 'stainless' ? 7.93 : 7.85))
-
-// هسته محاسباتی مهندسی و دقیق
-const calculatedWeight = computed(() => {
-  const L = Number(length.value) || 0
-  const W = Number(width.value) || 0
-  const H = Number(height.value) || 0
-  const T = Number(thickness.value) || 0
-  const D = Number(diameter.value) || 0
-  const S = Number(hexSize.value) || 0
-  const density = currentDensity.value
-
-  if (L <= 0) return 0
-
-  if (profileType.value === 'plate' && W > 0 && T > 0) {
-    return L * W * T * density
-  } 
-  
-  if (profileType.value === 'roundBar' && D > 0) {
-    return Math.pow(D, 2) * 0.006228 * L * (density / 7.85)
-  }
-
-  if (profileType.value === 'pipe' && D > 0 && T > 0 && D > T) {
-    return (D - T) * T * 0.0249 * L * (density / 7.85)
-  }
-
-  if (profileType.value === 'box' && W > 0 && H > 0 && T > 0 && W > 2*T && H > 2*T) {
-    // فرمول دقیق حجم قوطی
-    return 2 * T * (W + H - 2 * T) * L * (density / 1000)
-  }
-
-  if (profileType.value === 'hex' && S > 0) {
-    // مساحت شش‌ضلعی منتظم * طول * چگالی
-    return 0.866025 * Math.pow(S, 2) * L * (density / 1000)
-  }
-
-  return 0
-})
-
-// محاسبه قیمت کل
-const calculatedPrice = computed(() => {
-  const price = Number(unitPrice.value) || 0
-  if (calculatedWeight.value > 0 && price > 0) {
-    return calculatedWeight.value * price
-  }
-  return 0
-})
-
-// فرمت‌کننده‌ها
-const formatNumber = (num: number) => num.toLocaleString('fa-IR', { maximumFractionDigits: 2 })
-const formatCurrency = (num: number) => Math.round(num).toLocaleString('fa-IR')
-
-// کپی حرفه‌ای به سبک پیش‌فاکتور
-const copyToClipboard = async () => {
-  if (calculatedWeight.value === 0) return
-  try {
-    let textToCopy = `مقدار محاسبه شده برای: ${profileNames[profileType.value]}\n`
-    textToCopy += `وزن تقریبی: ${formatNumber(calculatedWeight.value)} کیلوگرم\n`
-    if (calculatedPrice.value > 0) {
-      textToCopy += `قیمت کل: ${formatCurrency(calculatedPrice.value)} تومان\n`
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "آیا محاسبه وزن استیل دقیق است؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "این ماشین حساب بر اساس فرمول‌های مهندسی و چگالی استاندارد استیل طراحی شده است و برای برآورد وزن و قیمت کاملاً مناسب است."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "این ابزار از چه گریدهایی پشتیبانی می‌کند؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "این ابزار برای تمامی گریدهای رایج مانند استیل 304، 310، 316، 420، 430 و سایر گریدهای استنلس استیل قابل استفاده است."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "آیا ماشین حساب قیمت را هم محاسبه می‌کند؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "بله، با وارد کردن قیمت هر کیلوگرم استیل، قیمت کل قطعه به صورت خودکار محاسبه می‌شود."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "آیا این ابزار برای پروفیل و لوله و میلگرد استیل مناسب است؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "بله، محاسبه وزن ورق، لوله، میلگرد، پروفیل و شش پر استیل توسط این ابزار انجام می‌شود."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "چرا وزن محاسبه شده با جدول وزن استیل تفاوت دارد؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "به دلیل تلرانس تولید کارخانه و استانداردهای ساخت ممکن است اختلاف جزئی وجود داشته باشد."
+      }
     }
-    textToCopy += `\n(محاسبه شده توسط ابزار آنلاین)`
-    
-    await navigator.clipboard.writeText(textToCopy)
-    isCopied.value = true
-    setTimeout(() => { isCopied.value = false }, 2500)
-  } catch (err) {
-    console.error('Failed to copy', err)
-  }
+  ]
 }
+
+useSeoMeta({
+  title: 'محاسبه وزن استیل | ماشین حساب آنلاین وزن ورق، لوله، میلگرد و پروفیل استیل | استیل مهفا',
+  description:
+    'ماشین حساب آنلاین وزن استیل برای محاسبه وزن ورق استیل، لوله استیل، میلگرد استیل، پروفیل استیل و شش پر استیل. محاسبه دقیق وزن و قیمت استیل بر اساس ابعاد و چگالی توسط استیل مهفا.',
+
+  keywords:
+    'محاسبه وزن استیل,ماشین حساب استیل,وزن ورق استیل,وزن لوله استیل,وزن میلگرد استیل,وزن پروفیل استیل,محاسبه وزن ورق 304,محاسبه وزن ورق 316,استیل مهفا',
+
+  robots: 'index,follow',
+
+  author: 'استیل مهفا',
+
+  ogType: 'website',
+
+  ogSiteName: 'استیل مهفا',
+
+  ogTitle:
+    'محاسبه وزن استیل | ماشین حساب آنلاین استیل | Mohafa',
+
+  ogDescription:
+    'محاسبه آنلاین وزن ورق، لوله، میلگرد، پروفیل و شش پر استیل با فرمول‌های مهندسی.',
+
+  ogUrl: 'https://mohafa.com/calculator',
+
+  ogImage: 'https://mohafa.com/header-logo.png',
+
+  twitterCard: 'summary_large_image',
+
+  twitterTitle:
+    'محاسبه وزن استیل | ماشین حساب آنلاین استیل',
+
+  twitterDescription:
+    'محاسبه دقیق وزن انواع مقاطع استیل با فرمول‌های مهندسی.',
+
+  twitterImage:
+    'https://mohafa.com/header-logo.png'
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://mohafa.com/calculator'
+    }
+  ]
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+
+        name: 'ماشین حساب وزن استیل',
+
+        applicationCategory: 'BusinessApplication',
+
+        operatingSystem: 'Any',
+
+        url: 'https://mohafa.com/calculator',
+
+        image: 'https://mohafa.com/header-logo.png',
+
+        description:
+          'ماشین حساب آنلاین محاسبه وزن انواع مقاطع استیل شامل ورق استیل، لوله استیل، میلگرد استیل، پروفیل استیل و شش پر استیل.',
+
+        publisher: {
+          '@type': 'Organization',
+
+          name: 'استیل مهفا',
+
+          url: 'https://mohafa.com',
+
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://mohafa.com/header-logo.png'
+          }
+        }
+      })
+    },{
+        type: 'application/ld+json',
+        children: JSON.stringify(faqSchema)
+      }
+  ]
+})
+
+
+
+const plateWeights = [
+  {
+    title: 'ورق ۱×۲ متر ضخامت ۱ میل',
+    weight: 15.86
+  },
+  {
+    title: 'ورق ۱×۲ متر ضخامت ۲ میل',
+    weight: 31.72
+  },
+  {
+    title: 'ورق ۱×۲ متر ضخامت ۳ میل',
+    weight: 47.58
+  },
+  {
+    title: 'ورق ۱×۲ متر ضخامت ۴ میل',
+    weight: 63.44
+  },
+  {
+    title: 'ورق ۱×۲ متر ضخامت ۵ میل',
+    weight: 79.30
+  },
+  {
+    title: 'ورق ۱.۲۵×۲.۵ متر ضخامت ۱ میل',
+    weight: 24.78
+  },
+  {
+    title: 'ورق ۱.۲۵×۲.۵ متر ضخامت ۲ میل',
+    weight: 49.56
+  },
+  {
+    title: 'ورق ۱.۲۵×۲.۵ متر ضخامت ۳ میل',
+    weight: 74.34
+  }
+]
 </script>
 
 <template>
-  <div class="calculator-wrapper">
-    
-    <div class="material-switch">
-      <button class="switch-btn" :class="{ active: material === 'stainless' }" @click="material = 'stainless'">استیل (۳۰۴/۳۱۶)</button>
-      <button class="switch-btn" :class="{ active: material === 'iron' }" @click="material = 'iron'">آهن / فولاد</button>
-    </div>
+  <main class="calculator-page selection:bg-[#84012b7a]">
 
-    <div class="profile-grid">
-      <button class="profile-btn" :class="{ active: profileType === 'plate' }" @click="profileType = 'plate'" title="ورق">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="6" rx="1"></rect></svg>
-        <span>ورق</span>
-      </button>
-      <button class="profile-btn" :class="{ active: profileType === 'roundBar' }" @click="profileType = 'roundBar'" title="میلگرد">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2" fill="currentColor"></circle></svg>
-        <span>میلگرد</span>
-      </button>
-      <button class="profile-btn" :class="{ active: profileType === 'pipe' }" @click="profileType = 'pipe'" title="لوله">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="5"></circle></svg>
-        <span>لوله</span>
-      </button>
-      <button class="profile-btn" :class="{ active: profileType === 'box' }" @click="profileType = 'box'" title="قوطی/پروفیل">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="1"></rect><rect x="8" y="8" width="8" height="8"></rect></svg>
-        <span>پروفیل</span>
-      </button>
-      <button class="profile-btn" :class="{ active: profileType === 'hex' }" @click="profileType = 'hex'" title="شش‌پر">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2"></polygon></svg>
-        <span>شش‌پر</span>
-      </button>
-    </div>
+    <section class="hero mt-[4.5rem] text-transparent text-4xl bg-clip-text bg-gradient-to-l pb-2 from-[#84012B] to-[#ff477e]">
 
-    <div class="divider">ابعاد مقطع</div>
+      <h1>
+        ماشین حساب آنلاین محاسبه وزن استیل
+      </h1>
 
-    <div class="inputs-grid">
-      <div class="input-group full-width">
-        <label>طول (شاخه)</label>
-        <div class="input-with-unit">
-          <input type="number" v-model.number="length" placeholder="۶" />
-          <span class="unit">متر</span>
-        </div>
-      </div>
+      <p class="hero-description">
+        با استفاده از ماشین حساب وزن استیل استیل مهفا می‌توانید وزن تقریبی
+        ورق استیل، لوله استیل، میلگرد استیل، پروفیل استیل و شش پر استیل را
+        بر اساس ابعاد و چگالی استاندارد محاسبه کنید.
+      </p>
 
-      <template v-if="profileType === 'plate'">
-        <div class="input-group"><label>عرض</label><div class="input-with-unit"><input type="number" v-model.number="width" placeholder="۱.۲۵" /><span class="unit">متر</span></div></div>
-        <div class="input-group"><label>ضخامت</label><div class="input-with-unit"><input type="number" v-model.number="thickness" placeholder="۲" /><span class="unit">میلی‌متر</span></div></div>
-      </template>
+    </section>
 
-      <template v-if="profileType === 'roundBar' || profileType === 'pipe'">
-        <div class="input-group" :class="{ 'full-width': profileType === 'roundBar' }">
-          <label>قطر بیرونی</label><div class="input-with-unit"><input type="number" v-model.number="diameter" placeholder="۵۰" /><span class="unit">میلی‌متر</span></div>
-        </div>
-      </template>
+    <SteelCalculator />
 
-      <template v-if="profileType === 'pipe'">
-        <div class="input-group"><label>ضخامت دیواره</label><div class="input-with-unit"><input type="number" v-model.number="thickness" placeholder="۱.۵" /><span class="unit">میلی‌متر</span></div></div>
-      </template>
 
-      <template v-if="profileType === 'box'">
-        <div class="input-group"><label>ضلع اول (A)</label><div class="input-with-unit"><input type="number" v-model.number="width" placeholder="۴۰" /><span class="unit">میلی‌متر</span></div></div>
-        <div class="input-group"><label>ضلع دوم (B)</label><div class="input-with-unit"><input type="number" v-model.number="height" placeholder="۴۰" /><span class="unit">میلی‌متر</span></div></div>
-        <div class="input-group full-width"><label>ضخامت ورق قوطی (T)</label><div class="input-with-unit"><input type="number" v-model.number="thickness" placeholder="۲" /><span class="unit">میلی‌متر</span></div></div>
-      </template>
 
-      <template v-if="profileType === 'hex'">
-        <div class="input-group full-width"><label>سایز آچارخور (S)</label><div class="input-with-unit"><input type="number" v-model.number="hexSize" placeholder="۲۲" /><span class="unit">میلی‌متر</span></div></div>
-      </template>
-    </div>
+<div class="table-wrapper">
 
-    <div class="divider">محاسبه مالی (اختیاری)</div>
+<table class="steel-table">
 
-    <div class="price-input-section">
-      <div class="input-group full-width">
-        <label>قیمت هر کیلوگرم</label>
-        <div class="input-with-unit price-field">
-          <input type="number" v-model.number="unitPrice" placeholder="مثلاً ۱۳۵۰۰۰" />
-          <span class="unit">تومان</span>
-        </div>
-      </div>
-    </div>
+<thead>
 
-    <div class="result-board" :class="{ 'has-value': calculatedWeight > 0 }">
-      <div class="result-content">
-        <div class="result-row">
-          <span class="result-label">وزن:</span>
-          <div class="weight-display">
-            <span class="number">{{ calculatedWeight > 0 ? formatNumber(calculatedWeight) : '۰.۰۰' }}</span>
-            <span class="unit-text">کیلوگرم</span>
-          </div>
-        </div>
+<tr>
+
+<th>مقطع</th>
+
+<th>ابعاد</th>
+
+<th>وزن هر متر</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>میلگرد استیل 304</td>
+
+<td>Ø10</td>
+
+<td>0.62 kg</td>
+
+</tr>
+
+<tr>
+
+<td>میلگرد استیل 304</td>
+
+<td>Ø20</td>
+
+<td>2.49 kg</td>
+
+</tr>
+
+<tr>
+
+<td>لوله استیل</td>
+
+<td>25×2</td>
+
+<td>1.17 kg</td>
+
+</tr>
+
+<tr>
+
+<td>لوله استیل</td>
+
+<td>38×2</td>
+
+<td>1.82 kg</td>
+
+</tr>
+
+<tr>
+
+<td>قوطی استیل</td>
+
+<td>40×40×2</td>
+
+<td>2.39 kg</td>
+
+</tr>
+
+<tr>
+
+<td>قوطی استیل</td>
+
+<td>60×40×2</td>
+
+<td>2.97 kg</td>
+
+</tr>
+
+<tr>
+
+<td>ورق استیل</td>
+
+<td>1 mm</td>
+
+<td>7.93 kg/m²</td>
+
+</tr>
+
+<tr>
+
+<td>ورق استیل</td>
+
+<td>2 mm</td>
+
+<td>15.86 kg/m²</td>
+
+</tr>
+
+<tr>
+
+<td>ورق استیل</td>
+
+<td>3 mm</td>
+
+<td>23.79 kg/m²</td>
+
+</tr>
+
+<tr>
+
+<td>ورق استیل</td>
+
+<td>5 mm</td>
+
+<td>39.65 kg/m²</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+    <section class="calculator-seo w-[50%] m-auto mb-[5rem]">
+      <h2>محاسبه وزن استیل به صورت آنلاین</h2>
         
-        <div v-if="calculatedPrice > 0" class="result-row price-row">
-          <span class="result-label">قیمت کل:</span>
-          <div class="weight-display price-display">
-            <span class="number">{{ formatCurrency(calculatedPrice) }}</span>
-            <span class="unit-text">تومان</span>
-          </div>
-        </div>
-      </div>
+      <p>
+        ماشین حساب وزن استیل استیل مهفا امکان محاسبه سریع و دقیق وزن انواع
+        مقاطع استیل را بر اساس ابعاد واقعی فراهم می‌کند. این ابزار برای
+        مهندسان، پیمانکاران، تولیدکنندگان، مجریان پروژه و خریداران استیل
+        طراحی شده است تا بدون نیاز به جدول‌های وزنی بتوانند وزن تقریبی هر
+        قطعه را تنها با وارد کردن ابعاد محاسبه کنند.
+      </p>
+    
+      <p>
+        تمامی فرمول‌های استفاده شده در این ابزار بر اساس روابط مهندسی و
+        چگالی استاندارد استیل طراحی شده‌اند و نتایج ارائه شده برای برآورد
+        وزن، قیمت و حمل بار کاملاً مناسب هستند.
+      </p>
+    
+      <h2>محاسبه وزن ورق استیل</h2>
+    
+      <p>
+        برای محاسبه وزن ورق استیل کافی است طول، عرض و ضخامت ورق را وارد کنید.
+        ماشین حساب به صورت خودکار وزن ورق را بر اساس چگالی گریدهای مختلف
+        استیل محاسبه می‌کند.
+      </p>
+    
+      <h2>محاسبه وزن لوله استیل</h2>
+    
+      <p>
+        در محاسبه وزن لوله استیل قطر خارجی، ضخامت دیواره و طول لوله در نظر
+        گرفته می‌شود. این ابزار برای انواع لوله‌های صنعتی، دکوراتیو و
+        صنایع غذایی مناسب است.
+      </p>
+    
+      <h2>محاسبه وزن میلگرد استیل</h2>
+    
+      <p>
+        برای محاسبه وزن میلگرد استیل تنها کافی است قطر و طول شاخه را وارد
+        کنید. این محاسبه برای میلگردهای استیل 304، 316، 310 و 420 نیز قابل
+        استفاده است.
+      </p>
+    
+      <h2>محاسبه وزن پروفیل استیل</h2>
+    
+      <p>
+        ماشین حساب وزن پروفیل استیل برای انواع قوطی و پروفیل‌های صنعتی و
+        دکوراتیو قابل استفاده است و وزن را بر اساس ابعاد واقعی مقطع محاسبه
+        می‌کند.
+      </p>
+    
+      <h2>چرا محاسبه وزن استیل اهمیت دارد؟</h2>
+    
+      <ul>
+        <li>برآورد هزینه خرید</li>
+        <li>محاسبه قیمت نهایی پروژه</li>
+        <li>تخمین هزینه حمل و نقل</li>
+        <li>انتخاب مناسب تجهیزات جابجایی</li>
+        <li>کاهش خطای سفارش</li>
+      </ul>
+    </section>
+
+    <section class="faq-section">
+
+      <h2>سوالات متداول درباره محاسبه وزن استیل</h2>
+
+      <div class="faq-item">
+      <h3>آیا محاسبه وزن استیل دقیق است؟</h3>
       
-      <button class="copy-btn" @click="copyToClipboard" :class="{ copied: isCopied }" :disabled="calculatedWeight === 0">
-        <div class="copy-icon-wrapper">
-          <svg v-if="!isCopied" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        </div>
-        <span>{{ isCopied ? 'کپی شد' : 'کپی فاکتور' }}</span>
-      </button>
-    </div>
+      <p>
+      این ماشین حساب بر اساس فرمول‌های مهندسی و چگالی استاندارد استیل طراحی شده است.
+      نتیجه برای برآورد وزن، قیمت و حمل بار کاملاً مناسب است، اما ممکن است با توجه به
+      تلرانس تولید کارخانه اختلاف بسیار جزئی وجود داشته باشد.
+      </p>
+      </div>
 
-  </div>
+      <div class="faq-item">
+      <h3>این ابزار از چه گریدهایی پشتیبانی می‌کند؟</h3>
+      
+      <p>
+      محاسبه وزن برای تمامی گریدهای رایج استیل مانند 304، 304L، 310، 310S،
+      316، 316L، 321، 420، 430 و سایر گریدها قابل استفاده است.
+      </p>
+
+      </div>
+
+      <div class="faq-item">
+      
+      <h3>آیا ماشین حساب قیمت را هم محاسبه می‌کند؟</h3>
+      
+      <p>
+      
+      بله.
+      کافی است قیمت هر کیلوگرم استیل را وارد کنید تا قیمت کل قطعه به صورت
+      خودکار محاسبه شود.
+      
+      </p>
+
+      </div>
+
+      <div class="faq-item">
+      
+      <h3>آیا این ابزار برای پروفیل، لوله و میلگرد استیل مناسب است؟</h3>
+      
+      <p>
+      
+      بله.
+      در حال حاضر امکان محاسبه وزن ورق استیل، لوله استیل، میلگرد استیل،
+      پروفیل استیل و شش پر استیل وجود دارد.
+      
+      </p>
+
+      </div>
+
+      <div class="faq-item">
+      
+      <h3>چرا وزن محاسبه شده با جدول وزن استیل تفاوت دارد؟</h3>
+      
+      <p>
+      
+      وزن واقعی هر قطعه ممکن است به دلیل تلرانس ضخامت، تلرانس قطر،
+      نوع تولید و استاندارد کارخانه چند درصد اختلاف داشته باشد.
+      ماشین حساب بر اساس ابعاد اسمی قطعه محاسبه انجام می‌دهد.
+      
+      </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="calculator-cta">
+
+        <h2>
+        استعلام قیمت روز استیل
+        </h2>
+
+        <p>
+        
+        اگر پس از محاسبه وزن، قصد خرید ورق استیل، لوله استیل،
+        میلگرد استیل، پروفیل استیل یا سایر مقاطع استیل را دارید،
+        کارشناسان فروش استیل مهفا آماده ارائه قیمت روز و مشاوره تخصصی هستند.
+        
+        </p>
+
+        <a
+        href="tel:02166394159"
+        class="call-button"
+        >
+
+        تماس با کارشناسان فروش
+        021-66394159
+
+        </a>
+
+    </section>
+
+  </main>
 </template>
-
-<style scoped>
-:root {
-  /* تم کاملاً تاریک با کنتراست بالا */
-  --bg-color: #0d0d0d; /* مشکی بسیار عمیق برای درخشش یاقوت */
-  --text-color: #f8f9fa;
-  --glass-bg: rgba(25, 25, 25, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.06);
-  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  
-  /* --- جادوی رنگ یاقوتی براق --- */
-  --primary-color: #84012B; 
-  /* یک هاله درخشان برای دور دکمه‌ها و پنل‌ها */
-  --primary-glow: rgba(132, 1, 43, 0.45); 
-  /* پس‌زمینه اینپوت‌ها */
-  --input-bg: rgba(15, 15, 15, 0.8);
-  --blur: blur(20px);
+<style>
+.hero{
+    margin-bottom:40px;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Vazirmatn', Tahoma, sans-serif;
-  direction: rtl;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  /* اضافه کردن دو هاله نور بسیار محو یاقوتی در پس‌زمینه برای زیبایی بیشتر */
-  background-image: 
-    radial-gradient(circle at 10% 0%, rgba(132, 1, 43, 0.15) 0px, transparent 60%),
-    radial-gradient(circle at 90% 100%, rgba(132, 1, 43, 0.1) 0px, transparent 60%);
-  background-attachment: fixed;
+.hero h1{
+    font-size:2.2rem;
+    font-weight:900;
+    line-height:1.5;
+    margin-bottom:16px;
+    width: 100%;
+    text-align: center;
+    margin:auto;
+    padding:40px 20px;
 }
 
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  /* اضافه کردن یک سایه داخلی (Inset) بسیار ظریف برای ایجاد لبه‌های براق شیشه‌ای */
-  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+.hero-description{
+    font-size:1.05rem;
+    line-height:2;
+    color:#777;
+    max-width:900px;
+    text-align: center;
+    margin: auto;
 }
 
-input, select, button {
-  font-family: 'Vazirmatn', inherit;
+.calculator-seo{
+    margin-top:80px;
+    line-height:2.2;
+    color:#d6d6d6;
 }
 
-.calculator-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.calculator-seo h2{
+    margin-top:45px;
+    margin-bottom:18px;
+    font-size:30px;
+    font-weight:800;
+    color:#ffffff;
 }
 
-.divider {
-  display: flex;
-  align-items: center;
-  font-size: 0.85rem;
-  color: var(--text-color);
-  opacity: 0.5;
-  font-weight: bold;
-  margin: 5px 0 -5px 0;
-}
-.divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--glass-border);
-  margin-right: 15px;
+.calculator-seo p{
+    margin-bottom:18px;
+    font-size:18px;
 }
 
-/* --- انتخابگر متریال --- */
-.material-switch {
-  display: flex;
-  background: var(--input-bg);
-  border-radius: 12px;
-  padding: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-[data-theme="dark"] .material-switch { border-color: rgba(255,255,255,0.05); }
-
-.switch-btn {
-  flex: 1; background: transparent; border: none; color: var(--text-color);
-  padding: 10px; font-size: 0.95rem; font-weight: 700; border-radius: 8px;
-  cursor: pointer; transition: all 0.3s; opacity: 0.5;
-}
-.switch-btn.active {
-  background: var(--primary-color); color: white; opacity: 1;
-  box-shadow: 0 4px 12px var(--primary-glow);
+.calculator-seo ul{
+    margin-top:15px;
+    padding-right:25px;
 }
 
-/* --- انتخابگر مقاطع (Grid) --- */
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-  gap: 10px;
+.calculator-seo li{
+    margin-bottom:10px;
 }
 
-.profile-btn {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  background: var(--input-bg); border: 2px solid transparent;
-  padding: 12px 5px; border-radius: 16px; color: var(--text-color);
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+.faq-section{
+    margin-top:80px;
+    width: 50%;
+    margin: auto;
+    color: #ffffff;
+    margin-bottom: 5rem;
 }
 
-.profile-btn span { font-size: 0.75rem; font-weight: 800; opacity: 0.8; }
-.profile-btn svg { width: 26px; height: 26px; opacity: 0.6; transition: all 0.3s; }
-.profile-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.06); }
-
-.profile-btn.active {
-  border-color: var(--primary-color);
-  background: linear-gradient(145deg, var(--input-bg), rgba(0, 102, 204, 0.05));
-  color: var(--primary-color); transform: translateY(-2px);
-  box-shadow: 0 8px 20px var(--primary-glow);
-}
-.profile-btn.active svg { opacity: 1; stroke: var(--primary-color); stroke-width: 2.5; }
-.profile-btn.active span { opacity: 1; }
-
-/* --- فیلدها --- */
-.inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.full-width { grid-column: span 2; }
-.input-group { display: flex; flex-direction: column; gap: 8px; }
-.input-group label { font-size: 0.85rem; font-weight: 800; color: var(--text-color); margin-right: 5px; }
-
-.input-with-unit { position: relative; display: flex; align-items: center; }
-.input-with-unit input {
-  width: 100%; background: var(--input-bg); border: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-radius: 14px; padding: 14px 15px; font-size: 1.1rem; font-weight: 800;
-  color: var(--text-color); transition: all 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.01);
-}
-[data-theme="dark"] .input-with-unit input { border-color: rgba(255,255,255,0.05); }
-.input-with-unit input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px var(--primary-glow); outline: none; }
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-
-.unit { position: absolute; left: 15px; font-size: 0.85rem; font-weight: 800; color: var(--text-color); opacity: 0.4; pointer-events: none; }
-.price-field input { color: #10b981; } /* رنگ سبز برای فیلد پول */
-.price-field input:focus { border-color: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
-
-/* --- برد نتیجه --- */
-.result-board {
-  background: var(--input-bg);
-  border: 2px dashed rgba(255, 255, 255, 0.5);
-  border-radius: 20px; padding: 20px;
-  display: flex; justify-content: space-between; align-items: stretch;
-  transition: all 0.4s; margin-top: 10px;
-}
-[data-theme="dark"] .result-board { border-color: rgba(255,255,255,0.1); }
-
-.result-board.has-value {
-  background: linear-gradient(135deg, var(--primary-color), #003d99);
-  border-style: solid; border-color: transparent;
-  box-shadow: 0 10px 30px var(--primary-glow);
+.faq-item{
+    margin-top:35px;
 }
 
-.result-content { display: flex; flex-direction: column; justify-content: center; gap: 15px; flex-grow: 1; }
-.result-row { display: flex; flex-direction: column; gap: 2px; }
-.price-row { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; }
-
-.result-label { font-size: 0.9rem; font-weight: 600; color: var(--text-color); opacity: 0.6; }
-.has-value .result-label { color: rgba(255, 255, 255, 0.7); }
-
-.weight-display { display: flex; align-items: baseline; gap: 6px; }
-.number { font-size: 2rem; font-weight: 900; color: var(--text-color); line-height: 1; }
-.has-value .number { color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-.price-display .number { font-size: 1.6rem; color: #34d399; } /* سبز روشن برای قیمت */
-
-.unit-text { font-size: 1rem; font-weight: bold; color: var(--text-color); opacity: 0.5; }
-.has-value .unit-text { color: rgba(255, 255, 255, 0.8); }
-.price-display .unit-text { color: #a7f3d0; opacity: 0.8; }
-
-/* دکمه کپی */
-.copy-btn {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  background: transparent; border: none; color: var(--text-color); opacity: 0.3;
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  padding: 0 15px; border-right: 1px solid rgba(255,255,255,0.1);
+.faq-item h3{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:10px;
 }
-.copy-btn span { font-size: 0.8rem; font-weight: 800; white-space: nowrap; }
-.copy-icon-wrapper {
-  width: 45px; height: 45px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.05); transition: all 0.3s;
+
+.faq-item p{
+    line-height:2.1;
+    opacity:.9;
 }
-.copy-icon-wrapper svg { width: 22px; height: 22px; }
 
-.has-value .copy-btn { color: white; opacity: 0.9; border-color: rgba(255,255,255,0.2); }
-.has-value .copy-icon-wrapper { background: rgba(255,255,255,0.15); }
-.has-value .copy-btn:hover { transform: scale(1.05); opacity: 1; }
-.has-value .copy-btn:hover .copy-icon-wrapper { background: rgba(255,255,255,0.25); }
+.calculator-cta{
 
-.copy-btn.copied { color: #4ade80 !important; }
-.copy-btn.copied .copy-icon-wrapper { background: rgba(74, 222, 128, 0.2); }
+margin-top:90px;
+
+padding:50px;
+
+border-radius:24px;
+
+background:linear-gradient(
+135deg,
+#84012B,
+#5f0120
+);
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 15px 40px rgba(132,1,43,.35);
+width: 50%;
+margin: auto;
+margin-bottom: 5rem;
+
+}
+
+.calculator-cta h2{
+
+font-size:34px;
+
+font-weight:900;
+
+margin-bottom:20px;
+
+}
+
+.calculator-cta p{
+
+font-size:18px;
+
+line-height:2;
+
+max-width:850px;
+
+margin:auto;
+
+opacity:.92;
+
+}
+
+.call-button{
+
+display:inline-block;
+
+margin-top:35px;
+
+padding:18px 42px;
+
+background:white;
+
+color:#84012B;
+
+font-weight:900;
+
+font-size:20px;
+
+border-radius:14px;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.call-button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 10px 30px rgba(255,255,255,.25);
+
+}
+
+.weight-table-section{
+    margin-top:80px;
+}
+
+.weight-table-section h2{
+    font-size:2rem;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.table-intro{
+    line-height:2;
+    opacity:.8;
+    margin-bottom:30px;
+}
+
+.table-wrapper{
+
+    overflow:auto;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:var(--glass-bg);
+
+    backdrop-filter:blur(20px);
+    width: 80%;
+    margin: auto;
+
+}
+
+.steel-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
+
+}
+
+.steel-table thead{
+
+    background:linear-gradient(
+        90deg,
+        #84012B,
+        #a30039
+    );
+
+    color:white;
+
+}
+
+.steel-table th{
+
+    padding:18px;
+
+    font-size:1rem;
+
+    text-align:center;
+
+}
+
+.steel-table td{
+
+    padding:16px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+    transition:.25s;
+
+}
+
+.steel-table tbody tr:nth-child(even){
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.steel-table tbody tr:hover{
+
+    background:rgba(132,1,43,.12);
+
+}
+
+.steel-table td:first-child{
+
+    font-weight:800;
+
+    color:#fff;
+
+}
+
+.steel-table td:nth-child(2){
+
+    color:#9dd7ff;
+
+    font-weight:700;
+
+}
+
+.steel-table td:last-child{
+
+    color:#47d18c;
+
+    font-weight:900;
+
+}
 </style>
