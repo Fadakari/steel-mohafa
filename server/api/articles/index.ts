@@ -1,7 +1,6 @@
 // server/api/articles/index.ts
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../../utils/prisma'
 
-const prisma = new PrismaClient()
 
 export default defineCachedEventHandler(async () => {
   return await prisma.article.findMany({
@@ -20,5 +19,4 @@ export default defineCachedEventHandler(async () => {
   maxAge: 60, 
   swr: true,
   name: 'articles-cache',
-  base:'redis'
 })

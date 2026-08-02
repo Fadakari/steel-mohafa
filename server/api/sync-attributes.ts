@@ -1,8 +1,8 @@
 // مسیر: server/api/sync-attributes.ts
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../utils/prisma'
+
 import { extractAttributesFromName } from '../utils/attributeExtractor'
 
-const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   // گرفتن تمام محصولاتی که هنوز attributes ندارند یا می‌خواهیم بازنویسی کنیم

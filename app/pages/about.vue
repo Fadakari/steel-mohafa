@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen bg-[#050505] text-white pt-28 pb-20 relative overflow-hidden">
+  <main class="min-h-screen bg-[#050505] text-white pt-28 pb-20 relative overflow-hidden selection:bg-[#84012b7a]">
     <!-- افکت نوری پس‌زمینه -->
     <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[#84012B] rounded-full filter blur-[150px] opacity-10 pointer-events-none"></div>
 

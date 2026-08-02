@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import { prisma } from '../utils/prisma'
+
 
 export default defineCachedEventHandler(async () => {
   const [settings, sections, latestArticles] = await Promise.all([
@@ -13,4 +13,4 @@ export default defineCachedEventHandler(async () => {
     sections,
     latestArticles
   }
-}, { maxAge: 3600, swr: true, name: 'homepage-cache',base:'redis' })
+}, { maxAge: 3600, swr: true, name: 'homepage-cache' })

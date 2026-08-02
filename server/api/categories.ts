@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '../utils/prisma'
 
 export default defineCachedEventHandler(async () => {
   try {
@@ -24,7 +22,4 @@ export default defineCachedEventHandler(async () => {
   maxAge: 60, 
   swr: true,
   name: 'header-categories-cache',
-
-  base:'redis'
-
 })

@@ -16,7 +16,11 @@ export default defineNuxtConfig({
 
 
   devtools: {
-    enabled: true
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
   },
 
   css: ['~/assets/css/main.css'],
@@ -40,10 +44,8 @@ export default defineNuxtConfig({
   nitro: {
     storage: {
       cache: {
-        driver: 'redis',
-        base: 'cache',
-        host: '127.0.0.1',
-        port: 6379
+        driver: 'fs',
+        base: './cache'
       }
     }
   }

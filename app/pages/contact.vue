@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen bg-[#050505] text-white pt-28 pb-20 relative overflow-hidden">
+  <main class="min-h-screen bg-[#050505] text-white pt-28 pb-20 relative overflow-hidden selection:bg-[#84012b7a]">
     
     <!-- خط نوری تزئینی -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-[#84012B] to-transparent opacity-50"></div>

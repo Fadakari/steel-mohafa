@@ -100,7 +100,7 @@ const closeMobileMenu = () => {
           <NuxtLink itemprop="url" to="/contact" class="text-sm font-bold text-zinc-300 hover:text-white transition-colors">تماس با ما</NuxtLink>
         </li>
         <li itemprop="name">
-          <NuxtLink itemprop="url" to="/calculator" class="text-sm font-bold text-zinc-300 hover:text-white transition-colors bg-[#84012B]"></NuxtLink>
+          <NuxtLink itemprop="url" to="/calculator" class="text-sm font-bold text-zinc-300 hover:text-white transition-colors py-2 px-3 bg-[#84012B] hover:bg-[#740025] rounded-sm">محاسبه گر</NuxtLink>
         </li>
       </ul>
 
