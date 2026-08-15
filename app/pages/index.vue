@@ -53,14 +53,14 @@
             :class="['flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto transition-all duration-1000 ease-out delay-300', 
                      isHeroBtnsVisible ? 'opacity-100 translate-y-0' : (isFirstLoad ? 'opacity-0 translate-y-12' : 'opacity-0 -translate-y-12')]"
           >
-            <NuxtLink to="/products" class="w-full sm:w-auto px-8 py-3.5 bg-[#84012B] hover:bg-[#a30034] text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#84012B]/20">
+            <NuxtLink to="/category/ورق-استیل" class="w-full sm:w-auto px-8 py-3.5 bg-[#84012B] hover:bg-[#a30034] text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#84012B]/20">
               مشاهده محصولات
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             </NuxtLink>
             
-            <button class="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-white/20 hover:bg-white/5 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+            <NuxtLink to="/calculator" class="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-white/20 hover:bg-white/5 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
               محاسبه‌گر وزن
-            </button>
+            </NuxtLink>
           </div>
           
         </div>
@@ -286,46 +286,46 @@
         
         <div ref="card1Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 relative flex flex-col', isCard1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/ورق-استیل">انواع ورق استیل</NuxtLink></h3>
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/category/ورق-استیل">انواع ورق استیل</NuxtLink></h3>
             <span class="font-mono text-zinc-600 text-sm">CAT.01</span>
           </div>
           <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">تامین شیت فابریک و رول استیل در ضخامت‌های ۰.۳ تا ۵۰ میل. تضمین سطح بدون تاب و خط و خش.</p>
           
           <ul class="flex flex-wrap gap-2 mt-auto">
-            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۰۴ (نگیر)</NuxtLink></li>
-            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-316" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۱۶ (ضد اسید)</NuxtLink></li>
-            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-براق" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق استیل براق</NuxtLink></li>
-            <li><NuxtLink to="/products/ورق-استیل/ورق-استیل-430" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۴۳۰ (بگیر)</NuxtLink></li>
+            <li><NuxtLink to="/category/ورق-استیل/ورق-استیل-304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۰۴ (نگیر)</NuxtLink></li>
+            <li><NuxtLink to="/category/ورق-استیل/ورق-استیل-316" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۳۱۶ (ضد اسید)</NuxtLink></li>
+            <li><NuxtLink to="/category/ورق-استیل/ورق-استیل-براق" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق استیل براق</NuxtLink></li>
+            <li><NuxtLink to="/category/ورق-استیل/ورق-استیل-430" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">ورق ۴۳۰ (بگیر)</NuxtLink></li>
           </ul>
         </div>
 
         <div ref="card2Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 delay-100 relative flex flex-col', isCard2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنعتی">لوله استیل صنعتی</NuxtLink></h3>
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/category/لوله-استیل">لوله استیل</NuxtLink></h3>
             <span class="font-mono text-zinc-600 text-sm">CAT.02</span>
           </div>
           <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">انتقال ایمن سیالات. واردات مستقیم لوله‌های بدون درز و درزدار با سرتیفیکیت‌های تست فشار و کشش.</p>
           
           <ul class="flex flex-wrap gap-2 mt-auto">
-            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-مانیسمان" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">مانیسمان (بدون درز)</NuxtLink></li>
-            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنعتی" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله استیل صنعتی</NuxtLink></li>
-            <li><NuxtLink to="/products/لوله-استیل/لوله-استیل-صنایع-غذایی" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله صنایع غذایی (دارویی)</NuxtLink></li>
-            <li><NuxtLink to="/products/لوله-استیل/لوله-دکوراتیو-استیل" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله دکوراتیو استیل</NuxtLink></li>
+            <li><NuxtLink to="/category/لوله-استیل/لوله-استیل-201" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله استیل 201</NuxtLink></li>
+            <li><NuxtLink to="/category/لوله-استیل/لوله-استیل-304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله استیل 304</NuxtLink></li>
+            <li><NuxtLink to="/category/لوله-استیل/لوله-صنایع-غذایی" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله صنایع غذایی (Food Grade)</NuxtLink></li>
+            <li><NuxtLink to="/category/لوله-استیل/لوله-استیل-316" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">لوله استیل 316</NuxtLink></li>
           </ul>
         </div>
 
         <div ref="card3Ref" :class="['group bg-[#050505] border border-white/10 hover:border-[#84012B] p-8 transition-all duration-500 delay-200 relative flex flex-col', isCard3Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24']">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/products/پروفیل-استیل/پروفیل-دکوراتیو-استیل">پروفیل و دکوراتیو</NuxtLink></h3>
+            <h3 class="text-2xl font-black text-white group-hover:text-[#ff477e] transition-colors"><NuxtLink to="/category/پروفیل-استیل">پروفیل استیل (Profiles)</NuxtLink></h3>
             <span class="font-mono text-zinc-600 text-sm">CAT.03</span>
           </div>
           <p class="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">قوطی و پروفیل‌های استیل با دقت ابعادی بالا. جوش‌پذیری عالی جهت استفاده در سازه‌ها و معماری مدرن.</p>
           
           <ul class="flex flex-wrap gap-2 mt-auto">
-            <li><NuxtLink to="/products/پروفیل-استیل?alloy=201" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل ۲۰۱</NuxtLink></li>
-            <li><NuxtLink to="/products/پروفیل-استیل?alloy=304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل ۳۰۴</NuxtLink></li>
-            <li><NuxtLink to="/products/پروفیل-استیل?surface=رزگلد+میرور+(براق)" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">رزگلد میرور(براق)</NuxtLink></li>
-            <li><NuxtLink to="/products/پروفیل-استیل/پروفیل-صنعتی-استیل" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل صنعتی استیل</NuxtLink></li>
+            <li><NuxtLink to="/category/پروفیل-استیل/پروفیل-استیل-201" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل استیل 201</NuxtLink></li>
+            <li><NuxtLink to="/category/پروفیل-استیل/پروفیل-استیل-304" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل استیل 304</NuxtLink></li>
+            <li><NuxtLink to="/category/پروفیل-استیل/پروفیل-استیل-دکوراتیو" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل استیل دکوراتیو</NuxtLink></li>
+            <li><NuxtLink to="/category/پروفیل-استیل/پروفیل-استیل-316" class="px-3 py-1 bg-white/5 hover:bg-[#84012B]/20 border border-white/5 hover:border-[#84012B]/50 text-zinc-300 text-xs font-bold transition-colors">پروفیل استیل 316</NuxtLink></li>
           </ul>
         </div>
 
@@ -501,6 +501,54 @@
     </section>
 
 
+    <section class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-24 border-t border-white/5">
+
+      <div class="mb-12 border-r-4 border-[#84012B] pr-6">
+        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">
+          داستان شکل‌گیری <span class="text-[#84012B]">استیل مهفا</span>
+        </h2>
+        <p class="text-zinc-400 font-mono text-sm tracking-widest uppercase">Since 1387 — Steel Mohafa</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+        <div class="lg:col-span-2 space-y-6 text-zinc-400 text-sm md:text-base leading-loose text-justify">
+          <p>
+            ریشه‌های <strong class="text-white">استیل مهفا</strong> در قلب تپنده‌ی صنعت فولاد ایران، یعنی بازار آهن شادآباد شکل گرفت.
+            ما از سال ۱۳۸۷ با هدفِ ایجاد شفافیت در قیمت‌گذاری و حذف دلالانِ واسطه، فعالیت خود را آغاز کردیم. در بازاری که اصالتِ آلیاژ
+            همواره یک دغدغه است، ما با تکیه بر دانشِ مهندسیِ متالورژی، به واردکننده و توزیع‌کننده‌ی تخصصیِ
+            <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق، لوله و پروفیل استیل ۳۰۴ و ۳۱۶</NuxtLink> تبدیل شدیم.
+          </p>
+          <p>
+            امروز، استیل مهفا با در اختیار داشتنِ انبارهای مجهز و شبکه‌ی تامینِ مستقیم از برترین کارخانجاتِ جهانی نظیر
+            <strong class="text-white">YUSCO و TISCO</strong>، مرجعِ تامینِ متریالِ پروژه‌های پتروشیمی، صنایع دارویی، غذایی و
+            ماشین‌سازیِ کشور است. تعهد ما ارائه‌ی بارهایی با سرتیفیکیت معتبر (MTC) و آنالیزِ شیمیاییِ دقیق است تا امنیتِ سازه‌های شما تضمین شود.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-[#09090b] border border-white/5 rounded-2xl p-5 text-center hover:border-[#84012B]/50 transition-colors">
+            <span class="block text-3xl font-mono font-black text-white">1398</span>
+            <span class="block text-xs text-zinc-500 mt-1">سال تاسیس</span>
+          </div>
+          <div class="bg-[#09090b] border border-white/5 rounded-2xl p-5 text-center hover:border-[#84012B]/50 transition-colors">
+            <span class="block text-3xl font-mono font-black text-white">MTC</span>
+            <span class="block text-xs text-zinc-500 mt-1">سرتیفیکیت معتبر</span>
+          </div>
+          <div class="bg-[#09090b] border border-white/5 rounded-2xl p-5 text-center hover:border-[#84012B]/50 transition-colors">
+            <span class="block text-lg font-mono font-black text-white">YUSCO/TISCO</span>
+            <span class="block text-xs text-zinc-500 mt-1">تامین مستقیم کارخانه</span>
+          </div>
+          <div class="bg-[#09090b] border border-white/5 rounded-2xl p-5 text-center hover:border-[#84012B]/50 transition-colors">
+            <span class="block text-3xl font-mono font-black text-white">304/316</span>
+            <span class="block text-xs text-zinc-500 mt-1">گریدهای تخصصی</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
     <section ref="faqSectionRef" class="relative z-20 max-w-4xl mx-auto px-6 py-24">
       <div :class="['mb-16 text-center transition-all duration-700 ease-out', isFaqSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12']">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">پاسخ به ابهامات شما</h2>
@@ -627,9 +675,9 @@ const isSeoTextExpanded = ref(false)
 
 
 const teamMembers = ref([
-  { id: 1, name: 'مهندس آرش کریمی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
-  { id: 2, name: 'مهندس مریم حسینی', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
-  { id: 3, name: 'مهندس رضا طاهری', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
+  { id: 1, name: 'مهندس مهدی صفرقلی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
+  { id: 2, name: 'مهندس اصغر فرخ‌نیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
+  { id: 3, name: 'مهندس کیمیا نجفی', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
   { id: 4, name: 'مهندس الناز راد', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop' },
   { id: 5, name: 'مهندس امید کاظمی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
 ]);
@@ -679,60 +727,183 @@ const faqSchema = computed(() => {
       "name": faq.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": faq.text || faq.answer
+        "text": faq.answer
       }
     }))
   }
 })
 
+// اسکیمای سازمان (Organization) — پیوند رسمی نام فارسی/انگلیسی برند و لوگو به
+// نمودار دانش گوگل (Knowledge Graph)؛ مهم‌ترین سیگنال برای شناسایی «استیل مهفا / Steel Mohafa»
+// به‌عنوان یک برند مستقل، جدا از این‌که کاربر چه کلمه‌ای سرچ کرده.
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "استیل مهفا",
+  "alternateName": "Steel Mohafa",
+  "url": "https://mohafa.com",
+  "foundingDate": "2019",
+  "logo": "https://mohafa.com/logo.png",
+  "sameAs": [
+    // TODO: هر پروفایل رسمی و فعال دیگری (لینکدین، آپارات، واتس‌اپ بیزینس و ...) را اضافه کنید
+    "https://instagram.com/steelmahfa",
+    "https://ble.ir/steelsara"
+  ]
+}
+
+// اسکیمای وب‌سایت (WebSite) — هویت خودِ سایت را (مستقل از کسب‌وکار) به گوگل معرفی می‌کند
+// و پیش‌نیاز نمایش Sitelinks در نتایج جست‌وجوی برند است.
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "استیل مهفا",
+  "alternateName": "Steel Mohafa",
+  "url": "https://mohafa.com"
+  // اگر جست‌وجوی داخلی سایت دارید (مثلا /products?search=...) آدرس دقیقش را بگو
+  // تا potentialAction (SearchAction) هم اضافه بشه؛ این باعث Sitelinks Search Box در گوگل می‌شود.
+}
+
+// اسکیمای شرکت و کسب‌وکار محلی (LocalBusiness) — منبع اصلی NAP (نام/آدرس/تلفن) برای
+// نقشه گوگل و پنل اطلاعات محلی + کاتالوگ محصولات برای تقویت ربط موضوعی (topical relevance)
+const localBusinessSchema = computed(() => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "استیل مهفا",
+    "alternateName": "Steel Mohafa",
+    "description": "تامین‌کننده و فروشنده مستقیم ورق، لوله و پروفیل استنلس استیل (۳۰۴، ۳۱۶ و دکوراتیو) در ایران با ارسال به سراسر کشور.",
+    "image": "https://mohafa.com/logo.png",
+    "@id": "https://mohafa.com",
+    "url": "https://mohafa.com",
+    "telephone": "+982166393755",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Iran"
+    },
+    "knowsAbout": [
+      "ورق استیل",
+      "لوله استیل",
+      "پروفیل استیل",
+      "استنلس استیل 304",
+      "استنلس استیل 316",
+      "قیمت آهن‌آلات"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+982166393755",
+        "contactType": "sales",
+        "areaServed": "IR",
+        "availableLanguage": ["fa"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+982166391417",
+        "contactType": "sales",
+        "areaServed": "IR",
+        "availableLanguage": ["fa"]
+      }
+    ],
+    "employee": teamMembers.value.map(member => ({
+      "@type": "Person",
+      "name": member.name,
+      "jobTitle": member.role
+    })),
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tehran Province, Tehran، بزرگراه فتح٫، M8G2+27M مجتمع استیل، فتح یازده, Iran", // TODO: آدرس دقیق و نهایی را تایید/تکمیل کنید
+      "addressLocality": "تهران",
+      "addressRegion": "استان تهران",
+      "addressCountry": "IR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 35.67383406781865, // TODO: مختصات دقیق گوگل‌مپ را تایید کنید
+      "longitude": 51.300444117791024
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "دسته‌بندی محصولات استیل مهفا",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "ورق استیل",
+            "url": "https://mohafa.com/products/ورق-استیل"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "لوله استیل صنعتی",
+            "url": "https://mohafa.com/products/لوله-استیل/لوله-استیل-صنعتی"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "پروفیل و دکوراتیو استیل",
+            "url": "https://mohafa.com/products/پروفیل-استیل/پروفیل-دکوراتیو-استیل"
+          }
+        }
+      ]
+    },
+    "sameAs": [
+      // TODO: هر پروفایل رسمی و فعال دیگری (لینکدین، آپارات، واتس‌اپ بیزینس و ...) را اضافه کنید
+      "https://instagram.com/steelmahfa",
+      "https://ble.ir/steelsara"
+    ]
+  }
+})
+
 useSeoMeta({
-  title: 'استیل مهفا | بورس انواع ورق، لوله و پروفیل استیل در ایران',
-  description: 'خرید مستقیم و بدون واسطه مقاطع استیل (۳۰۴، ۳۱۶، دکوراتیو و صنعتی). استعلام قیمت لحظه‌ای آهن‌آلات، ارسال به سراسر کشور با تضمین کیفیت و سرتیفیکیت معتبر.',
-  ogTitle: 'استیل مهفا - مرجع تخصصی تامین استیل',
-  ogDescription: 'تامین یکپارچه سبد محصولات استیل پروژه‌های صنعتی و ساختمانی با قیمت رقابتی.',
+  title: 'استیل مهفا (Steel Mohafa) | خرید و قیمت روز ورق، لوله و پروفیل استیل',
+  description: 'استیل مهفا؛ تامین‌کننده مستقیم و بدون واسطه ورق، لوله و پروفیل استنلس استیل (۳۰۴، ۳۱۶، دکوراتیو و صنعتی) در ایران. قیمت روز، فروش عمده، ارسال سراسری و سرتیفیکیت معتبر کارخانه.',
+  keywords: 'استیل مهفا,Steel Mohafa,قیمت ورق استیل,خرید ورق استیل,لوله استیل,پروفیل استیل,ورق استیل 304,ورق استیل 316,قیمت روز آهن آلات,فروش عمده استیل,استنلس استیل,بورس استیل,خرید استیل بدون واسطه',
+  robots: 'index,follow',
+  author: 'استیل مهفا',
+  ogType: 'website',
+  ogLocale: 'fa_IR',
+  ogSiteName: 'استیل مهفا',
+  ogTitle: 'استیل مهفا (Steel Mohafa) - مرجع تخصصی تامین استیل در ایران',
+  ogDescription: 'تامین یکپارچه سبد محصولات استیل پروژه‌های صنعتی و ساختمانی با قیمت رقابتی و بدون واسطه.',
+  ogUrl: 'https://mohafa.com',
   ogImage: 'https://mohafa.com/logo.png',
   twitterCard: 'summary_large_image',
+  twitterTitle: 'استیل مهفا (Steel Mohafa) - خرید ورق، لوله و پروفیل استیل',
+  twitterDescription: 'قیمت روز و خرید مستقیم انواع مقاطع استنلس استیل با سرتیفیکیت معتبر.',
+  twitterImage: 'https://mohafa.com/logo.png',
 })
 
 useHead({
+  htmlAttrs: {
+    lang: 'fa',
+    dir: 'rtl'
+  },
+  link: [
+    { rel: 'canonical', href: 'https://mohafa.com' }
+  ],
   script: [
     {
-      // 1. اسکیما شرکت و کسب‌وکار محلی (LocalBusiness) - برای لینک شدن به مپ و شماره تماس
+      // 1. اسکیما سازمان (Organization) - پیوند نام فارسی/انگلیسی برند و لوگو به گوگل
       type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "استیل مهفا",
-        "image": "https://mohafa.com/logo.png",
-        "@id": "https://mohafa.com",
-        "url": "https://mohafa.com",
-        "telephone": "+982166393755",
-        "employee": teamMembers.value.map(member => ({
-          "@type": "Person",
-          "name": member.name,
-          "jobTitle": member.role
-        })),
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Tehran Province, Tehran، بزرگراه فتح٫، M8G2+27M مجتمع استیل، فتح یازده, Iran", // آدرس دقیق را بعدا تکمیل کنید
-          "addressLocality": "تهران",
-          "addressRegion": "استان تهران",
-          "addressCountry": "IR"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 35.67383406781865, // مختصات دقیق مپ را جایگزین کنید
-          "longitude": 51.300444117791024
-        },
-        "sameAs": [
-          // آدرس شبکه‌های اجتماعی خود را اینجا بگذارید
-          "https://instagram.com/steelmahfa",
-          "https://ble.ir/steelsara"
-        ]
-      })
+      innerHTML: JSON.stringify(organizationSchema)
     },
     {
-      // 2. اسکیما سوالات متداول (FAQ) - باعث می‌شود سوالات زیر لینک شما در گوگل نمایش داده شوند
+      // 2. اسکیما وب‌سایت (WebSite)
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(websiteSchema)
+    },
+    {
+      // 3. اسکیما شرکت و کسب‌وکار محلی (LocalBusiness) - برای لینک شدن به مپ، شماره تماس و کاتالوگ محصولات
+      type: 'application/ld+json',
+      innerHTML: computed(() => JSON.stringify(localBusinessSchema.value))
+    },
+    {
+      // 4. اسکیما سوالات متداول (FAQ) - باعث می‌شود سوالات زیر لینک شما در گوگل نمایش داده شوند
       type: 'application/ld+json',
       innerHTML: computed(() => JSON.stringify(faqSchema.value))
     }

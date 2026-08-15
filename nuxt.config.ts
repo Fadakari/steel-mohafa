@@ -13,8 +13,11 @@ export default defineNuxtConfig({
       ]
     }
   },
-
-
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_BASE_URL || 'http://localhost:8055'
+    }
+  },
   devtools: {
     enabled: true,
 
@@ -28,6 +31,11 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
     '/blog/**': { swr: 3600 },
+    // کشینگ کاملاً ایمن و بدون تداخل بر اساس URL دقیق
+    '/api/categories': { swr: 300 },
+    '/api/category/**': { swr: 300 },
+    '/api/products/**': { swr: 300 },
+    '/api/best-sellers': { swr: 300 }
   },
 
   compatibilityDate: '2025-01-15',

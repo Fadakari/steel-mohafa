@@ -45,10 +45,10 @@ const closeMobileMenu = () => {
           @mouseenter="isDesktopProductsHovered = true"
           @mouseleave="isDesktopProductsHovered = false"
         >
-          <NuxtLink itemprop="url" to="/products" class="text-sm font-bold text-zinc-300 hover:text-white transition-colors flex items-center gap-1">
+          <button type="button" class="cursor-pointer text-sm font-bold text-zinc-300 hover:text-white transition-colors flex items-center gap-1">
             <span itemprop="name">محصولات</span>
             <svg class="w-4 h-4 transition-transform duration-300" :class="isDesktopProductsHovered ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </NuxtLink>
+          </button>
 
           <!-- مگامنوی بهینه‌شده: عرض ۸۰۰ پیکسل، سه ستونه، همراه با محدودیت ارتفاع -->
           <Transition name="dropdown">
@@ -56,7 +56,7 @@ const closeMobileMenu = () => {
               
               <div class="mb-5 border-b border-white/5 pb-4 flex justify-between items-center shrink-0">
                 <span class="text-zinc-400 text-xs font-mono">دسته‌بندی جامع محصولات</span>
-                <NuxtLink itemprop="url" to="/products" class="inline-flex items-center gap-1 text-sm font-black text-white hover:text-[#84012B] transition-colors">
+                <NuxtLink itemprop="url" to="/category" class="inline-flex items-center gap-1 text-sm font-black text-white hover:text-[#84012B] transition-colors">
                   <span>مشاهده همه محصولات</span>
                   <span>⟵</span>
                 </NuxtLink>
@@ -67,17 +67,17 @@ const closeMobileMenu = () => {
                 <li v-for="cat in categories" :key="cat.id" itemprop="name" class="flex flex-col">
                   <NuxtLink 
                     itemprop="url" 
-                    :to="`/products/${cat.slug}`" 
+                    :to="`/category/${cat.slug}`" 
                     class="text-sm font-bold text-zinc-100 hover:text-[#84012B] transition-colors mb-1.5 inline-block"
                   >
                     {{ cat.name }}
                   </NuxtLink>
                   
-                  <ul v-if="cat.children && cat.children.length > 0" class="flex flex-col gap-1">
-                    <li v-for="child in cat.children" :key="child.id" itemprop="name">
+                  <ul v-if="cat.children && (cat.children as any[]).length > 0" class="flex flex-col gap-1">
+                    <li v-for="child in (cat.children as any[])" :key="child.id" itemprop="name">
                       <NuxtLink 
                         itemprop="url" 
-                        :to="`/products/${cat.slug}/${child.slug}`" 
+                        :to="`/category/${cat.slug}/${child.slug}`" 
                         class="text-xs font-medium text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5 before:content-[''] before:w-1 before:h-1 before:bg-zinc-700 before:rounded-full hover:before:bg-[#84012B]"
                       >
                         {{ child.name }}
@@ -141,7 +141,7 @@ const closeMobileMenu = () => {
             <Transition name="accordion">
               <ul v-show="isMobileProductsOpen" class="bg-[#0a0a0c] rounded-lg mt-2 border border-white/10 overflow-hidden">
                 <li>
-                  <NuxtLink to="/products" class="block py-4 px-4 text-sm font-black text-white bg-[#84012B] shadow-[0_4px_14px_0_rgba(132,1,43,0.39)]" @click="closeMobileMenu">
+                  <NuxtLink to="/category" class="block py-4 px-4 text-sm font-black text-white bg-[#84012B] shadow-[0_4px_14px_0_rgba(132,1,43,0.39)]" @click="closeMobileMenu">
                     مشاهده همه محصولات ⟵
                   </NuxtLink>
                 </li>
@@ -151,18 +151,18 @@ const closeMobileMenu = () => {
                     <span class="text-sm font-bold text-zinc-300 group-hover:text-white transition-colors">
                       {{ cat.name }}
                     </span>
-                    <svg v-if="cat.children && cat.children.length > 0" class="w-4 h-4 text-zinc-500 transition-transform duration-300" :class="openMobileSubcategories[cat.id] ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    <svg v-if="cat.children && (cat.children as any[]).length > 0" class="w-4 h-4 text-zinc-500 transition-transform duration-300" :class="openMobileSubcategories[cat.id] ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   
                   <Transition name="accordion">
                     <ul v-show="openMobileSubcategories[cat.id]" class="bg-[#050505]/50 pb-2 flex flex-col">
                       <li>
-                        <NuxtLink :to="`/products/${cat.slug}`" class="block py-2.5 pr-6 pl-4 text-xs font-bold text-[#84012B] hover:text-white transition-colors" @click="closeMobileMenu">
+                        <NuxtLink :to="`/category/${cat.slug}`" class="block py-2.5 pr-6 pl-4 text-xs font-bold text-[#84012B] hover:text-white transition-colors" @click="closeMobileMenu">
                           مشاهده همه {{ cat.name }} ⟵
                         </NuxtLink>
                       </li>
-                      <li v-for="child in cat.children" :key="child.id">
-                        <NuxtLink :to="`/products/${cat.slug}/${child.slug}`" class="block py-2 pr-8 pl-4 text-xs font-medium text-zinc-400 hover:text-white transition-colors before:content-['•'] before:text-zinc-600 before:ml-2" @click="closeMobileMenu">
+                      <li v-for="child in (cat.children as any[])" :key="child.id">
+                        <NuxtLink :to="`/category/${cat.slug}/${child.slug}`" class="block py-2 pr-8 pl-4 text-xs font-medium text-zinc-400 hover:text-white transition-colors before:content-['•'] before:text-zinc-600 before:ml-2" @click="closeMobileMenu">
                           {{ child.name }}
                         </NuxtLink>
                       </li>

@@ -1,25 +1,33 @@
 import { prisma } from '../utils/prisma'
 
-export default defineCachedEventHandler(async () => {
+export default defineEventHandler(async () => {
   try {
-    const allCategories = await prisma.category.findMany({
+    const allCategories = await prisma.categories.findMany({
       where: {
-        // این خطوط "بدون دسته بندی" یا "Uncategorized" را فیلتر می‌کنند
-        name: { notIn: ['بدون دسته بندی', 'بدون دسته‌بندی', 'Uncategorized'] }
+        // فیلتر کردن دسته بندی‌های نامعتبر
+        title: { notIn: ['بدون دسته بندی', 'بدون دسته‌بندی', 'Uncategorized'] }
       },
-      include: { children: true },
+      include: { other_categories: true },
       orderBy: { id: 'asc' }
     })
 
-    const parentCategories = allCategories.filter(cat => !cat.parentId)
+    const parentCategories = allCategories.filter(cat => !cat.parent_id)
 
-    return parentCategories.length > 0 ? parentCategories : allCategories
+    // Map the fields to match the old format expected by SiteHeader.vue
+    const mappedCategories = parentCategories.map(cat => ({
+      id: cat.id,
+      name: cat.title,
+      slug: cat.slug,
+      children: cat.other_categories ? cat.other_categories.map((child: any) => ({
+        id: child.id,
+        name: child.title,
+        slug: child.slug
+      })) : []
+    }))
+
+    return mappedCategories.length > 0 ? mappedCategories : []
   } catch (error) {
     console.error('خطا در دریافت دسته‌بندی‌های هدر:', error)
     return []
   }
-}, {
-  maxAge: 60, 
-  swr: true,
-  name: 'header-categories-cache',
 })

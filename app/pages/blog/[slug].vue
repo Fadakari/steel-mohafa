@@ -57,7 +57,7 @@
       </header>
 
       <div v-if="article.imageUrl" class="relative w-full aspect-[16/9] md:aspect-[2/1] mb-12 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-        <img :src="`http://localhost:8055/assets/${article.imageUrl}`" :alt="article.title" class="w-full h-full object-cover" />
+        <img :src="`${useRuntimeConfig().public.apiBase}/assets/${article.imageUrl}`" :alt="article.title" class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80"></div>
       </div>
 
@@ -125,7 +125,7 @@
             <div class="w-full h-40 overflow-hidden relative bg-[#111113]">
               <img 
                 v-if="relArticle.imageUrl" 
-                :src="`http://localhost:8055/assets/${relArticle.imageUrl}`" 
+                :src="`${useRuntimeConfig().public.apiBase}/assets/${relArticle.imageUrl}`" 
                 :alt="relArticle.title" 
                 class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
               />
@@ -211,7 +211,7 @@ const canonicalUrl = `https://mohafa.com/blog/${rawSlug}`
 useHead(() => {
   if (!article.value) return {}
 
-  const articleImageUrl = article.value.imageUrl ? `http://localhost:8055/assets/${article.value.imageUrl}` : 'https://mohafa.com/default-blog-image.jpg'
+  const articleImageUrl = article.value.imageUrl ? `${useRuntimeConfig().public.apiBase}/assets/${article.value.imageUrl}` : 'https://mohafa.com/default-blog-image.jpg'
 
   const schemas = []
 

@@ -3,7 +3,8 @@ export default defineCachedEventHandler(async () => {
   try {
     // گرفتن اطلاعات مستقیما از API دایرکتوس
     // چون Single Collection است، آدرس آن /items/globals است
-    const response = await $fetch<{ data: any }>('http://127.0.0.1:8055/items/globals')
+    const apiBase = process.env.API_BASE_URL || 'http://127.0.0.1:8055'
+    const response = await $fetch<{ data: any }>(`${apiBase}/items/globals`)
     
     return response.data
   } catch (error) {

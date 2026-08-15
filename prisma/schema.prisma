@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
@@ -32,13 +32,13 @@ model article {
 }
 
 model category {
-  id             Int        @id @default(autoincrement())
-  name           String
-  slug           String     @unique(map: "Category_slug_key")
-  parentId       Int?
-  parent    category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
-  children  category[] @relation("CategoryHierarchy")
-  product        product[]
+  id       Int        @id @default(autoincrement())
+  name     String
+  slug     String     @unique(map: "Category_slug_key")
+  parentId Int?
+  parent   category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], map: "Category_parentId_fkey")
+  children category[] @relation("CategoryHierarchy")
+  product  product[]
 
   @@index([parentId], map: "Category_parentId_fkey")
 }
@@ -849,4 +849,47 @@ model sitesetting {
   id    Int    @id @default(autoincrement())
   key   String @unique(map: "SiteSetting_key_key")
   value String @db.Text
+}
+
+model categories {
+  id               Int          @id @default(autoincrement()) @db.UnsignedInt
+  title            String?      @db.VarChar(255)
+  slug             String?      @db.VarChar(255)
+  parent_id        Int?         @db.UnsignedInt
+  SEO_meta         Json?
+  categories       categories?  @relation("categoriesTocategories", fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "categories_parent_id_foreign")
+  other_categories categories[] @relation("categoriesTocategories")
+  products         products[]
+
+  @@index([parent_id], map: "categories_parent_id_foreign")
+}
+
+model price_history {
+  id                Int       @id @default(autoincrement()) @db.UnsignedInt
+  product_id        Int?      @db.UnsignedInt
+  price             Int?
+  unit              String?   @db.VarChar(255)
+  is_call_for_price Boolean?
+  date_created      DateTime? @db.Timestamp(0)
+  products          products? @relation(fields: [product_id], references: [id], onUpdate: NoAction, map: "price_history_product_id_foreign")
+
+  @@index([product_id], map: "price_history_product_id_foreign")
+}
+
+model products {
+  id                Int             @id @default(autoincrement()) @db.UnsignedInt
+  category_id       Int?            @db.UnsignedInt
+  brand_origin      String?         @db.VarChar(255)
+  is_active         Boolean?        @default(true)
+  sort              Int?
+  thickness         Float?          @db.Float
+  dimensions        String?         @db.VarChar(255)
+  outer_diameter    String?         @db.VarChar(255)
+  finish_surface    String?         @db.VarChar(255)
+  condition         String?         @db.VarChar(255)
+  schedule_standard String?         @db.VarChar(255)
+  price_history     price_history[]
+  categories        categories?     @relation(fields: [category_id], references: [id], onUpdate: NoAction, map: "products_category_id_foreign")
+
+  @@index([category_id], map: "products_category_id_foreign")
 }

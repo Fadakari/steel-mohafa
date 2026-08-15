@@ -33,7 +33,7 @@
           <div class="relative w-full h-56 overflow-hidden bg-[#111113]">
             <img 
               v-if="article.imageUrl" 
-              :src="`http://localhost:8055/assets/${article.imageUrl}`" 
+              :src="`${useRuntimeConfig().public.apiBase}/assets/${article.imageUrl}`" 
               :alt="article.title" 
               class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
             />
