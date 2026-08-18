@@ -597,8 +597,8 @@ const sparklinePoints = computed(() => {
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
           
-          <h3 class="text-white font-bold text-lg mb-2">روند تغییرات قیمت</h3>
-          <p v-if="selectedProduct" class="text-zinc-400 text-sm mb-6 pb-4 border-b border-zinc-800/50">
+          <h3 class="text-white font-bold text-lg mb-2 text-right">روند تغییرات قیمت</h3>
+          <p v-if="selectedProduct" class="text-zinc-400 text-sm mb-6 pb-4 border-b border-zinc-800/50 text-right">
             <span v-if="selectedProduct.thickness">ضخامت {{ selectedProduct.thickness }} | </span>
             <span v-if="selectedProduct.dimensions">{{ selectedProduct.dimensions }}</span>
           </p>
@@ -626,7 +626,7 @@ const sparklinePoints = computed(() => {
                 stroke-width="2"
               />
             </svg>
-            <div class="flex justify-between mt-2 text-[10px] text-zinc-500 px-2">
+            <div class="flex justify-between mt-0 text-[10px] text-zinc-500 px-2">
               <span>قدیمی‌تر</span>
               <span>جدیدترین</span>
             </div>
