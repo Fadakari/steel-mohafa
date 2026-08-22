@@ -34,8 +34,14 @@ const router = useRouter()
 onMounted(() => {
   // Triggered immediately when navigation is requested
   const unregisterRouter = router.beforeEach((to, from, next) => {
-    if (to.path !== from.path) {
-      isLoading.value = true
+    try {
+      if (decodeURIComponent(to.path) !== decodeURIComponent(from.path)) {
+        isLoading.value = true
+      }
+    } catch (e) {
+      if (to.path !== from.path) {
+        isLoading.value = true
+      }
     }
     next()
   })

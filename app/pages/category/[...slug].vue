@@ -224,13 +224,13 @@ useHead(() => {
 <template>
   <main class="pt-32 pb-32 md:pb-24 max-w-[100%] mx-auto px-4 md:px-6 min-h-[70vh] selection:bg-[#84012b7a]">
     <!-- حالت در حال بارگذاری -->
-    <div v-if="pending" class="flex flex-col items-center justify-center py-20 text-zinc-400">
+    <div v-if="pending && !categoryData" class="flex flex-col items-center justify-center py-20 text-zinc-400">
       <span class="w-10 h-10 border-4 border-[#84012B] border-t-transparent rounded-full animate-spin mb-4"></span>
       در حال دریافت اطلاعات آخرین قیمت‌ها...
     </div>
     
     <!-- حالت خطا -->
-    <div v-else-if="error" class="text-center py-20 bg-red-500/10 rounded-2xl border border-red-500/20">
+    <div v-else-if="error && !categoryData" class="text-center py-20 bg-red-500/10 rounded-2xl border border-red-500/20">
       <h2 class="text-xl font-bold text-red-400 mb-2">متاسفانه خطایی رخ داد!</h2>
       <p class="text-zinc-400">امکان دریافت اطلاعات این دسته‌بندی در حال حاضر وجود ندارد.</p>
     </div>
