@@ -914,7 +914,8 @@ const { data: products } = await useFetch('/api/products/best-sellers', {
   headers: {
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache'
-  }
+  },
+  getCachedData: () => undefined
 })
 // فقط متغیرها در فضای باز تعریف می‌شوند
 const advSectionRef = ref(null)

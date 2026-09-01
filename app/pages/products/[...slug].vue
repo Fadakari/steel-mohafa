@@ -18,14 +18,15 @@ const currentSlug = computed(() => {
 
 const uniqueFetchKey = computed(() => `products-${currentSlug.value}-${JSON.stringify(route.query)}`)
 
-const { data: pageData, pending } = await useFetch('/api/products', {
+const { data: pageData, pending, refresh } = await useFetch('/api/products', {
   key: uniqueFetchKey.value,
   query: computed(() => ({ categorySlug: currentSlug.value, ...route.query })),
   watch: [() => route.query],
   headers: {
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache'
-  }
+  },
+  getCachedData: () => undefined
 })
 
 const openAccordions = ref<Record<string, boolean>>({

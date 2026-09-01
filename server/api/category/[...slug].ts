@@ -3,13 +3,19 @@ import { prisma } from '../../utils/prisma'
 export default defineEventHandler(async (event) => {
   const rawSlug = getRouterParam(event, 'slug')
   
+  setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
+  setHeader(event, 'pragma', 'no-cache')
+  setHeader(event, 'expires', '0')
+  removeResponseHeader(event, 'ETag')
+  removeResponseHeader(event, 'Last-Modified')
+  
   if (!rawSlug) {
     throw createError({ statusCode: 400, statusMessage: 'Slug is required' })
   }
 
   const slugs = rawSlug.split('/')
-  const targetSlug = slugs[slugs.length - 1]
-  const parentSlug = slugs.length > 1 ? slugs[slugs.length - 2] : null
+  const targetSlug = slugs[slugs.length - 1].replace(/ي/g, 'ی').replace(/ك/g, 'ک')
+  const parentSlug = slugs.length > 1 ? slugs[slugs.length - 2].replace(/ي/g, 'ی').replace(/ك/g, 'ک') : null
 
   try {
     const categoryData = await prisma.categories.findFirst({
@@ -38,6 +44,7 @@ export default defineEventHandler(async (event) => {
                 sort: 'asc'
               },
               include: {
+                product_pricing_attributes: true,
                 price_history: {
                   take: 5,
                   orderBy: {
@@ -57,6 +64,7 @@ export default defineEventHandler(async (event) => {
             sort: 'asc'
           },
           include: {
+            product_pricing_attributes: true,
             // Fetch the last 5 price records for charting/display
             price_history: {
               take: 5,

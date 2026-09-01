@@ -1,6 +1,12 @@
 import { prisma } from '../../utils/prisma'
 
-export default defineCachedEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
+  setHeader(event, 'pragma', 'no-cache')
+  setHeader(event, 'expires', '0')
+  removeResponseHeader(event, 'ETag')
+  removeResponseHeader(event, 'Last-Modified')
+  
   try {
     const bestSellers = await prisma.products.findMany({
       where: {
@@ -52,9 +58,4 @@ export default defineCachedEventHandler(async () => {
     console.error('Error fetching best sellers:', error)
     return []
   }
-}, {
-  maxAge: 300, // 5 minutes
-  name: 'best-sellers-api',
-  getKey: () => 'all',
-  swr: true,
 })

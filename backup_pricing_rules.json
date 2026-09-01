@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "rule_type": "category",
+    "rule_value": "decorative",
+    "multiplier": "1.5320",
+    "category_id": 266,
+    "subcategory_id": null,
+    "alloy_id": null,
+    "priority": 1,
+    "updated_at": "2026-08-31T07:09:18.000Z"
+  }
+]

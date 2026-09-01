@@ -5,12 +5,20 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const { search, categorySlug, minPrice, maxPrice, ...dynamicFiltersQuery } = query
 
+  // Disable caching for this endpoint to ensure prices are always fresh
+  setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
+  setHeader(event, 'pragma', 'no-cache')
+  setHeader(event, 'expires', '0')
+  removeResponseHeader(event, 'ETag')
+  removeResponseHeader(event, 'Last-Modified')
+
   let targetCategory = null
   const categoryIds: number[] = []
 
   if (categorySlug) {
+    const normalizedSlug = String(categorySlug).replace(/ي/g, 'ی').replace(/ك/g, 'ک')
     targetCategory = await prisma.category.findUnique({
-      where: { slug: String(categorySlug) },
+      where: { slug: normalizedSlug },
       include: { children: true }
     })
 

@@ -205,15 +205,23 @@ const lastUpdated = computed(() => {
   })
 })
 
-const getLatestPriceRecord = (product) => {
-  if (!product.price_history || product.price_history.length === 0) return null
-  return product.price_history[0] 
+const getLivePrice = (product) => {
+  if (product.product_pricing_attributes && product.product_pricing_attributes.calculated_price_per_kg) {
+    return parseFloat(product.product_pricing_attributes.calculated_price_per_kg)
+  }
+  return null
+}
+
+const getLiveUnit = (product) => {
+  if (product.product_pricing_attributes && product.product_pricing_attributes.unit) {
+    return product.product_pricing_attributes.unit
+  }
+  return 'کیلوگرم'
 }
 
 const needsCallForPrice = (product) => {
-  const record = getLatestPriceRecord(product)
-  if (!record) return true
-  return record.is_call_for_price || !record.price || record.price === 0
+  const price = getLivePrice(product)
+  return !price || price === 0
 }
 
 const formatPrice = (price) => {
@@ -224,35 +232,52 @@ const formatPrice = (price) => {
 // --- منطق مدال نمودار قیمت ---
 const isChartModalOpen = ref(false)
 const selectedProduct = ref(null)
+const extendedHistory = ref([])
+const isHistoryLoading = ref(false)
+const activeTooltipIndex = ref(null)
+const chartContainer = ref(null)
 
-const openChart = (product) => {
+const handlePointerMove = (event) => {
+  if (!chartContainer.value || !extendedHistory.value || extendedHistory.value.length === 0) return
+  
+  // Calculate index based on pointer position relative to chart
+  const rect = chartContainer.value.getBoundingClientRect()
+  const clientX = event.touches ? event.touches[0].clientX : event.clientX
+  
+  let relativeX = (clientX - rect.left) / rect.width
+  const clampedX = Math.max(0, Math.min(1, relativeX))
+  
+  const len = extendedHistory.value.length - 1 || 1
+  activeTooltipIndex.value = Math.round(clampedX * len)
+}
+
+const handlePointerLeave = () => {
+  activeTooltipIndex.value = null
+}
+
+const openChart = async (product) => {
   selectedProduct.value = product
   isChartModalOpen.value = true
+  isHistoryLoading.value = true
+  extendedHistory.value = []
+  try {
+    extendedHistory.value = await $fetch(`/api/products/${product.id}/price-history`)
+  } catch (e) {
+    console.error(e)
+  } finally {
+    isHistoryLoading.value = false
+  }
 }
 
 const closeChart = () => {
   isChartModalOpen.value = false
-  setTimeout(() => { selectedProduct.value = null }, 300)
+  setTimeout(() => { 
+    selectedProduct.value = null
+    extendedHistory.value = []
+  }, 300)
 }
 
-const sparklinePoints = computed(() => {
-  if (!selectedProduct.value || !selectedProduct.value.price_history) return ''
-  const history = [...selectedProduct.value.price_history].reverse()
-  if (history.length < 2) return ''
-  const prices = history.map(h => h.price || 0)
-  const max = Math.max(...prices)
-  const min = Math.min(...prices)
-  const width = 300
-  const height = 100
-  const padding = 20
-  const stepX = (width - padding * 2) / (prices.length - 1)
-  const rangeY = max - min || 1
-  return prices.map((price, index) => {
-    const x = padding + (index * stepX)
-    const y = height - padding - (((price - min) / rangeY) * (height - padding * 2))
-    return `${x},${y}`
-  }).join(' ')
-})
+
 </script>
 
 <template>
@@ -478,8 +503,8 @@ const sparklinePoints = computed(() => {
                   <template v-else>
                     <div class="flex flex-col items-end">
                       <span class="text-base font-bold transition-colors" :class="showVat ? 'text-amber-400' : 'text-white'">
-                        {{ formatPrice(showVat ? getLatestPriceRecord(product).price * 1.1 : getLatestPriceRecord(product).price) }}
-                        <span v-if="getLatestPriceRecord(product).unit" class="text-xs font-normal mr-1" :class="showVat ? 'text-amber-500/70' : 'text-zinc-500'">/ {{ getLatestPriceRecord(product).unit }}</span>
+                        {{ formatPrice(showVat ? getLivePrice(product) * 1.1 : getLivePrice(product)) }}
+                        <span v-if="getLiveUnit(product)" class="text-xs font-normal mr-1" :class="showVat ? 'text-amber-500/70' : 'text-zinc-500'">/ {{ getLiveUnit(product) }}</span>
                       </span>
                       <span v-if="showVat" class="text-[9px] md:text-[10px] text-amber-500/70 uppercase tracking-wider mt-0.5 font-bold">با احتساب مالیات</span>
                     </div>
@@ -541,10 +566,10 @@ const sparklinePoints = computed(() => {
                    </template>
                    <template v-else>
                       <div class="font-black text-xl tracking-tight transition-colors" :class="showVat ? 'text-amber-400' : 'text-white'">
-                        {{ formatPrice(showVat ? getLatestPriceRecord(product).price * 1.1 : getLatestPriceRecord(product).price) }}
+                        {{ formatPrice(showVat ? getLivePrice(product) * 1.1 : getLivePrice(product)) }}
                       </div>
                       <div class="text-[10px] mt-0.5 transition-colors" :class="showVat ? 'text-amber-500/70' : 'text-zinc-500'">
-                        تومان / {{ getLatestPriceRecord(product).unit }} <span v-if="showVat" class="font-bold">(با مالیات)</span>
+                        تومان / {{ getLiveUnit(product) }} <span v-if="showVat" class="font-bold">(با مالیات)</span>
                       </div>
                    </template>
                 </div>
@@ -592,7 +617,7 @@ const sparklinePoints = computed(() => {
       <div v-if="isChartModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="closeChart"></div>
         
-        <div class="relative w-full max-w-lg bg-[#0a0a0c] border border-zinc-800 rounded-2xl p-6 shadow-2xl animate-fade-in-up">
+        <div class="relative w-full max-w-lg bg-[#0a0a0c] border border-zinc-800 rounded-2xl p-6 shadow-2xl animate-fade-in-up overflow-visible">
           <button @click="closeChart" class="absolute top-4 left-4 text-zinc-500 hover:text-white bg-zinc-900 p-2 rounded-full transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
@@ -603,30 +628,103 @@ const sparklinePoints = computed(() => {
             <span v-if="selectedProduct.dimensions">{{ selectedProduct.dimensions }}</span>
           </p>
           
-          <div v-if="sparklinePoints" class="relative w-full h-[150px] bg-zinc-900/30 rounded-xl border border-zinc-800 p-4">
-            <svg viewBox="0 0 300 100" class="w-full h-full overflow-visible">
-              <line x1="0" y1="50" x2="300" y2="50" stroke="#3f3f46" stroke-dasharray="4" stroke-width="0.5"/>
-              <polyline 
-                :points="sparklinePoints"
-                fill="none" 
-                stroke="#ff477e" 
-                stroke-width="3" 
-                stroke-linecap="round" 
-                stroke-linejoin="round"
-                class="drop-shadow-[0_0_8px_rgba(255,71,126,0.5)]"
-              />
-              <circle 
-                v-for="(point, idx) in sparklinePoints.split(' ')" 
-                :key="idx"
-                :cx="point.split(',')[0]" 
-                :cy="point.split(',')[1]" 
-                r="4" 
-                fill="#050505"
-                stroke="#ff477e"
-                stroke-width="2"
-              />
-            </svg>
-            <div class="flex justify-between mt-0 text-[10px] text-zinc-500 px-2">
+          <div v-if="isHistoryLoading" class="flex justify-center py-10">
+            <svg class="animate-spin h-8 w-8 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          </div>
+          <div v-else-if="extendedHistory.length > 1" class="relative w-full h-[200px] bg-zinc-900/30 rounded-xl border border-zinc-800 p-4 pt-10">
+            <!-- Custom HTML Tooltip container -->
+            <div 
+              ref="chartContainer"
+              class="relative w-full h-full cursor-crosshair touch-pan-x"
+              @mousemove="handlePointerMove"
+              @touchmove.prevent="handlePointerMove"
+              @touchstart="handlePointerMove"
+              @mouseleave="handlePointerLeave"
+              @touchend="handlePointerLeave"
+            >
+              <svg viewBox="0 0 300 100" class="w-full h-full overflow-visible pointer-events-none" preserveAspectRatio="none">
+                <line x1="0" y1="50" x2="300" y2="50" stroke="#3f3f46" stroke-dasharray="4" stroke-width="0.5"/>
+                <polyline 
+                  :points="(() => {
+                    const history = [...extendedHistory].reverse();
+                    const prices = history.map(h => h.price || 0);
+                    const max = Math.max(...prices);
+                    const min = Math.min(...prices);
+                    const stepX = 300 / (prices.length - 1 || 1);
+                    const rangeY = max - min || 1;
+                    return prices.map((price, idx) => {
+                      const x = idx * stepX;
+                      const y = 100 - (((price - min) / rangeY) * 100);
+                      return `${x},${y}`;
+                    }).join(' ');
+                  })()"
+                  fill="none" 
+                  stroke="#ff477e" 
+                  stroke-width="2.5" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                  class="drop-shadow-[0_0_8px_rgba(255,71,126,0.5)]"
+                />
+              </svg>
+              
+              <!-- Hoverable HTML points over the SVG -->
+              <div 
+                v-for="(point, idx) in [...extendedHistory].reverse()" 
+                :key="point.id"
+                class="absolute w-4 h-4 -ml-2 -mt-2 rounded-full pointer-events-none flex items-center justify-center z-10 transition-all duration-75"
+                :style="{
+                  left: (() => {
+                    const len = extendedHistory.length - 1 || 1;
+                    return (idx / len) * 100 + '%';
+                  })(),
+                  top: (() => {
+                    const prices = extendedHistory.map(h => h.price || 0);
+                    const max = Math.max(...prices);
+                    const min = Math.min(...prices);
+                    const rangeY = max - min || 1;
+                    return (100 - (((point.price - min) / rangeY) * 100)) + '%';
+                  })()
+                }"
+              >
+                <!-- Dot -->
+                <div 
+                  class="w-2 h-2 rounded-full transition-all duration-200"
+                  :class="activeTooltipIndex === idx ? 'scale-150 bg-[#ff477e] border-0' : 'bg-[#050505] border-2 border-[#ff477e]'"
+                ></div>
+                
+                <!-- Tooltip -->
+                <div 
+                  class="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-64 bg-zinc-900 border border-zinc-700 rounded-lg p-3 shadow-2xl transition-all duration-200 z-50 pointer-events-none"
+                  :class="activeTooltipIndex === idx ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'"
+                >
+                  <div class="flex justify-between items-center mb-2 pb-2 border-b border-zinc-800">
+                    <span class="text-xs text-zinc-400 font-mono">{{ point.jalaliDate }}</span>
+                    <span class="text-sm font-bold text-white">{{ new Intl.NumberFormat('fa-IR').format(point.price) }} <span class="text-[10px] text-zinc-500 font-normal">تومان</span></span>
+                  </div>
+                  
+                  <div class="space-y-1.5">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-zinc-500">تغییر:</span>
+                      <span :class="point.change_percent > 0 ? 'text-red-400' : point.change_percent < 0 ? 'text-green-400' : 'text-zinc-300'" dir="ltr">
+                        {{ point.change_percent ? (point.change_percent > 0 ? '+' : '') + point.change_percent + '%' : 'ثابت' }}
+                      </span>
+                    </div>
+                    <div v-if="point.old_price" class="flex justify-between text-xs">
+                      <span class="text-zinc-500">قیمت قبلی:</span>
+                      <span class="text-zinc-300">{{ new Intl.NumberFormat('fa-IR').format(point.old_price) }}</span>
+                    </div>
+                    <div v-if="point.reason" class="flex justify-between text-xs mt-2 pt-2 border-t border-zinc-800/50">
+                      <span class="text-zinc-500 shrink-0 ml-2">علت:</span>
+                      <span class="text-amber-400/90 text-right leading-relaxed">{{ point.reason }}</span>
+                    </div>
+                  </div>
+                  <!-- Arrow -->
+                  <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-zinc-900 border-b border-r border-zinc-700 rotate-45"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex justify-between mt-2 text-[10px] text-zinc-500 px-1">
               <span>قدیمی‌تر</span>
               <span>جدیدترین</span>
             </div>

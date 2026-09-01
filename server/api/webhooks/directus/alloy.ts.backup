@@ -1,0 +1,77 @@
+import { defineEventHandler, readBody } from 'h3'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event)
+  
+  // دایرکتوس هنگام آپدیت یک کالکشن، ایونت items.update رو با لیست آیدی‌های تغییر کرده و فیلدهای تغییر کرده ارسال میکنه
+  if (body?.collection !== 'alloy' || body?.event !== 'alloy.items.update' && body?.event !== 'items.update') {
+    return { status: 'ignored', message: 'Not an alloy update' }
+  }
+
+  // گرفتن آیدی آلیاژ که آپدیت شده (معمولا در آرایه keys هست)
+  const keys = body.keys || []
+  const alloyId = keys[0]
+  const newBasePrice = body.payload?.basePrice ? parseFloat(body.payload.basePrice) : null
+  
+  if (!alloyId || !newBasePrice || isNaN(newBasePrice)) {
+    return { status: 'ignored', message: 'Base price was not updated or invalid payload' }
+  }
+
+  try {
+    // گرفتن تمام محصولاتی که به این آلیاژ متصل هستند و از طریق فرمول محاسبه میشن
+    const products = await prisma.$queryRaw`
+      SELECT p.id as product_id, ppa.base_price_ratio, ppa.calculated_weight_kg as weight
+      FROM products p
+      JOIN product_pricing_attributes ppa ON p.id = ppa.product_id
+      JOIN product_alloy_mapping pam ON p.id = pam.product_id
+      WHERE pam.alloy_id = ${alloyId} AND ppa.pricing_strategy = 'FORMULA_WEIGHT'
+    ` as any[]
+
+    let updatedCount = 0
+
+    // اعمال آپدیت قیمت بر اساس نسبت ذخیره شده (base_price_ratio)
+    for (const p of products) {
+      if (!p.base_price_ratio) continue;
+      
+      const ratio = parseFloat(p.base_price_ratio)
+      const newPricePerKg = Math.round(newBasePrice * ratio)
+      const newTotalPrice = p.weight ? (newPricePerKg * parseFloat(p.weight)) : null
+      
+      // ۱. آپدیت قیمت فرمول در ویژگی‌های قیمت‌گذاری
+      await prisma.$executeRaw`
+        UPDATE product_pricing_attributes 
+        SET calculated_price_per_kg = ${newPricePerKg}, 
+            calculated_total_price_per_unit = ${newTotalPrice}
+        WHERE product_id = ${p.product_id}
+      `
+      
+      // ۲. اضافه کردن لاگ سیستم
+      await prisma.$executeRaw`
+        INSERT INTO engine_price_history (product_id, old_price_per_kg, new_price_per_kg, old_total_price, new_total_price, change_percentage, source, base_alloy_price_used) 
+        VALUES (${p.product_id}, NULL, ${newPricePerKg}, NULL, ${newTotalPrice}, 0, 'directus_webhook_auto', ${newBasePrice})
+      `
+      
+      // ۳. اضافه کردن به تاریخچه اصلی برای نمایش در فرانت‌اند
+      await prisma.$executeRaw`
+        INSERT INTO price_history (product_id, price, unit, is_call_for_price, date_created) 
+        VALUES (${p.product_id}, ${newPricePerKg}, 'کیلوگرم', 0, NOW())
+      `
+      updatedCount++
+    }
+
+    return {
+      status: 'success',
+      message: `Successfully auto-applied new base price ${newBasePrice} to ${updatedCount} products for alloy ${alloyId}`
+    }
+    
+    } catch (error) {
+      console.error('Webhook Error:', error)
+      return {
+        status: 'error',
+        message: 'Internal Server Error during pricing sync'
+      }
+    }
+})

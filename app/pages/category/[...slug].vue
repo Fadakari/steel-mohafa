@@ -107,7 +107,12 @@ const currentSeoData = computed(() => {
 
 // واکشی دیتا از طریق سرور API که در مرحله قبل ساختیم
 const { data: categoryData, pending, error } = await useFetch(() => `/api/category/${fullSlugPath.value}`, {
-  key: `category-${fullSlugPath.value}`
+  key: `category-${fullSlugPath.value}`,
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache'
+  },
+  getCachedData: () => undefined
 })
 
 // تنظیم متادیتاها برای سئو (استفاده از مقادیر پیش‌فرض در صورت خالی بودن دیتابیس)
