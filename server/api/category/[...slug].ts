@@ -2,6 +2,10 @@ import { prisma } from '../../utils/prisma'
 
 export default defineEventHandler(async (event) => {
   const rawSlug = getRouterParam(event, 'slug')
+  const query = getQuery(event)
+  const page = parseInt(query.page) || 1
+  const take = 50
+  const skip = (page - 1) * take
   
   setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
   setHeader(event, 'pragma', 'no-cache')
@@ -37,19 +41,22 @@ export default defineEventHandler(async (event) => {
             title: true,
             slug: true,
             products: {
-              where: {
-                is_active: true
-              },
-              orderBy: {
-                sort: 'asc'
-              },
+          where: {
+            is_active: true
+          },
+          orderBy: {
+            sort: 'asc'
+          },
+          take: take,
+          skip: skip,
               include: {
                 product_pricing_attributes: true,
                 price_history: {
                   take: 5,
-                  orderBy: {
-                    date_created: 'desc'
-                  }
+                  orderBy: [
+                  { date_created: 'desc' },
+                  { id: 'desc' }
+                ]
                 }
               }
             }
@@ -63,14 +70,17 @@ export default defineEventHandler(async (event) => {
           orderBy: {
             sort: 'asc'
           },
+          take: take,
+          skip: skip,
           include: {
             product_pricing_attributes: true,
             // Fetch the last 5 price records for charting/display
             price_history: {
               take: 5,
-              orderBy: {
-                date_created: 'desc'
-              }
+              orderBy: [
+                  { date_created: 'desc' },
+                  { id: 'desc' }
+                ]
             }
           }
         }

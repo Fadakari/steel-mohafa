@@ -26,7 +26,8 @@ const { data: pageData, pending, refresh } = await useFetch('/api/products', {
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache'
   },
-  getCachedData: () => undefined
+  getCachedData: () => undefined,
+  shallow: true
 })
 
 const openAccordions = ref<Record<string, boolean>>({

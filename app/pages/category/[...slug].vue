@@ -4,6 +4,26 @@ definePageMeta({
 })
 
 const route = useRoute()
+
+const currentPage = ref(1)
+const isFetchingMore = ref(false)
+
+const fetchNextPage = async () => {
+  if (isFetchingMore.value) return
+  isFetchingMore.value = true
+  currentPage.value++
+  try {
+    const res = await $fetch(`/api/category/${fullSlugPath.value}?page=${currentPage.value}`)
+    if (res && res.products && res.products.length > 0) {
+      categoryData.value.products.push(...res.products)
+    }
+  } catch (err) {
+    console.error('Failed to load more products', err)
+  } finally {
+    isFetchingMore.value = false
+  }
+}
+
 const currentSlug = computed(() => {
   const slugParam = route.params.slug
   if (!slugParam) return null
@@ -107,6 +127,7 @@ const currentSeoData = computed(() => {
 
 // واکشی دیتا از طریق سرور API که در مرحله قبل ساختیم
 const { data: categoryData, pending, error } = await useFetch(() => `/api/category/${fullSlugPath.value}`, {
+  shallow: true,
   key: `category-${fullSlugPath.value}`,
   headers: {
     'Cache-Control': 'no-cache',
@@ -282,7 +303,7 @@ useHead(() => {
       </div>
 
       <!-- فراخوانی کامپوننت PricingTable و ارسال محصولات به آن -->
-      <PricingTable :products="categoryData.products || []" />
+      <PricingTable :products="categoryData.products || []" @load-more="fetchNextPage" />
       
       <!-- نمایش زیردسته‌ها در صورتی که این دسته، والد باشد (مثلاً ورق استیل -> ورق 304) -->
       <div v-if="categoryData.other_categories && categoryData.other_categories.length > 0" class="mt-16 w-[80%] mx-auto">

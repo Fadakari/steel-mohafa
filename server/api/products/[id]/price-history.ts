@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
       SELECT id, price, unit, is_call_for_price, date_created 
       FROM price_history 
       WHERE product_id = ${productId} 
-      ORDER BY date_created DESC 
+      ORDER BY date_created DESC, id DESC 
       LIMIT 50
     `
 

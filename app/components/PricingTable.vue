@@ -161,8 +161,11 @@ watch([searchQuery, selectedFilters], () => {
   visibleCount.value = 50
 }, { deep: true })
 
+const emit = defineEmits(['load-more'])
+
 const loadMore = () => {
   visibleCount.value += 50
+  emit('load-more')
 }
 
 const slicedProducts = computed(() => filteredProducts.value.slice(0, visibleCount.value))
@@ -206,15 +209,24 @@ const lastUpdated = computed(() => {
 })
 
 const getLivePrice = (product) => {
-  if (product.product_pricing_attributes && product.product_pricing_attributes.calculated_price_per_kg) {
-    return parseFloat(product.product_pricing_attributes.calculated_price_per_kg)
+  if (product.product_pricing_attributes) {
+    let ppa = product.product_pricing_attributes;
+    if (Array.isArray(ppa)) ppa = ppa[0]; // just in case it's an array
+    if (ppa && (ppa.unit === 'عدد' || ppa.unit === 'شاخه')) {
+      return parseFloat(ppa.calculated_total_price_per_unit || ppa.calculated_price_per_kg)
+    }
+    if (ppa) {
+      return parseFloat(ppa.calculated_price_per_kg)
+    }
   }
   return null
 }
 
 const getLiveUnit = (product) => {
-  if (product.product_pricing_attributes && product.product_pricing_attributes.unit) {
-    return product.product_pricing_attributes.unit
+  if (product.product_pricing_attributes) {
+    let ppa = product.product_pricing_attributes;
+    if (Array.isArray(ppa)) ppa = ppa[0];
+    if (ppa && ppa.unit) return ppa.unit;
   }
   return 'کیلوگرم'
 }
@@ -233,6 +245,14 @@ const formatPrice = (price) => {
 const isChartModalOpen = ref(false)
 const selectedProduct = ref(null)
 const extendedHistory = ref([])
+const chartDataset = computed(() => {
+  return extendedHistory.value.map(h => ({
+    ...h,
+    price: showVat.value ? Math.round(h.price * 1.1) : h.price,
+    old_price: h.old_price ? (showVat.value ? Math.round(h.old_price * 1.1) : h.old_price) : null
+  }))
+})
+
 const isHistoryLoading = ref(false)
 const activeTooltipIndex = ref(null)
 const chartContainer = ref(null)
@@ -247,7 +267,7 @@ const handlePointerMove = (event) => {
   let relativeX = (clientX - rect.left) / rect.width
   const clampedX = Math.max(0, Math.min(1, relativeX))
   
-  const len = extendedHistory.value.length - 1 || 1
+  const len = chartDataset.value.length - 1 || 1
   activeTooltipIndex.value = Math.round(clampedX * len)
 }
 
@@ -631,7 +651,22 @@ const closeChart = () => {
           <div v-if="isHistoryLoading" class="flex justify-center py-10">
             <svg class="animate-spin h-8 w-8 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
           </div>
-          <div v-else-if="extendedHistory.length > 1" class="relative w-full h-[200px] bg-zinc-900/30 rounded-xl border border-zinc-800 p-4 pt-10">
+          <div v-else-if="extendedHistory.length > 1" class="relative w-full bg-zinc-900/30 rounded-xl border border-zinc-800 p-4 pb-8 pl-4 pr-14 mt-4">
+              <!-- Y-Axis (Prices) -->
+              <div class="absolute right-2 top-4 bottom-8 flex flex-col justify-between text-[10px] text-zinc-500 font-mono text-right pointer-events-none">
+                <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.max(...p)); })() }}</span>
+                <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.round((Math.max(...p) + Math.min(...p))/2)); })() }}</span>
+                <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.min(...p)); })() }}</span>
+              </div>
+              
+              <!-- X-Axis (Dates) -->
+              <div class="absolute bottom-2 left-4 right-14 flex justify-between text-[10px] text-zinc-500 font-mono pointer-events-none" dir="ltr">
+                <span>{{ chartDataset.length > 0 ? chartDataset[chartDataset.length - 1].jalaliDate.split(' ')[0] + ' ' + chartDataset[chartDataset.length - 1].jalaliDate.split(' ')[1] : '' }}</span>
+                <span v-if="chartDataset.length > 2">{{ chartDataset[Math.floor(chartDataset.length / 2)].jalaliDate.split(' ')[0] + ' ' + chartDataset[Math.floor(chartDataset.length / 2)].jalaliDate.split(' ')[1] }}</span>
+                <span>{{ chartDataset.length > 0 ? chartDataset[0].jalaliDate.split(' ')[0] + ' ' + chartDataset[0].jalaliDate.split(' ')[1] : '' }}</span>
+              </div>
+              
+              <div class="w-full h-[180px] relative">
             <!-- Custom HTML Tooltip container -->
             <div 
               ref="chartContainer"
@@ -646,7 +681,7 @@ const closeChart = () => {
                 <line x1="0" y1="50" x2="300" y2="50" stroke="#3f3f46" stroke-dasharray="4" stroke-width="0.5"/>
                 <polyline 
                   :points="(() => {
-                    const history = [...extendedHistory].reverse();
+                    const history = [...chartDataset].reverse();
                     const prices = history.map(h => h.price || 0);
                     const max = Math.max(...prices);
                     const min = Math.min(...prices);
@@ -669,16 +704,16 @@ const closeChart = () => {
               
               <!-- Hoverable HTML points over the SVG -->
               <div 
-                v-for="(point, idx) in [...extendedHistory].reverse()" 
+                v-for="(point, idx) in [...chartDataset].reverse()" 
                 :key="point.id"
                 class="absolute w-4 h-4 -ml-2 -mt-2 rounded-full pointer-events-none flex items-center justify-center z-10 transition-all duration-75"
                 :style="{
                   left: (() => {
-                    const len = extendedHistory.length - 1 || 1;
+                      const len = chartDataset.length - 1 || 1;
                     return (idx / len) * 100 + '%';
                   })(),
                   top: (() => {
-                    const prices = extendedHistory.map(h => h.price || 0);
+                    const prices = chartDataset.map(h => h.price || 0);
                     const max = Math.max(...prices);
                     const min = Math.min(...prices);
                     const rangeY = max - min || 1;
@@ -724,13 +759,13 @@ const closeChart = () => {
               </div>
             </div>
             
-            <div class="flex justify-between mt-2 text-[10px] text-zinc-500 px-1">
+            <div class="flex justify-between mt-9 text-[10px] text-zinc-500 px-1">
               <span>قدیمی‌تر</span>
               <span>جدیدترین</span>
             </div>
-          </div>
-          
-          <div v-else class="text-center py-10 text-zinc-500">
+            </div>
+            </div>
+            <div v-else class="text-center py-10 text-zinc-500">
             اطلاعات کافی برای رسم نمودار وجود ندارد.
           </div>
         </div>
