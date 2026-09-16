@@ -36,7 +36,7 @@
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <span class="block text-xs font-mono text-zinc-500 tracking-wider">SALES DEPARTMENT</span>
+                  <span class="block text-xs font-mono text-zinc-400 tracking-wider">SALES DEPARTMENT</span>
                   <a href="tel:02166393755" class="text-xl font-black text-white hover:text-[#ff477e] transition-colors" dir="ltr">021 - 6639 3755</a>
                   <a href="tel:02166391417" class="text-xl font-black text-white hover:text-[#ff477e] transition-colors" dir="ltr">021 - 6639 1417</a>
                 </div>
@@ -48,7 +48,7 @@
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <span class="block text-xs font-mono text-zinc-500 tracking-wider">EMAIL ADDRESS</span>
+                  <span class="block text-xs font-mono text-zinc-400 tracking-wider">EMAIL ADDRESS</span>
                   <a href="mailto:info@mohafa.com" class="text-lg font-bold text-white hover:text-blue-400 transition-colors">
                     info@mohafa.com
                   </a>
@@ -61,7 +61,7 @@
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <span class="block text-xs font-mono text-zinc-500 tracking-wider">HEADQUARTERS</span>
+                  <span class="block text-xs font-mono text-zinc-400 tracking-wider">HEADQUARTERS</span>
                   <address class="text-base text-zinc-300 not-italic leading-relaxed">
                     تهران، بزرگراه فتح، بازار آهن شادآباد، مجتمع تجاری پاییزان، بلوک ۲، پلاک ۱۸
                   </address>
@@ -74,7 +74,7 @@
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <span class="block text-xs font-mono text-zinc-500 tracking-wider">BUSINESS HOURS</span>
+                  <span class="block text-xs font-mono text-zinc-400 tracking-wider">BUSINESS HOURS</span>
                   <p class="text-sm text-zinc-300 leading-relaxed">
                     شنبه تا چهارشنبه: <span class="font-bold text-white">۰۸:۳۰ تا ۱۷:۰۰</span><br>
                     پنج‌شنبه‌ها: <span class="font-bold text-white">۰۸:۳۰ تا ۱۳:۰۰</span>
@@ -113,7 +113,7 @@
               rel="noopener noreferrer"
               class="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-black text-sm hover:scale-105 transition-transform shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
             >
-              <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <svg class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               مسیریابی با Google Maps
             </a>
           </div>

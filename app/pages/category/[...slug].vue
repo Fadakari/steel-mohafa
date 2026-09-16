@@ -34,7 +34,7 @@ const currentSlug = computed(() => {
 const fullSlugPath = computed(() => {
   const slugParam = route.params.slug
   if (!slugParam) return ''
-  return Array.isArray(slugParam) ? slugParam.map(s => encodeURIComponent(s)).join('/') : encodeURIComponent(String(slugParam))
+  return Array.isArray(slugParam) ? slugParam.map(s => encodeURIComponent(decodeURIComponent(s))).join('/') : encodeURIComponent(decodeURIComponent(String(slugParam)))
 })
 
 // SEO & Content State
@@ -133,7 +133,7 @@ const { data: categoryData, pending, error } = await useFetch(() => `/api/catego
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache'
   },
-  getCachedData: () => undefined
+
 })
 
 // تنظیم متادیتاها برای سئو (استفاده از مقادیر پیش‌فرض در صورت خالی بودن دیتابیس)
@@ -268,13 +268,13 @@ useHead(() => {
         <div class="absolute left-0 top-0 w-1 h-full bg-[#84012B] hidden md:block"></div>
         <div class="md:pl-6">
           <nav aria-label="Breadcrumb" class="mb-4">
-            <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-500">
+            <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-400">
               <li class="flex items-center gap-2">
                 <NuxtLink to="/" class="hover:text-white transition-colors flex items-center gap-1">
                   <span class="w-1.5 h-1.5 bg-zinc-600 rounded-full inline-block"></span>
                   خانه
                 </NuxtLink>
-                <span class="text-zinc-700">/</span>
+                <span class="text-zinc-400">/</span>
               </li>
               <li class="flex items-center gap-2">
                 <span class="text-[#ff477e] font-bold">{{ categoryData.title }}</span>
@@ -293,9 +293,9 @@ useHead(() => {
             </div>
 
             <div class="shrink-0 flex flex-col items-end border-l border-white/10 pl-4 hidden md:flex">
-              <span class="text-xs text-zinc-500 font-mono uppercase tracking-widest mb-1">Total Items</span>
+              <span class="text-xs text-zinc-400 font-mono uppercase tracking-widest mb-1">Total Items</span>
               <span class="text-2xl font-black text-white font-mono tracking-tighter">
-                {{ categoryData.products?.length || 0 }} <span class="text-sm text-[#84012B]">ردیف</span>
+                {{ categoryData.products?.length || 0 }} <span class="text-sm text-[#ff477e]">ردیف</span>
               </span>
             </div>
           </div>
@@ -351,7 +351,7 @@ useHead(() => {
             </button>
           
             <div v-if="currentSeoData.links && currentSeoData.links.length > 0">
-              <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest text-zinc-500 font-mono">Related Categories</h3>
+              <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest text-zinc-400 font-mono">Related Categories</h3>
               <div class="flex flex-wrap gap-2">
                 <NuxtLink 
                   v-for="(link, index) in currentSeoData.links" 

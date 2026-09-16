@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 definePageMeta({
   key: route => String(route.params.slug)
 })
@@ -26,7 +26,7 @@ const { data: pageData, pending, refresh } = await useFetch('/api/products', {
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache'
   },
-  getCachedData: () => undefined,
+
   shallow: true
 })
 
@@ -908,14 +908,14 @@ useHead(() => {
       >
         <div v-if="isMobileFilterOpen" class="flex items-center justify-between p-4 bg-[#0a0a0c] border-b border-white/10 shrink-0">
           <span class="font-bold text-white text-lg">فیلتر مشخصات</span>
-          <button @click="isMobileFilterOpen = false" class="p-2 bg-white/5 rounded-full text-zinc-400 hover:text-white transition-colors">
+          <button aria-label="بستن فیلترها" @click="isMobileFilterOpen = false" class="p-2 bg-white/5 rounded-full text-zinc-400 hover:text-white transition-colors">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
 
         <div class="hidden lg:flex justify-between items-center mb-4 border-b border-white/5 pb-4 shrink-0 mt-2">
           <h2 class="text-lg font-bold text-white flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             فیلتر پیشرفته
@@ -938,7 +938,7 @@ useHead(() => {
                       {{ selectedFilters[filterKey].length }} انتخاب
                     </span>
                     <svg 
-                      class="w-4 h-4 text-zinc-500 transition-transform duration-300"
+                      class="w-4 h-4 text-zinc-400 transition-transform duration-300"
                       :class="openAccordions[filterKey] ? 'rotate-180' : ''"
                       fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     >
@@ -958,7 +958,7 @@ useHead(() => {
                       :placeholder="`جستجوی ${translateFilterKey(filterKey)}...`" 
                       class="w-full bg-[#050505] border border-white/10 rounded-md py-2 px-3 pl-8 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
                     />
-                    <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
@@ -973,15 +973,15 @@ useHead(() => {
                       <input type="checkbox" :value="opt" v-model="selectedFilters[filterKey]" class="hidden" />
                       {{ opt }}
                     </label>
-                    <div v-if="getFilteredOptions(filterKey, options).length === 0" class="text-xs text-zinc-600 w-full text-center py-2">
+                    <div v-if="getFilteredOptions(filterKey, options).length === 0" class="text-xs text-zinc-400 w-full text-center py-2">
                       موردی یافت نشد.
                     </div>
                   </div>
                 </div>
               </div>
           </div>
-          <div v-else class="text-zinc-500 text-sm flex items-center gap-2 mt-4 lg:mt-0">
-            <svg class="animate-spin h-4 w-4 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          <div v-else class="text-zinc-400 text-sm flex items-center gap-2 mt-4 lg:mt-0">
+            <svg class="animate-spin h-4 w-4 text-[#ff477e]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             در حال تحلیل ویژگی‌ها...
           </div>
         </div>
@@ -1004,7 +1004,7 @@ useHead(() => {
           
           <div class="py-8 pl-6">
             <nav aria-label="Breadcrumb" class="mb-4">
-              <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-500">
+              <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-400">
                 <li v-for="(crumb, index) in breadcrumbs" :key="index" class="flex items-center gap-2">
                   <NuxtLink 
                     :to="crumb.url" 
@@ -1014,7 +1014,7 @@ useHead(() => {
                     <span v-if="index === 0" class="w-1.5 h-1.5 bg-zinc-600 rounded-full inline-block"></span>
                     {{ crumb.name }}
                   </NuxtLink>
-                  <span v-if="index < breadcrumbs.length - 1" class="text-zinc-700">/</span>
+                  <span v-if="index < breadcrumbs.length - 1" class="text-zinc-400">/</span>
                 </li>
               </ol>
             </nav>
@@ -1030,9 +1030,9 @@ useHead(() => {
               </div>
 
               <div class="shrink-0 flex flex-col items-end border-l border-white/10 pl-4">
-                <span class="text-xs text-zinc-500 font-mono uppercase tracking-widest mb-1">Total Items</span>
+                <span class="text-xs text-zinc-400 font-mono uppercase tracking-widest mb-1">Total Items</span>
                 <span class="text-2xl font-black text-white font-mono tracking-tighter">
-                  {{ pageData?.products?.length || 0 }} <span class="text-sm text-[#84012B]">ردیف</span>
+                  {{ pageData?.products?.length || 0 }} <span class="text-sm text-[#ff477e]">ردیف</span>
                 </span>
               </div>
             </div>
@@ -1065,14 +1065,14 @@ useHead(() => {
          </div>
          
          <div v-else-if="!pageData?.products || pageData.products.length === 0" class="flex flex-col items-center justify-center bg-[#0c0c0e] border border-white/5 rounded-xl py-16 px-4 text-center mt-2">
-           <svg class="w-12 h-12 text-zinc-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+           <svg class="w-12 h-12 text-zinc-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
            <h3 class="text-base font-bold text-white mb-1">محصولی با این مشخصات یافت نشد!</h3>
            <p class="text-xs text-zinc-400 max-w-sm">لطفاً فیلترهای انتخابی خود را تغییر دهید.</p>
          </div>
 
          <div v-else class="flex flex-col mt-4">
             <!-- هدر جدول (مخصوص دسکتاپ) -->
-            <div class="hidden md:grid grid-cols-12 gap-4 px-6 py-3.5 text-[11px] font-black text-zinc-500 uppercase tracking-widest bg-[#0a0a0c] border border-white/5 rounded-t-xl shadow-sm">
+            <div class="hidden md:grid grid-cols-12 gap-4 px-6 py-3.5 text-[11px] font-black text-zinc-400 uppercase tracking-widest bg-[#0a0a0c] border border-white/5 rounded-t-xl shadow-sm">
                <div class="col-span-5">شرح محصول و شناسه</div>
                <div class="col-span-3">مشخصات فنی</div>
                <div class="col-span-1 text-center">نوسان</div>
@@ -1097,10 +1097,10 @@ useHead(() => {
                       {{ product.name }}
                     </h3>
                     <div class="flex flex-wrap items-center gap-2 mt-1">
-                      <span class="text-[10px] text-zinc-500 font-mono bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                      <span class="text-[10px] text-zinc-400 font-mono bg-white/5 px-2 py-0.5 rounded border border-white/5">
                         SKU: {{ product.sku || 'N/A' }}
                       </span>
-                      <span class="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
+                      <span class="flex items-center gap-1 text-[10px] text-emerald-400/80 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
                         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         موجود در انبار
                       </span>
@@ -1111,7 +1111,7 @@ useHead(() => {
                   <div class="md:hidden shrink-0 mt-0.5">
                     <span 
                       v-if="product.trend !== 'stable'"
-                      :class="product.trend === 'up' ? 'text-rose-500 bg-rose-500/10' : 'text-emerald-500 bg-emerald-500/10'"
+                      :class="product.trend === 'up' ? 'text-rose-400 bg-rose-500/10' : 'text-emerald-400 bg-emerald-500/10'"
                       class="px-2 py-1 rounded text-[10px] font-bold flex items-center gap-1"
                     >
                       {{ product.trend === 'up' ? '▲' : '▼' }} {{ product.priceDiffPercentage }}%
@@ -1136,12 +1136,12 @@ useHead(() => {
                 <div class="hidden md:flex md:col-span-1 justify-center items-center">
                   <span 
                     v-if="product.trend !== 'stable'"
-                    :class="product.trend === 'up' ? 'text-rose-500 bg-rose-500/10' : 'text-emerald-500 bg-emerald-500/10'"
+                    :class="product.trend === 'up' ? 'text-rose-400 bg-rose-500/10' : 'text-emerald-400 bg-emerald-500/10'"
                     class="px-2.5 py-1 rounded text-[11px] font-bold flex items-center gap-1 shadow-sm"
                   >
                     {{ product.trend === 'up' ? '▲' : '▼' }} {{ product.priceDiffPercentage }}%
                   </span>
-                  <span v-else class="px-2 py-0.5 rounded text-[11px] font-bold text-zinc-600 bg-white/5">
+                  <span v-else class="px-2 py-0.5 rounded text-[11px] font-bold text-zinc-400 bg-white/5">
                     0%
                   </span>
                 </div>
@@ -1155,7 +1155,7 @@ useHead(() => {
                     >
                       {{ formatPrice(showVat ? product.price * 1.1 : product.price) }}
                     </span>
-                    <span class="text-[9px] md:text-[10px] text-zinc-500 uppercase tracking-wider mt-0.5 font-bold" :class="showVat ? 'text-amber-500/70' : ''">
+                    <span class="text-[9px] md:text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5 font-bold" :class="showVat ? 'text-amber-500/70' : ''">
                       ریال / کیلوگرم
                     </span>
                   </div>
@@ -1208,7 +1208,7 @@ useHead(() => {
                 </button>
               
                 <div v-if="currentSeoData.links && currentSeoData.links.length > 0">
-                  <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest text-zinc-500 font-mono">Related Categories</h3>
+                  <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest text-zinc-400 font-mono">Related Categories</h3>
                   <div class="flex flex-wrap gap-2">
                     <NuxtLink 
                       v-for="(link, index) in currentSeoData.links" 
@@ -1264,7 +1264,7 @@ useHead(() => {
               <div class="relative flex flex-col items-center group">
                 <div class="w-16 h-16 rounded-full border-2 border-[#84012B] flex items-center justify-center text-xl font-black text-white mb-6 group-hover:bg-[#84012B] transition-all">01</div>
                 <h4 class="font-bold text-white mb-2">ثبت سفارش</h4>
-                <p class="text-zinc-500 text-xs text-center">تماس تلفنی یا استعلام آنلاین</p>
+                <p class="text-zinc-400 text-xs text-center">تماس تلفنی یا استعلام آنلاین</p>
                 <div class="hidden md:block absolute top-8 right-1/2 w-full h-px border-t border-dashed border-zinc-700 -z-10"></div>
               </div>
             
@@ -1272,7 +1272,7 @@ useHead(() => {
               <div class="relative flex flex-col items-center group">
                 <div class="w-16 h-16 rounded-full border-2 border-blue-500 flex items-center justify-center text-xl font-black text-white mb-6 group-hover:bg-blue-500 transition-all">02</div>
                 <h4 class="font-bold text-white mb-2">صدور پیش‌فاکتور</h4>
-                <p class="text-zinc-500 text-xs text-center">بررسی فنی و تایید نهایی قیمت</p>
+                <p class="text-zinc-400 text-xs text-center">بررسی فنی و تایید نهایی قیمت</p>
                 <div class="hidden md:block absolute top-8 right-1/2 w-full h-px border-t border-dashed border-zinc-700 -z-10"></div>
               </div>
             
@@ -1280,7 +1280,7 @@ useHead(() => {
               <div class="relative flex flex-col items-center group">
                 <div class="w-16 h-16 rounded-full border-2 border-amber-500 flex items-center justify-center text-xl font-black text-white mb-6 group-hover:bg-amber-500 transition-all">03</div>
                 <h4 class="font-bold text-white mb-2">تراکنش مالی</h4>
-                <p class="text-zinc-500 text-xs text-center">تسویه حساب نقدی یا اعتباری</p>
+                <p class="text-zinc-400 text-xs text-center">تسویه حساب نقدی یا اعتباری</p>
                 <div class="hidden md:block absolute top-8 right-1/2 w-full h-px border-t border-dashed border-zinc-700 -z-10"></div>
               </div>
             
@@ -1288,7 +1288,7 @@ useHead(() => {
               <div class="relative flex flex-col items-center group">
                 <div class="w-16 h-16 rounded-full border-2 border-emerald-500 flex items-center justify-center text-xl font-black text-white mb-6 group-hover:bg-emerald-500 transition-all">04</div>
                 <h4 class="font-bold text-white mb-2">تحویل در سایت</h4>
-                <p class="text-zinc-500 text-xs text-center">ارسال با بیمه‌نامه معتبر</p>
+                <p class="text-zinc-400 text-xs text-center">ارسال با بیمه‌نامه معتبر</p>
               </div>
             
             </div>

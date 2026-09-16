@@ -26,12 +26,12 @@ const closeMobileMenu = () => {
     <nav itemscope itemtype="https://schema.org/SiteNavigationElement" aria-label="منوی اصلی" class="max-w-7xl mx-auto px-4 md:px-6 h-[80px] flex items-center justify-between">
       
       <NuxtLink to="/" class="flex items-center gap-2 z-50" aria-label="صفحه اصلی استیل مهفا">
-        <img src="/header-logo.png" alt="" class="brand-logo w-18 h-15"
+        <NuxtImg src="/header-logo.png" alt="لوگوی مهفا" width="158" height="105" class="brand-logo w-auto h-15"
+          format="webp"
+          quality="90"
           loading="eager"
           fetchpriority="high"
-          decoding="async"
-          width="34"
-          height="34">
+          decoding="async" />
         <span class="text-xl font-black text-white tracking-tight">استیل مهفا</span>
       </NuxtLink>
 
@@ -47,7 +47,7 @@ const closeMobileMenu = () => {
         >
           <button type="button" class="cursor-pointer text-sm font-bold text-zinc-300 hover:text-white transition-colors flex items-center gap-1">
             <span itemprop="name">محصولات</span>
-            <svg class="w-4 h-4 transition-transform duration-300" :class="isDesktopProductsHovered ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            <svg class="w-4 h-4 transition-transform duration-300" :class="isDesktopProductsHovered ? 'rotate-180 text-[#ff477e]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
           </button>
 
           <!-- مگامنوی بهینه‌شده: عرض ۸۰۰ پیکسل، سه ستونه، همراه با محدودیت ارتفاع -->
@@ -56,7 +56,7 @@ const closeMobileMenu = () => {
               
               <div class="mb-5 border-b border-white/5 pb-4 flex justify-between items-center shrink-0">
                 <span class="text-zinc-400 text-xs font-mono">دسته‌بندی جامع محصولات</span>
-                <NuxtLink itemprop="url" to="/category" class="inline-flex items-center gap-1 text-sm font-black text-white hover:text-[#84012B] transition-colors">
+                <NuxtLink itemprop="url" to="/category" class="inline-flex items-center gap-1 text-sm font-black text-white hover:text-[#ff477e] transition-colors">
                   <span>مشاهده همه محصولات</span>
                   <span>⟵</span>
                 </NuxtLink>
@@ -68,7 +68,7 @@ const closeMobileMenu = () => {
                   <NuxtLink 
                     itemprop="url" 
                     :to="`/category/${cat.slug}`" 
-                    class="text-sm font-bold text-zinc-100 hover:text-[#84012B] transition-colors mb-1.5 inline-block"
+                    class="text-sm font-bold text-zinc-100 hover:text-[#ff477e] transition-colors mb-1.5 inline-block"
                   >
                     {{ cat.name }}
                   </NuxtLink>
@@ -114,7 +114,7 @@ const closeMobileMenu = () => {
           <span dir="ltr">۰۲۱ - ۶۶۳۹ ۳۷۵۵</span>
         </a>
 
-        <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="md:hidden p-2 text-white relative w-10 h-10 focus:outline-none bg-white/5 rounded-lg">
+        <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="md:hidden p-2 text-white relative w-10 h-10 focus:outline-none bg-white/5 rounded-lg" aria-label="منوی موبایل">
           <div class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform">
             <span aria-hidden="true" :class="{'rotate-45': isMobileMenuOpen, '-translate-y-1.5': !isMobileMenuOpen}" class="block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out rounded-full"></span>
             <span aria-hidden="true" :class="{'opacity-0': isMobileMenuOpen }" class="block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out rounded-full"></span>
@@ -127,7 +127,10 @@ const closeMobileMenu = () => {
     <!-- منوی موبایل (فول‌اسکرین) -->
     <Transition name="mobile-menu">
       <div v-if="isMobileMenuOpen" class="md:hidden fixed inset-0 z-40 bg-[#050505] overflow-y-auto pt-[80px] pb-12 min-h-screen">
-        <ul class="flex flex-col p-6 gap-2">
+        <!-- یک بلاکر رنگی ثابت برای بالای منو تا آیتم‌ها موقع اسکرول برن زیرش و کثیف دیده نشه -->
+        <div class="fixed top-0 left-0 right-0 h-[80px] bg-[#050505] z-10 border-b border-white/10"></div>
+        
+        <ul class="flex flex-col p-6 gap-2 relative z-0">
           <li>
             <NuxtLink to="/" class="mobile-link block py-3 text-lg font-bold text-zinc-200 border-b border-white/5" @click="closeMobileMenu">خانه</NuxtLink>
           </li>
@@ -135,7 +138,7 @@ const closeMobileMenu = () => {
           <li>
             <button @click="isMobileProductsOpen = !isMobileProductsOpen" class="mobile-link w-full flex items-center justify-between py-3 text-lg font-bold text-zinc-200 border-b border-white/5">
               <span>محصولات</span>
-              <svg class="w-5 h-5 transition-transform duration-300" :class="isMobileProductsOpen ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-5 h-5 transition-transform duration-300" :class="isMobileProductsOpen ? 'rotate-180 text-[#ff477e]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             
             <Transition name="accordion">
@@ -151,18 +154,18 @@ const closeMobileMenu = () => {
                     <span class="text-sm font-bold text-zinc-300 group-hover:text-white transition-colors">
                       {{ cat.name }}
                     </span>
-                    <svg v-if="cat.children && (cat.children as any[]).length > 0" class="w-4 h-4 text-zinc-500 transition-transform duration-300" :class="openMobileSubcategories[cat.id] ? 'rotate-180 text-[#84012B]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    <svg v-if="cat.children && (cat.children as any[]).length > 0" class="w-4 h-4 text-zinc-400 transition-transform duration-300" :class="openMobileSubcategories[cat.id] ? 'rotate-180 text-[#ff477e]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   
                   <Transition name="accordion">
                     <ul v-show="openMobileSubcategories[cat.id]" class="bg-[#050505]/50 pb-2 flex flex-col">
                       <li>
-                        <NuxtLink :to="`/category/${cat.slug}`" class="block py-2.5 pr-6 pl-4 text-xs font-bold text-[#84012B] hover:text-white transition-colors" @click="closeMobileMenu">
+                        <NuxtLink :to="`/category/${cat.slug}`" class="block py-2.5 pr-6 pl-4 text-xs font-bold text-[#ff477e] hover:text-white transition-colors" @click="closeMobileMenu">
                           مشاهده همه {{ cat.name }} ⟵
                         </NuxtLink>
                       </li>
                       <li v-for="child in (cat.children as any[])" :key="child.id">
-                        <NuxtLink :to="`/category/${cat.slug}/${child.slug}`" class="block py-2 pr-8 pl-4 text-xs font-medium text-zinc-400 hover:text-white transition-colors before:content-['•'] before:text-zinc-600 before:ml-2" @click="closeMobileMenu">
+                        <NuxtLink :to="`/category/${cat.slug}/${child.slug}`" class="block py-2 pr-8 pl-4 text-xs font-medium text-zinc-400 hover:text-white transition-colors before:content-['•'] before:text-zinc-400 before:ml-2" @click="closeMobileMenu">
                           {{ child.name }}
                         </NuxtLink>
                       </li>

@@ -1,1 +1,0 @@
-const { PrismaClient } = require('@prisma/client'); const prisma = new PrismaClient(); async function main() { await prisma.INSERT INTO price_history (product_id, price) VALUES (1165, 10500000); console.log('Added price'); process.exit(0); } main();

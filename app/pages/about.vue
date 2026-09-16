@@ -33,7 +33,7 @@
         
         <div class="relative group">
           <div class="absolute -inset-2 bg-gradient-to-r from-[#84012B] to-[#ff477e] rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity blur-lg"></div>
-          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1400&auto=format&fit=crop" 
+          <NuxtImg src="/images/gallery/photo-1504917595217-d4dc5ebe6122.avif" 
               alt="انبار مقاطع فولاد ضد زنگ استیل مهفا در بازار آهن تهران - تامین کننده و فروشنده مستقیم ورق استیل" 
               title="انبار مرکزی استیل مهفا جهت استعلام موجودی و قیمت روز مقاطع استیل"
               class="relative rounded-2xl border border-white/10 shadow-2xl w-full h-[450px] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
@@ -108,7 +108,7 @@
 
           <!-- ۱. تصویر اصلی انبار (باکس عریض ۴ ستونه) -->
           <div class="md:col-span-4 lg:col-span-4 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Mohafa-Steel-Warehouse-Direct-stainless-steel-price-and-purchase-reference.webp"
               alt="انبار مرکزی مگاسنتر استیل مهفا - بزرگترین فروشنده لوله و مقاطع استیل در بازار آهن شادآباد" 
               title="انبار استیل مهفا - مرجع قیمت و خرید بی‌واسطه استنلس استیل"
@@ -125,7 +125,7 @@
         
           <!-- ۲. بارگیری جرثقیل (باکس بسیار بلند ۳ ردیفه جهت شکستن تقارن) -->
           <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a] shadow-lg">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Steel-sheet-unloading-and-loading-equipment-at-Mohafa-Steel.webp" 
               alt="عملیات بارگیری سنگین کویل ورق استیل با جرثقیل در انبارهای شرکت استیل مهفا" 
               title="تجهیزات تخلیه و بارگیری ورق استیل در استیل مهفا"
@@ -141,7 +141,7 @@
         
           <!-- ۳. درب طلایی دکوراتیو (باکس ۲ در ۲) -->
           <div class="md:col-span-2 lg:col-span-2 md:row-span-3 relative group overflow-hidden rounded-xl border border-amber-500/20 bg-[#08080a] shadow-lg">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Buy-Golden-Mirror-Decorative-Steel-Sheet-from-Mohafa-Steel.webp" 
               alt="فروش ورق استیل طلایی طرح‌دار میرور دکوراتیو با بهترین قیمت روز در استیل مهفا" 
               title="خرید ورق استیل دکوراتیو میرور طلایی از استیل مهفا"
@@ -157,7 +157,7 @@
         
           <!-- ۴. دپوی کویل (باکس تک‌ردیفه افقی) -->
           <div class="md:col-span-2 lg:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Steel-coil-and-roll-inventory-with-valid-certificates-Mohafa-Steel.webp" 
               alt="دپوی تخصصی کویل و رول استیل ۳۰۴ و ۳۱۶ در مرکز فروش استیل مهفا" 
               title="موجودی کویل و رول استیل با سرتیفیکیت معتبر - استیل مهفا"
@@ -172,7 +172,7 @@
         
           <!-- ۵. ناوگان حمل و نقل (باکس عریض پایین) -->
           <div class="md:col-span-1 lg:col-span-1 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Mohafa-Steel-Transport-Fleet-is-sending-steel-sheet-cargo-to-industrial-projects-and-buyers.webp" 
               alt="ناوگان حمل و نقل استیل مهفا در حال ارسال محموله ورق استیل به پروژه‌های صنعتی و خریداران" 
               title="ارسال مستقیم و مطمئن مقاطع استیل از تهران به سراسر ایران"
@@ -187,7 +187,7 @@
         
           <!-- ۶. بارگیری بندل (باکس مکمل) -->
           <div class="md:col-span-2 lg:col-span-3 md:row-span-2 relative group overflow-hidden rounded-xl border border-zinc-700/50 bg-[#08080a]">
-            <img 
+            <NuxtImg 
               src="/images/gallery/Immediate-delivery-and-competitive-prices-for-all-types-of-stainless-steel-sections.webp" 
               alt="بسته‌بندی استاندارد و تحویل سریع محموله لوله و ورق استیل توسط فروشندگان استیل مهفا" 
               title="تحویل فوری و قیمت رقابتی انواع مقاطع استنلس استیل"
@@ -213,10 +213,10 @@
           
           <!-- فلش‌های ناوبری کاستوم -->
           <div class="flex items-center gap-3">
-            <button class="team-swiper-prev w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
+            <button aria-label="?????? ????" class="team-swiper-prev w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </button>
-            <button class="team-swiper-next w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
+            <button aria-label="?????? ????" class="team-swiper-next w-12 h-12 rounded-xl bg-[#0a0a0c] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#84012B] hover:border-[#84012B] transition-all duration-300 focus:outline-none">
               <svg class="w-5 h-5 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </button>
           </div>
@@ -237,7 +237,7 @@
               <div class="absolute top-0 left-0 w-full h-1.5 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               
               <div class="relative w-28 h-28 mb-5">
-                <img :src="member.image"
+                <NuxtImg :src="member.image"
                   :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای استعلام قیمت روز استیل'" 
                   :title="'تماس با ' + member.name + ' جهت خرید مقاطع استنلس استیل از مهفا'"
                   class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
@@ -250,7 +250,7 @@
               
               <!-- دکمه بصری تماس -->
               <div class="w-full bg-[#050505] border border-white/5 group-hover:bg-[#84012B] group-hover:border-[#84012B] py-3 rounded-xl flex flex-col items-center justify-center transition-colors">
-                <span class="text-[10px] text-zinc-500 font-mono mb-0.5 group-hover:text-white/70 transition-colors">تماس مستقیم</span>
+                <span class="text-[10px] text-zinc-400 font-mono mb-0.5 group-hover:text-white/70 transition-colors">تماس مستقیم</span>
                 <span class="text-white font-bold tracking-wider" dir="ltr">{{ member.phone }}</span>
               </div>
             </a>
@@ -272,7 +272,7 @@
         </div>
         
         <div class="relative z-10 shrink-0 w-full md:w-auto">
-          <a href="/catalog.pdf" download class="w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#84012B] hover:bg-zinc-100 font-black rounded-xl text-lg transition-transform hover:scale-105 shadow-lg shadow-black/20">
+          <a href="/catalog.pdf" download class="w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#ff477e] hover:bg-zinc-100 font-black rounded-xl text-lg transition-transform hover:scale-105 shadow-lg shadow-black/20">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             دانلود کاتالوگ شرکت
           </a>

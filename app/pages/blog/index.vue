@@ -5,7 +5,7 @@
       <header class="mb-12 md:mb-16 text-center md:text-right border-b border-white/5 pb-8 relative">
         <div class="absolute left-0 bottom-0 w-32 h-1 bg-gradient-to-r from-transparent to-[#84012B]"></div>
         <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
-          دانشنامه <span class="text-[#84012B]">استیل مهفا</span>
+          دانشنامه <span class="text-[#ff477e]">استیل مهفا</span>
         </h1>
         <p class="text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed">
           مرجع تخصصی مقالات مهندسی متالورژی، راهنمای خرید مقاطع استنلس استیل، اخبار بازار آهن و تحلیل‌های کاربردی برای صنایع.
@@ -31,19 +31,23 @@
           <div class="absolute top-0 left-0 w-full h-1 bg-[#84012B] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10"></div>
 
           <div class="relative w-full h-56 overflow-hidden bg-[#111113]">
-            <img 
+            <NuxtImg 
               v-if="article.imageUrl" 
-              :src="`${useRuntimeConfig().public.apiBase}/assets/${article.imageUrl}`" 
+              :src="`${config.public.apiBase}/assets/${article.imageUrl}?width=510&height=280&quality=80&format=webp`" 
               :alt="article.title" 
+              width="510"
+              height="280"
+              :fetchpriority="index === 0 ? 'high' : 'auto'"
+              :preload="index === 0"
               class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
             />
-            <div v-else class="w-full h-full flex items-center justify-center text-zinc-700">
+            <div v-else class="w-full h-full flex items-center justify-center text-zinc-400">
               <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             </div>
             
             <div class="absolute bottom-3 right-3 bg-[#050505]/80 backdrop-blur-sm border border-white/10 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-xs font-mono text-zinc-300 shadow-lg">
-              <svg class="w-3.5 h-3.5 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              {{ new Date(article.publishedAt).toLocaleDateString('fa-IR') }}
+              <svg class="w-3.5 h-3.5 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <ClientOnly fallback="" ><span v-text="new Date(article.publishedAt).toLocaleDateString('fa-IR')"></span></ClientOnly>
             </div>
           </div>
 
@@ -58,7 +62,7 @@
             <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded-full bg-[#111113] border border-[#84012B] flex items-center justify-center text-[10px] font-bold text-zinc-400">MA</div>
-                <span class="text-xs text-zinc-500 font-mono">ا. فرخ‌نیا</span>
+                <span class="text-xs text-zinc-400 font-mono">ا. فرخ‌نیا</span>
               </div>
               <span class="text-xs font-bold text-[#ff477e] flex items-center gap-1 group-hover:translate-x-[-4px] transition-transform duration-300">
                 مطالعه مقاله
@@ -70,7 +74,7 @@
       </div>
 
       <div v-else class="text-center py-20 bg-[#0a0a0c] border border-white/5 rounded-2xl">
-        <p class="text-zinc-500">در حال حاضر مقاله‌ای برای نمایش وجود ندارد.</p>
+        <p class="text-zinc-400">در حال حاضر مقاله‌ای برای نمایش وجود ندارد.</p>
       </div>
 
     </div>
@@ -78,6 +82,7 @@
 </template>
 
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const { data: articles, pending } = await useFetch('/api/articles', {
   headers: {
     'Cache-Control': 'no-cache',

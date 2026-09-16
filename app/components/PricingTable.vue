@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
@@ -312,14 +312,14 @@ const closeChart = () => {
       >
         <div v-if="isMobileFilterOpen" class="flex items-center justify-between p-4 bg-[#0a0a0c] border-b border-white/10 shrink-0">
           <span class="font-bold text-white text-lg">فیلتر مشخصات</span>
-          <button @click="isMobileFilterOpen = false" class="p-2 bg-white/5 rounded-full text-zinc-400 hover:text-white transition-colors">
+          <button aria-label="بستن فیلترها" @click="isMobileFilterOpen = false" class="p-2 bg-white/5 rounded-full text-zinc-400 hover:text-white transition-colors">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
 
         <div class="hidden lg:flex justify-between items-center mb-4 border-b border-white/5 pb-4 shrink-0 mt-2">
           <h2 class="text-lg font-bold text-white flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             فیلتر پیشرفته
@@ -342,7 +342,7 @@ const closeChart = () => {
                       {{ selectedFilters[filterKey].length }} انتخاب
                     </span>
                     <svg 
-                      class="w-4 h-4 text-zinc-500 transition-transform duration-300"
+                      class="w-4 h-4 text-zinc-400 transition-transform duration-300"
                       :class="openAccordions[filterKey] ? 'rotate-180' : ''"
                       fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     >
@@ -362,7 +362,7 @@ const closeChart = () => {
                       :placeholder="`جستجوی ${translateFilterKey(filterKey)}...`" 
                       class="w-full bg-[#050505] border border-white/10 rounded-md py-2 px-3 pl-8 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
                     />
-                    <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
@@ -377,15 +377,15 @@ const closeChart = () => {
                       <input type="checkbox" :value="opt" v-model="selectedFilters[filterKey]" class="hidden" />
                       {{ opt }}
                     </label>
-                    <div v-if="getFilteredOptions(filterKey, options).length === 0" class="text-xs text-zinc-600 w-full text-center py-2">
+                    <div v-if="getFilteredOptions(filterKey, options).length === 0" class="text-xs text-zinc-400 w-full text-center py-2">
                       موردی یافت نشد.
                     </div>
                   </div>
                 </div>
               </div>
           </div>
-          <div v-else class="text-zinc-500 text-sm flex items-center gap-2 mt-4 lg:mt-0">
-            <svg class="animate-spin h-4 w-4 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          <div v-else class="text-zinc-400 text-sm flex items-center gap-2 mt-4 lg:mt-0">
+            <svg class="animate-spin h-4 w-4 text-[#ff477e]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             در حال بررسی مشخصات...
           </div>
         </div>
@@ -416,7 +416,7 @@ const closeChart = () => {
       <div class="sticky top-[75px] z-40 flex flex-col md:flex-row justify-between items-start md:items-center bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 p-3 md:p-4 rounded-xl shadow-lg mb-6 gap-4">
         <!-- Active Filters -->
         <div class="flex-1 flex flex-wrap gap-2 items-center w-full">
-          <span class="text-xs text-zinc-500 font-bold ml-1">فیلتر فعال:</span>
+          <span class="text-xs text-zinc-400 font-bold ml-1">فیلتر فعال:</span>
           <template v-for="(values, key) in selectedFilters" :key="'active-'+key">
             <span 
               v-for="val in values" 
@@ -424,12 +424,12 @@ const closeChart = () => {
               class="inline-flex items-center gap-1.5 bg-[#84012B]/20 text-white text-xs px-2 py-1 rounded-md border border-[#84012B]/40"
             >
               {{ val }}
-              <button @click="removeFilter(key, val)" class="text-zinc-400 hover:text-white transition-colors">
+              <button aria-label="حذف فیلتر" @click="removeFilter(key, val)" class="text-zinc-400 hover:text-white transition-colors">
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
             </span>
           </template>
-          <span v-if="!hasActiveFilters" class="text-xs text-zinc-600">نداریم</span>
+          <span v-if="!hasActiveFilters" class="text-xs text-zinc-400">نداریم</span>
           <button v-if="hasActiveFilters" @click="clearAllFilters" class="text-xs text-[#ff477e] hover:text-white transition-colors mr-1 font-bold">
             حذف همه
           </button>
@@ -465,7 +465,7 @@ const closeChart = () => {
             placeholder="جستجوی سریع..." 
             class="w-full bg-zinc-900/50 border border-zinc-700/50 text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-[#84012B]/50 transition-colors"
           />
-          <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 top-2.5 w-5 h-5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 top-2.5 w-5 h-5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
 
         <div v-if="lastUpdated" class="text-sm text-zinc-400 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10 hidden lg:flex items-center gap-2 shrink-0">
@@ -475,7 +475,7 @@ const closeChart = () => {
       </div>
 
       <!-- Empty State -->
-      <div v-if="filteredProducts.length === 0" class="py-12 text-center text-zinc-500 bg-zinc-900/20 rounded-xl border border-zinc-800">
+      <div v-if="filteredProducts.length === 0" class="py-12 text-center text-zinc-400 bg-zinc-900/20 rounded-xl border border-zinc-800">
         محصولی با این مشخصات یافت نشد.
       </div>
 
@@ -524,7 +524,7 @@ const closeChart = () => {
                     <div class="flex flex-col items-end">
                       <span class="text-base font-bold transition-colors" :class="showVat ? 'text-amber-400' : 'text-white'">
                         {{ formatPrice(showVat ? getLivePrice(product) * 1.1 : getLivePrice(product)) }}
-                        <span v-if="getLiveUnit(product)" class="text-xs font-normal mr-1" :class="showVat ? 'text-amber-500/70' : 'text-zinc-500'">/ {{ getLiveUnit(product) }}</span>
+                        <span v-if="getLiveUnit(product)" class="text-xs font-normal mr-1" :class="showVat ? 'text-amber-500/70' : 'text-zinc-400'">/ {{ getLiveUnit(product) }}</span>
                       </span>
                       <span v-if="showVat" class="text-[9px] md:text-[10px] text-amber-500/70 uppercase tracking-wider mt-0.5 font-bold">با احتساب مالیات</span>
                     </div>
@@ -533,7 +533,7 @@ const closeChart = () => {
                   <button 
                     v-if="product.price_history && product.price_history.length > 1"
                     @click="openChart(product)"
-                    class="text-zinc-500 hover:text-[#ff477e] transition-colors p-1 rounded-md hover:bg-[#84012B]/20"
+                    class="text-zinc-400 hover:text-[#ff477e] transition-colors p-1 rounded-md hover:bg-[#84012B]/20"
                     title="نمودار تغییرات قیمت"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
@@ -588,14 +588,14 @@ const closeChart = () => {
                       <div class="font-black text-xl tracking-tight transition-colors" :class="showVat ? 'text-amber-400' : 'text-white'">
                         {{ formatPrice(showVat ? getLivePrice(product) * 1.1 : getLivePrice(product)) }}
                       </div>
-                      <div class="text-[10px] mt-0.5 transition-colors" :class="showVat ? 'text-amber-500/70' : 'text-zinc-500'">
+                      <div class="text-[10px] mt-0.5 transition-colors" :class="showVat ? 'text-amber-500/70' : 'text-zinc-400'">
                         تومان / {{ getLiveUnit(product) }} <span v-if="showVat" class="font-bold">(با مالیات)</span>
                       </div>
                    </template>
                 </div>
                 
                 <div class="flex gap-2">
-                  <button @click="openChart(product)" v-if="product.price_history && product.price_history.length > 1" class="text-zinc-400 hover:text-[#ff477e] bg-zinc-900/50 p-2 rounded-lg border border-zinc-800">
+                  <button aria-label="نمودار تغییرات قیمت" @click="openChart(product)" v-if="product.price_history && product.price_history.length > 1" class="text-zinc-400 hover:text-[#ff477e] bg-zinc-900/50 p-2 rounded-lg border border-zinc-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                   </button>
                   <a href="tel:02112345678" class="flex items-center justify-center bg-zinc-800 text-white px-4 py-2 rounded-lg text-sm font-bold active:scale-95 transition-transform border border-zinc-700">تماس</a>
@@ -607,7 +607,7 @@ const closeChart = () => {
 
       <!-- Load More Action -->
       <div v-if="filteredProducts.length > visibleCount" class="mt-8 text-center flex flex-col items-center gap-3">
-        <p class="text-xs text-zinc-500">
+        <p class="text-xs text-zinc-400">
           در حال نمایش {{ visibleCount }} مورد از {{ filteredProducts.length }} محصول
         </p>
         <button 
@@ -638,7 +638,7 @@ const closeChart = () => {
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="closeChart"></div>
         
         <div class="relative w-full max-w-lg bg-[#0a0a0c] border border-zinc-800 rounded-2xl p-6 shadow-2xl animate-fade-in-up overflow-visible">
-          <button @click="closeChart" class="absolute top-4 left-4 text-zinc-500 hover:text-white bg-zinc-900 p-2 rounded-full transition-colors">
+          <button aria-label="بستن نمودار" @click="closeChart" class="absolute top-4 left-4 text-zinc-400 hover:text-white bg-zinc-900 p-2 rounded-full transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
           
@@ -649,18 +649,18 @@ const closeChart = () => {
           </p>
           
           <div v-if="isHistoryLoading" class="flex justify-center py-10">
-            <svg class="animate-spin h-8 w-8 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <svg class="animate-spin h-8 w-8 text-[#ff477e]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
           </div>
           <div v-else-if="extendedHistory.length > 1" class="relative w-full bg-zinc-900/30 rounded-xl border border-zinc-800 p-4 pb-8 pl-4 pr-14 mt-4">
               <!-- Y-Axis (Prices) -->
-              <div class="absolute right-2 top-4 bottom-8 flex flex-col justify-between text-[10px] text-zinc-500 font-mono text-right pointer-events-none">
+              <div class="absolute right-2 top-4 bottom-8 flex flex-col justify-between text-[10px] text-zinc-400 font-mono text-right pointer-events-none">
                 <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.max(...p)); })() }}</span>
                 <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.round((Math.max(...p) + Math.min(...p))/2)); })() }}</span>
                 <span>{{ (() => { const p = chartDataset.map(h => h.price); return new Intl.NumberFormat('fa-IR').format(Math.min(...p)); })() }}</span>
               </div>
               
               <!-- X-Axis (Dates) -->
-              <div class="absolute bottom-2 left-4 right-14 flex justify-between text-[10px] text-zinc-500 font-mono pointer-events-none" dir="ltr">
+              <div class="absolute bottom-2 left-4 right-14 flex justify-between text-[10px] text-zinc-400 font-mono pointer-events-none" dir="ltr">
                 <span>{{ chartDataset.length > 0 ? chartDataset[chartDataset.length - 1].jalaliDate.split(' ')[0] + ' ' + chartDataset[chartDataset.length - 1].jalaliDate.split(' ')[1] : '' }}</span>
                 <span v-if="chartDataset.length > 2">{{ chartDataset[Math.floor(chartDataset.length / 2)].jalaliDate.split(' ')[0] + ' ' + chartDataset[Math.floor(chartDataset.length / 2)].jalaliDate.split(' ')[1] }}</span>
                 <span>{{ chartDataset.length > 0 ? chartDataset[0].jalaliDate.split(' ')[0] + ' ' + chartDataset[0].jalaliDate.split(' ')[1] : '' }}</span>
@@ -734,22 +734,22 @@ const closeChart = () => {
                 >
                   <div class="flex justify-between items-center mb-2 pb-2 border-b border-zinc-800">
                     <span class="text-xs text-zinc-400 font-mono">{{ point.jalaliDate }}</span>
-                    <span class="text-sm font-bold text-white">{{ new Intl.NumberFormat('fa-IR').format(point.price) }} <span class="text-[10px] text-zinc-500 font-normal">تومان</span></span>
+                    <span class="text-sm font-bold text-white">{{ new Intl.NumberFormat('fa-IR').format(point.price) }} <span class="text-[10px] text-zinc-400 font-normal">تومان</span></span>
                   </div>
                   
                   <div class="space-y-1.5">
                     <div class="flex justify-between text-xs">
-                      <span class="text-zinc-500">تغییر:</span>
+                      <span class="text-zinc-400">تغییر:</span>
                       <span :class="point.change_percent > 0 ? 'text-red-400' : point.change_percent < 0 ? 'text-green-400' : 'text-zinc-300'" dir="ltr">
                         {{ point.change_percent ? (point.change_percent > 0 ? '+' : '') + point.change_percent + '%' : 'ثابت' }}
                       </span>
                     </div>
                     <div v-if="point.old_price" class="flex justify-between text-xs">
-                      <span class="text-zinc-500">قیمت قبلی:</span>
+                      <span class="text-zinc-400">قیمت قبلی:</span>
                       <span class="text-zinc-300">{{ new Intl.NumberFormat('fa-IR').format(point.old_price) }}</span>
                     </div>
                     <div v-if="point.reason" class="flex justify-between text-xs mt-2 pt-2 border-t border-zinc-800/50">
-                      <span class="text-zinc-500 shrink-0 ml-2">علت:</span>
+                      <span class="text-zinc-400 shrink-0 ml-2">علت:</span>
                       <span class="text-amber-400/90 text-right leading-relaxed">{{ point.reason }}</span>
                     </div>
                   </div>
@@ -759,13 +759,13 @@ const closeChart = () => {
               </div>
             </div>
             
-            <div class="flex justify-between mt-9 text-[10px] text-zinc-500 px-1">
+            <div class="flex justify-between mt-9 text-[10px] text-zinc-400 px-1">
               <span>قدیمی‌تر</span>
               <span>جدیدترین</span>
             </div>
             </div>
             </div>
-            <div v-else class="text-center py-10 text-zinc-500">
+            <div v-else class="text-center py-10 text-zinc-400">
             اطلاعات کافی برای رسم نمودار وجود ندارد.
           </div>
         </div>

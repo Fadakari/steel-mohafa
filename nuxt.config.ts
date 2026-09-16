@@ -2,10 +2,17 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxt/image'
   ],
+  image: {
+    format: ['webp'],
+    quality: 90,
+    domains: ['images.unsplash.com', 'ui-avatars.com']
+  },
   app: {
     head: {
+      htmlAttrs: { lang: 'fa', dir: 'rtl' },
       title: 'استیل مهفا',
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -28,11 +35,11 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  features: {
+    inlineStyles: true
+  },
+
   routeRules: {
-    '/': { prerender: true },
-    '/blog/**': { swr: 3600 },
-    // کشینگ کاملاً ایمن و بدون تداخل بر اساس URL دقیق
-    '/api/categories': { swr: 300 }
   },
 
   compatibilityDate: '2025-01-15',
@@ -45,13 +52,7 @@ export default defineNuxtConfig({
       }
     }
   },
-
   nitro: {
-    storage: {
-      cache: {
-        driver: 'fs',
-        base: './cache'
-      }
-    }
+    preset: 'node-server'
   }
 })

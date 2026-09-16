@@ -52,7 +52,7 @@ const modules = [Autoplay, EffectFade, Navigation, Pagination]
         ></div>
 
         <!-- Main Image: object-contain with left-bottom focal point to ensure watermark visibility -->
-        <img
+        <NuxtImg
           :src="img.src"
           :alt="img.alt"
           class="w-full h-full object-contain object-left-bottom z-10 transition-transform duration-700 hover:scale-[1.02]"

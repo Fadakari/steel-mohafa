@@ -6,14 +6,14 @@
         
         <div class="space-y-4">
           <h3 class="text-white font-black text-xl mb-4">استیل مهفا</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">
+          <p class="text-gray-400 text-sm leading-relaxed">
             مرجع تخصصی تامین مقاطع استیل صنعتی و دکوراتیو در ایران. کیفیت، دقت و سرعت را در زنجیره تامین خود تجربه کنید.
           </p>
         </div>
 
         <div>
           <h4 class="text-white font-bold mb-6">دسترسی سریع</h4>
-          <ul class="space-y-3 text-sm text-gray-500">
+          <ul class="space-y-3 text-sm text-gray-400">
             <li><NuxtLink to="/products" class="hover:text-[#ff477e] transition-colors">لیست محصولات</NuxtLink></li>
             <li><NuxtLink to="/calculator" class="hover:text-[#ff477e] transition-colors">محاسبه‌گر وزن استیل</NuxtLink></li>
             <li><NuxtLink to="/about" class="hover:text-[#ff477e] transition-colors">درباره ما</NuxtLink></li>
@@ -34,7 +34,7 @@
                 ۰۲۱-۶۶۳۹۱۴۱۷
               </a>
             </li>
-            <li class="pt-2 text-xs text-gray-600">تهران، بازار آهن، پلاک ...</li>
+            <li class="pt-2 text-xs text-gray-400">تهران، بازار آهن، پلاک ...</li>
           </ul>
         </div>
 
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <div class="pt-8 border-t border-white/5 text-center text-gray-600 text-xs">
+      <div class="pt-8 border-t border-white/5 text-center text-gray-400 text-xs">
         © ۲۰۲۶ کلیه حقوق برای استیل مهفا محفوظ است. طراحی و توسعه هوشمند.
       </div>
     </div>

@@ -3,28 +3,28 @@
   
   <div v-if="pending" class="min-h-screen bg-[#050505] pt-32 pb-12 flex justify-center items-center">
     <div class="flex flex-col items-center gap-4">
-      <svg class="animate-spin h-10 w-10 text-[#84012B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-      <span class="text-zinc-500 text-sm font-mono animate-pulse">در حال بارگذاری دانشنامه...</span>
+      <svg class="animate-spin h-10 w-10 text-[#ff477e]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+      <span class="text-zinc-400 text-sm font-mono animate-pulse">در حال بارگذاری دانشنامه...</span>
     </div>
   </div>
 
   <div v-else-if="error || !article" class="min-h-screen bg-[#050505] pt-32 pb-12 flex flex-col items-center justify-center text-center px-4">
-    <div class="w-24 h-24 mb-6 text-zinc-800">
+    <div class="w-24 h-24 mb-6 text-zinc-400">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
     </div>
     <h1 class="text-2xl md:text-3xl text-white font-black mb-4">مقاله مورد نظر پیدا نشد یا حذف شده است!</h1>
-    <p class="text-zinc-500 mb-8 max-w-md">ممکن است آدرس را اشتباه وارد کرده باشید یا این مقاله به بخش دیگری منتقل شده باشد.</p>
+    <p class="text-zinc-400 mb-8 max-w-md">ممکن است آدرس را اشتباه وارد کرده باشید یا این مقاله به بخش دیگری منتقل شده باشد.</p>
     <NuxtLink to="/blog" class="px-6 py-3 bg-white/5 hover:bg-[#84012B] border border-white/10 rounded-xl text-white font-bold transition-all flex items-center gap-2">
       <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       بازگشت به مرکز مقالات
     </NuxtLink>
   </div>
 
-  <article v-else class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012b7a] selection:text-white">
-    <div class="max-w-[850px] mx-auto">
+  <main v-else class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012b7a] selection:text-white">
+    <article class="max-w-[850px] mx-auto">
       
       <nav aria-label="Breadcrumb" class="mb-8 md:mb-12">
-        <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-500">
+        <ol class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-mono text-zinc-400">
           <li><NuxtLink to="/" class="hover:text-white transition-colors">خانه</NuxtLink></li>
           <li>/</li>
           <li><NuxtLink to="/blog" class="hover:text-white transition-colors">دانشنامه استیل</NuxtLink></li>
@@ -40,39 +40,47 @@
         
         <div class="flex flex-wrap items-center gap-6 text-sm text-zinc-400 font-mono border-y border-white/5 py-4">
           <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            <span>{{ new Date(article.publishedAt).toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span><ClientOnly fallback="" ><span v-text="new Date(article.publishedAt).toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' })"></span></ClientOnly></span>
           </div>
           <div class="w-1 h-1 rounded-full bg-zinc-700 hidden md:block"></div>
           <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span>زمان مطالعه: {{ readingTime }} دقیقه</span>
           </div>
           <div class="w-1 h-1 rounded-full bg-zinc-700 hidden md:block"></div>
           <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
             <span>مهندس اصغر فرخ‌نیا</span>
           </div>
         </div>
       </header>
 
       <div v-if="article.imageUrl" class="relative w-full aspect-[16/9] md:aspect-[2/1] mb-12 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-        <img :src="`${useRuntimeConfig().public.apiBase}/assets/${article.imageUrl}`" :alt="article.title" class="w-full h-full object-cover" />
+        <NuxtImg 
+          :src="`${config.public.apiBase}/assets/${article.imageUrl}?width=1200&format=webp&quality=80`" 
+          :alt="article.title" 
+          width="1200" 
+          height="600" 
+          fetchpriority="high" 
+          preload 
+          class="w-full h-full object-cover" 
+        />
         <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80"></div>
       </div>
 
       <div v-if="toc.length > 0" class="mb-12 bg-[#0a0a0c] border border-white/10 rounded-2xl p-6 md:p-8">
-        <h3 class="text-xl font-black text-white mb-6 flex items-center gap-2">
-          <svg class="w-5 h-5 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+        <h2 class="text-xl font-black text-white mb-6 flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
           فهرست مطالب این مقاله
-        </h3>
+        </h2>
         <ul class="space-y-3">
           <li v-for="item in toc" :key="item.id" class="text-zinc-200 font-bold">
             <button 
               @click="scrollToSection(item.id)"
               class="text-right hover:text-[#ff477e] transition-colors flex items-start gap-2 group w-full"
             >
-              <span class="text-[#84012B] mt-1 shrink-0">▪</span>
+              <span class="text-[#ff477e] mt-1 shrink-0">▪</span>
               <span class="group-hover:translate-x-[-4px] transition-transform duration-300">{{ item.text }}</span>
             </button>
           </li>
@@ -83,17 +91,24 @@
 
       <div class="mt-16 mb-8 p-6 md:p-8 bg-[#0a0a0c] border border-white/5 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
         <div class="shrink-0 relative">
-          <img src="https://ui-avatars.com/api/?name=Asghar+Farahnia&background=84012B&color=fff" alt="مهندس اصغر فرخ‌نیا" class="w-24 h-24 rounded-full object-cover border-2 border-[#84012B] p-1" />
+          <NuxtImg 
+            src="https://ui-avatars.com/api/?name=Asghar+Farahnia&background=84012B&color=fff" 
+            alt="مهندس اصغر فراهنیا" 
+            width="96" 
+            height="96" 
+            loading="lazy" 
+            class="w-24 h-24 rounded-full object-cover border-2 border-[#84012B] p-1" 
+          />
           <div class="absolute -bottom-2 -right-2 bg-[#050505] p-1.5 rounded-full border border-white/10">
-            <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
           </div>
         </div>
         
         <div class="flex flex-col text-center md:text-right w-full">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
             <div>
-              <h3 class="text-lg font-black text-white">مهندس اصغر فرخ‌نیا</h3>
-              <span class="text-xs text-zinc-500 font-mono">کارشناس ارشد متالورژی و تحلیلگر بازار فولاد</span>
+              <h2 class="text-lg font-black text-white">مهندس اصغر فرخ‌نیا</h2>
+              <span class="text-xs text-zinc-400 font-mono">کارشناس ارشد متالورژی و تحلیلگر بازار فولاد</span>
             </div>
             
             <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-3 py-1.5 bg-[#0077b5]/10 text-[#0077b5] hover:bg-[#0077b5] hover:text-white rounded-lg transition-colors text-xs font-bold mx-auto md:mx-0 border border-[#0077b5]/20">
@@ -110,10 +125,10 @@
       <div v-if="relatedArticles && relatedArticles.length > 0" class="mt-20 pt-12 border-t border-white/5 relative">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#84012B] to-transparent opacity-50"></div>
         
-        <h3 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
-          <svg class="w-6 h-6 text-[#84012B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14"></path></svg>
+        <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
+          <svg class="w-6 h-6 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14"></path></svg>
           شاید برای شما جالب باشد
-        </h3>
+        </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <NuxtLink 
@@ -123,23 +138,26 @@
             class="group bg-[#0a0a0c] border border-white/5 rounded-xl overflow-hidden hover:border-[#84012B]/50 transition-all duration-300 flex flex-col"
           >
             <div class="w-full h-40 overflow-hidden relative bg-[#111113]">
-              <img 
+              <NuxtImg 
                 v-if="relArticle.imageUrl" 
-                :src="`${useRuntimeConfig().public.apiBase}/assets/${relArticle.imageUrl}`" 
+                :src="`${config.public.apiBase}/assets/${relArticle.imageUrl}?width=400&height=250&quality=80&format=webp`" 
                 :alt="relArticle.title" 
-                class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                width="400" 
+                height="250" 
+                loading="lazy"
+                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
               />
-              <div v-else class="w-full h-full flex items-center justify-center text-zinc-700">
+              <div v-else class="w-full h-full flex items-center justify-center text-zinc-400">
                 <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               </div>
             </div>
             
             <div class="p-5 flex flex-col flex-grow">
-              <h4 class="text-sm font-bold text-zinc-200 leading-snug group-hover:text-white transition-colors line-clamp-2 mb-3">
+              <h3 class="text-sm font-bold text-zinc-200 leading-snug group-hover:text-white transition-colors line-clamp-2 mb-3">
                 {{ relArticle.title }}
-              </h4>
-              <div class="mt-auto flex items-center justify-between text-xs text-zinc-500 font-mono">
-                <span>{{ new Date(relArticle.publishedAt).toLocaleDateString('fa-IR') }}</span>
+              </h3>
+              <div class="mt-auto flex items-center justify-between text-xs text-zinc-400 font-mono">
+                <span><ClientOnly fallback="" ><span v-text="new Date(relArticle.publishedAt).toLocaleDateString('fa-IR')"></span></ClientOnly></span>
                 <span class="text-[#ff477e] group-hover:translate-x-[-4px] transition-transform duration-300">مطالعه ➔</span>
               </div>
             </div>
@@ -162,11 +180,12 @@
         </div>
       </footer>
 
-    </div>
-  </article>
+    </article>
+  </main>
 </template>
 
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const route = useRoute()
 const rawSlug = Array.isArray(route.params.slug) ? route.params.slug[0] : route.params.slug
 
@@ -211,7 +230,7 @@ const canonicalUrl = `https://mohafa.com/blog/${rawSlug}`
 useHead(() => {
   if (!article.value) return {}
 
-  const articleImageUrl = article.value.imageUrl ? `${useRuntimeConfig().public.apiBase}/assets/${article.value.imageUrl}` : 'https://mohafa.com/default-blog-image.jpg'
+  const articleImageUrl = article.value.imageUrl ? `${config.public.apiBase}/assets/${article.value.imageUrl}` : 'https://mohafa.com/default-blog-image.jpg'
 
   const schemas = []
 
@@ -319,6 +338,8 @@ const processedContent = computed(() => {
     // ۲. تبدیل کدهای مخرب مثل &zwnj; به نیم‌فاصله واقعی و &nbsp; به فاصله
     cleanText = cleanText.replace(/&zwnj;/g, '\u200C').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
     
+    if (!cleanText.trim()) return ''
+
     // ۳. ساخت ID
     const id = cleanText.replace(/\s+/g, '-').replace(/[^\w\u0600-\u06FF\u200C-]/g, '')
     
