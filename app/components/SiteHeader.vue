@@ -26,7 +26,7 @@ const closeMobileMenu = () => {
     <nav itemscope itemtype="https://schema.org/SiteNavigationElement" aria-label="منوی اصلی" class="max-w-7xl mx-auto px-4 md:px-6 h-[80px] flex items-center justify-between">
       
       <NuxtLink to="/" class="flex items-center gap-2 z-50" aria-label="صفحه اصلی استیل مهفا">
-        <NuxtImg src="/header-logo.png" alt="لوگوی مهفا" width="158" height="105" class="brand-logo w-auto h-15"
+        <NuxtImg src="/header-logo.webp" alt="لوگوی مهفا" width="158" height="105" class="brand-logo w-auto h-15"
           format="webp"
           quality="90"
           loading="eager"

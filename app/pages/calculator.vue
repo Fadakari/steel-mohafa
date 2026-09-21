@@ -161,12 +161,12 @@ useSeoMeta({
   ogDescription:
     'محاسبه آنلاین وزن ورق، لوله، میلگرد، پروفیل و شش‌پر استیل با فرمول‌های مهندسی، به همراه جدول کامل وزن استیل.',
   ogUrl: 'https://mohafa.com/calculator',
-  ogImage: 'https://mohafa.com/header-logo.png',
+  ogImage: 'https://mohafa.com/header-logo.webp',
 
   twitterCard: 'summary_large_image',
   twitterTitle: 'محاسبه وزن استیل، آهن و فولاد | ماشین‌حساب آنلاین',
   twitterDescription: 'محاسبه دقیق وزن انواع مقاطع استیل با فرمول‌های مهندسی و جدول وزن کامل.',
-  twitterImage: 'https://mohafa.com/header-logo.png'
+  twitterImage: 'https://mohafa.com/header-logo.webp'
 })
 
 useHead({
@@ -184,7 +184,7 @@ useHead({
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Any',
         url: 'https://mohafa.com/calculator',
-        image: 'https://mohafa.com/header-logo.png',
+        image: 'https://mohafa.com/header-logo.webp',
         description:
           'ماشین حساب آنلاین محاسبه وزن انواع مقاطع استیل شامل ورق استیل، لوله استیل، میلگرد استیل، پروفیل استیل و شش پر استیل.',
         offers: {
@@ -198,7 +198,7 @@ useHead({
           url: 'https://mohafa.com',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://mohafa.com/header-logo.png'
+            url: 'https://mohafa.com/header-logo.webp'
           }
         }
       })

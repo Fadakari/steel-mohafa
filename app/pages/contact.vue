@@ -29,7 +29,6 @@
             <h2 class="text-2xl font-bold mb-10 border-b border-white/10 pb-4 text-white">راه‌های ارتباطی</h2>
             
             <div class="space-y-8 relative z-10">
-              
               <!-- تلفن‌های تماس -->
               <div class="flex items-start gap-5 group">
                 <div class="w-12 h-12 shrink-0 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:bg-[#84012B] group-hover:border-[#84012B] transition-all duration-300">
@@ -63,7 +62,7 @@
                 <div class="flex flex-col gap-1">
                   <span class="block text-xs font-mono text-zinc-400 tracking-wider">HEADQUARTERS</span>
                   <address class="text-base text-zinc-300 not-italic leading-relaxed">
-                    تهران، بزرگراه فتح، بازار آهن شادآباد، مجتمع تجاری پاییزان، بلوک ۲، پلاک ۱۸
+                    تهران، بزرگراه فتح، کیلومتر 4، مرکز تجارت استیل ایران، پلاک  238
                   </address>
                 </div>
               </div>
@@ -156,7 +155,7 @@ useHead({
         "email": "info@mohafa.com",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "بزرگراه فتح، بازار آهن شادآباد، مجتمع تجاری پاییزان، بلوک ۲، پلاک ۱۸",
+          "streetAddress": "تهران، بزرگراه فتح، کیلومتر 4، مرکز تجارت استیل ایران، پلاک  238",
           "addressLocality": "تهران",
           "addressRegion": "تهران",
           "addressCountry": "IR"
@@ -180,10 +179,6 @@ useHead({
             "opens": "08:30",
             "closes": "13:00"
           }
-        ],
-        "sameAs": [
-          "https://www.instagram.com/steelmahfa",
-          "https://t.me/steelmahfa"
         ]
       })
     },

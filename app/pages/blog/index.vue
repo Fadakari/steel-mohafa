@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012b7a] selection:text-white">
+  <main class="min-h-screen bg-[#050505] pt-28 md:pt-36 pb-20 px-4 md:px-8 selection:bg-[#84012b7a] selection:text-white">
     <div class="max-w-6xl mx-auto">
       
       <header class="mb-12 md:mb-16 text-center md:text-right border-b border-white/5 pb-8 relative">
@@ -39,6 +39,7 @@
               height="280"
               :fetchpriority="index === 0 ? 'high' : 'auto'"
               :preload="index === 0"
+              crossorigin="anonymous"
               class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
             />
             <div v-else class="w-full h-full flex items-center justify-center text-zinc-400">
@@ -78,7 +79,7 @@
       </div>
 
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

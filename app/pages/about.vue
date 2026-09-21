@@ -238,9 +238,10 @@
               
               <div class="relative w-28 h-28 mb-5">
                 <NuxtImg :src="member.image"
-                  :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای استعلام قیمت روز استیل'" 
-                  :title="'تماس با ' + member.name + ' جهت خرید مقاطع استنلس استیل از مهفا'"
-                  class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
+                    :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای مشاوره خرید ورق استیل'" 
+                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از مهفا'"
+                    width="200" height="200" format="webp" quality="80" loading="lazy"
+                    class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300" />
               </div>
               
               <h3 class="font-black text-white text-lg mb-1">{{ member.name }}</h3>
@@ -292,11 +293,11 @@ import 'swiper/css/navigation';
 
 // اطلاعات استاتیک تیم
 const teamMembers = ref([
-  { id: 1, name: 'مهندس آرش کریمی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
-  { id: 2, name: 'مهندس مریم حسینی', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
-  { id: 3, name: 'مهندس رضا طاهری', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
-  { id: 4, name: 'مهندس الناز راد', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop' },
-  { id: 5, name: 'مهندس امید کاظمی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
+  { id: 1, name: 'مهندس مهدی صفرقلی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
+  { id: 2, name: 'مهندس مالک فرخنیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: '/team/asghar-farahnia-pipes-fittings.jpg' },
+  { id: 3, name: 'مهندس کیمیا نجفی', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: '/team/kimia-najafi-decorative-sections.jpg' },
+  { id: 4, name: 'مهندس مریم مرادی', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: '/team/maryam-moradi-b2b-market-development.jpg' },
+  { id: 5, name: 'مهندس افسانه مرادی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: '/team/afsaneh-moradi-quality-control-manager.jpg' }
 ]);
 
 // ۱. سئوی متادیتاها
@@ -340,7 +341,7 @@ useHead({
           "legalName": "شرکت مهندسی فروش استیل مهفا",
           "url": "https://mohafa.com",
           "logo": "https://mohafa.com/logo.png",
-          "image": "https://mohafa.com/header-logo.png",
+          "image": "https://mohafa.com/header-logo.webp",
           "foundingDate": "2008",
           "description": "مرجع تخصصی فروش بی‌واسطه آهن‌آلات و فولاد ضد زنگ در بازار آهن تهران.",
           "address": {

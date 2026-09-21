@@ -39,27 +39,7 @@ export default defineEventHandler(async (event) => {
           select: {
             id: true,
             title: true,
-            slug: true,
-            products: {
-          where: {
-            is_active: true
-          },
-          orderBy: {
-            sort: 'asc'
-          },
-          take: take,
-          skip: skip,
-              include: {
-                product_pricing_attributes: true,
-                price_history: {
-                  take: 5,
-                  orderBy: [
-                  { date_created: 'desc' },
-                  { id: 'desc' }
-                ]
-                }
-              }
-            }
+            slug: true
           }
         },
         // Fetch products within this category

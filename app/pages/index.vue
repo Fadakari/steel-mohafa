@@ -5,7 +5,7 @@
       
       <div class="absolute mt-30 z-0 pointer-events-none">
         <picture class="block w-full h-full">
-          <source media="(max-width: 767px)" :srcset="'/hero-mobile.webp'">
+          <source media="(max-width: 767px)" :srcset="img('/hero-mobile.webp', { width: 768, format: 'webp', quality: 80 })">
           <NuxtImg 
             src="/hero-bg.webp" 
             alt="استیل مهفا مرجع تخصصی خرید و قیمت روز ورق و لوله استیل در ایران" 
@@ -486,9 +486,10 @@
               
               <div class="relative w-28 h-28 mb-5">
                 <NuxtImg :src="member.image"
-                  :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای استعلام قیمت روز استیل'" 
-                  :title="'تماس با ' + member.name + ' جهت خرید مقاطع استنلس استیل از مهفا'"
-                  class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />
+                    :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای مشاوره خرید ورق استیل'" 
+                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از مهفا'"
+                    width="200" height="200" format="webp" quality="80" loading="lazy"
+                    class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300" />
               </div>
               
               <h3 class="font-black text-white text-lg mb-1">{{ member.name }}</h3>
@@ -678,15 +679,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+const img = useImage()
 const isSeoTextExpanded = ref(false)
 
 
 const teamMembers = ref([
   { id: 1, name: 'مهندس مهدی صفرقلی', role: 'مدیر دپارتمان ورق استیل', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
-  { id: 2, name: 'مهندس اصغر فرخ‌نیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
-  { id: 3, name: 'مهندس کیمیا نجفی', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
-  { id: 4, name: 'مهندس الناز راد', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop' },
-  { id: 5, name: 'مهندس امید کاظمی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
+  { id: 2, name: 'مهندس مالک فرخنیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', image: '/team/asghar-farahnia-pipes-fittings.jpg' },
+  { id: 3, name: 'مهندس کیمیا نجفی', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', image: '/team/kimia-najafi-decorative-sections.jpg' },
+  { id: 4, name: 'مهندس مریم مرادی', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', image: '/team/maryam-moradi-b2b-market-development.jpg' },
+  { id: 5, name: 'مهندس افسانه مرادی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', image: '/team/afsaneh-moradi-quality-control-manager.jpg' }
 ]);
 
 // Observer برای انیمیشن بخش اعتماد
@@ -754,7 +756,6 @@ const organizationSchema = {
   "sameAs": [
     // TODO: هر پروفایل رسمی و فعال دیگری (لینکدین، آپارات، واتس‌اپ بیزینس و ...) را اضافه کنید
     "https://instagram.com/steelmahfa",
-    "https://ble.ir/steelsara"
   ]
 }
 
@@ -861,7 +862,6 @@ const localBusinessSchema = computed(() => {
     "sameAs": [
       // TODO: هر پروفایل رسمی و فعال دیگری (لینکدین، آپارات، واتس‌اپ بیزینس و ...) را اضافه کنید
       "https://instagram.com/steelmahfa",
-      "https://ble.ir/steelsara"
     ]
   }
 })

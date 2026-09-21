@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:8055'
+      apiBase: process.env.API_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://cms.mohafa.com' : 'http://localhost:8055')
     }
   },
   devtools: {
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   features: {
-    inlineStyles: true
+    inlineStyles: false
   },
 
   routeRules: {
@@ -53,6 +53,9 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
+    routeRules: {
+      '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } }
+    },
     preset: 'node-server'
   }
 })
