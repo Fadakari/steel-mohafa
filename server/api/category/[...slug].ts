@@ -2,22 +2,20 @@ import { prisma } from '../../utils/prisma'
 
 export default defineEventHandler(async (event) => {
   const rawSlug = getRouterParam(event, 'slug')
-  const query = getQuery(event)
-  const page = parseInt(query.page) || 1
-  const take = 50
-  const skip = (page - 1) * take
-  
-  setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
-  setHeader(event, 'pragma', 'no-cache')
-  setHeader(event, 'expires', '0')
-  removeResponseHeader(event, 'ETag')
-  removeResponseHeader(event, 'Last-Modified')
   
   if (!rawSlug) {
     throw createError({ statusCode: 400, statusMessage: 'Slug is required' })
   }
 
-  const slugs = rawSlug.split('/')
+    let decodedSlug = rawSlug;
+  try {
+    decodedSlug = decodeURIComponent(rawSlug);
+    if (decodedSlug.includes('%')) {
+        decodedSlug = decodeURIComponent(decodedSlug);
+    }
+  } catch (e) {}
+
+  const slugs = decodedSlug.split('/')
   const targetSlug = slugs[slugs.length - 1].replace(/ي/g, 'ی').replace(/ك/g, 'ک')
   const parentSlug = slugs.length > 1 ? slugs[slugs.length - 2].replace(/ي/g, 'ی').replace(/ك/g, 'ک') : null
 
@@ -43,19 +41,23 @@ export default defineEventHandler(async (event) => {
           }
         },
         // Fetch products within this category
-        products: {
+                products: {
           where: {
             is_active: true
           },
           orderBy: {
             sort: 'asc'
           },
-          take: take,
-          skip: skip,
           include: {
-            product_pricing_attributes: true,
-            // Fetch the last 5 price records for charting/display
+            product_pricing_attributes: {
+              select: {
+                unit: true,
+                calculated_total_price_per_unit: true,
+                calculated_price_per_kg: true
+              }
+            },
             price_history: {
+              select: { id: true, date_created: true },
               take: 5,
               orderBy: [
                   { date_created: 'desc' },
@@ -76,16 +78,35 @@ export default defineEventHandler(async (event) => {
       products: [...(categoryData.products || [])]
     }
 
-    if (result.other_categories && result.other_categories.length > 0) {
-      for (const subCat of result.other_categories) {
-        if (subCat.products && subCat.products.length > 0) {
-          const subProducts = subCat.products.map((p: any) => ({
-            ...p,
-            subcategory_title: subCat.title
-          }))
-          result.products.push(...subProducts)
+        if (result.other_categories && result.other_categories.length > 0) {
+      const subCatIds = result.other_categories.map((c: any) => c.id)
+            const subProducts = await prisma.products.findMany({
+        where: {
+          category_id: { in: subCatIds },
+          is_active: true
+        },
+        orderBy: { sort: 'asc' },
+        include: {
+          product_pricing_attributes: {
+            select: {
+              unit: true,
+              calculated_total_price_per_unit: true,
+              calculated_price_per_kg: true
+            }
+          },
+          price_history: {
+            select: { id: true, date_created: true },
+            take: 5,
+            orderBy: [{ date_created: 'desc' }, { id: 'desc' }]
+          }
         }
-      }
+      })
+      const subCatMap = new Map(result.other_categories.map((c: any) => [c.id, c.title]))
+      const formattedSubProducts = subProducts.map((p: any) => ({
+        ...p,
+        subcategory_title: subCatMap.get(p.category_id)
+      }))
+      result.products.push(...formattedSubProducts)
     }
 
     return result

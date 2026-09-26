@@ -1,0 +1,1 @@
+  const targetSlug = slugs[slugs.length - 1].replace(/┘è/g, '█î').replace(/┘â/g, '┌⌐')

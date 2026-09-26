@@ -3,6 +3,8 @@ definePageMeta({
   key: route => String(route.params.slug)
 })
 
+throw createError({ statusCode: 404, statusMessage: 'Page Not Found', fatal: true });
+
 const route = useRoute()
 const router = useRouter()
 
@@ -870,6 +872,8 @@ useHead(() => {
   return {
     title: pageTitle,
     meta: [
+        { name: 'robots', content: 'noindex, nofollow' },
+        { name: 'googlebot', content: 'noindex, nofollow' },
       { name: 'description', content: pageDescription },
       
       // تگ‌های Open Graph

@@ -39,7 +39,7 @@
               height="280"
               :fetchpriority="index === 0 ? 'high' : 'auto'"
               :preload="index === 0"
-              crossorigin="anonymous"
+              
               class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
             />
             <div v-else class="w-full h-full flex items-center justify-center text-zinc-400">
