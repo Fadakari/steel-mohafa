@@ -1,4 +1,7 @@
-import { prisma } from '../../../utils/prisma'
+import codecs
+
+# 1. Update API
+api_content = '''import { prisma } from '../../../utils/prisma'
 
 export default defineEventHandler(async (event) => {
   setHeader(event, 'cache-control', 'no-store, no-cache, must-revalidate, max-age=0')
@@ -53,3 +56,30 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: 'Failed to fetch price history' })
   }
 })
+'''
+
+with codecs.open('server/api/products/[id]/price-history.ts', 'w', 'utf-8') as f:
+    f.write(api_content)
+
+
+# 2. Update Vue component
+content = codecs.open('app/components/PricingTable.vue', 'r', 'utf-8').read()
+
+import re
+
+content = re.sub(
+    r'\{\{\s*point\.source\s*===\s*\'mysql_trigger_auto\'\s*\?\s*\'[^\']+\'\s*:\s*\'[^\']+\'\s*\}\}', 
+    '{{ point.reason || \\\'نوسانات بازار\\\' }}', 
+    content
+)
+
+content = content.replace('point.change > 0', 'point.change_percent > 0')
+content = content.replace('point.change < 0', 'point.change_percent < 0')
+content = content.replace('point.change === 0', 'point.change_percent === 0')
+content = content.replace('{{ point.changePercentage }}%', '{{ point.change_percent }}%')
+
+
+with codecs.open('app/components/PricingTable.vue', 'w', 'utf-8') as f:
+    f.write(content)
+
+print("Updates applied")

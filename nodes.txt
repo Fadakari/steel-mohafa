@@ -1,0 +1,53 @@
+        </div>
+
+        <div class="hidden lg:flex justify-between items-center mb-4 border-b border-white/5 pb-4 shrink-0 mt-2">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#ff477e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            فیلتر پیشرفته
+          </h2>
+        </div>
+
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-0 lg:pr-2">
+          <div v-if="Object.keys(availableFilters).length > 0" class="space-y-3">
+                                <span v-if="selectedFilters[filterKey]?.length > 0" class="bg-[#84012B] text-white text-[10px] px-1.5 py-0.5 rounded-md">
+                      {{ selectedFilters[filterKey].length }} انتخاب
+                    </span>
+                    <svg 
+                      class="w-4 h-4 text-zinc-400 transition-transform duration-300"
+                      :class="openAccordions[filterKey] ? 'rotate-180' : ''"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div         <button 
+          @click="isMobileFilterOpen = true"
+          class="w-full max-w-sm bg-white text-black py-3 rounded-xl font-bold flex justify-center items-center gap-2 active:scale-95 transition-transform text-sm shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          فیلتر مشخصات و جستجو
+        </button>
+      </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 max-w-4xl bg-[#08080a] rounded-2xl border border-zinc-800 p-4 md:p-6 shadow-xl relative">
+      
+      <!-- Sticky Active Filters & VAT Bar -->
+      <div class="sticky top-[75px] z-40 flex flex-col md:flex-row justify-between items-start md:items-center bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 p-3 md:p-4 rounded-xl shadow-lg mb-6 gap-4">              <!-- Hoverable HTML points over the SVG -->
+              <div 
+                v-for="(point, idx) in [...chartDataset].reverse()" 
+                :key="point.id"
+                class="absolute w-4 h-4 -ml-2 -mt-2 rounded-full pointer-events-none flex items-center justify-center z-10 transition-all duration-75"
+                :style="{
+                  left: (() => {
+                      const len = chartDataset.length - 1 || 1;
+                    return (idx / len) * 100 + '%';
+                  })(),
+                  top: (() => {
+                    const prices = chartDataset.map(h => h.price || 0);
+                    const max = Math.max(...prices);
+                    const min = Math.min(...prices);

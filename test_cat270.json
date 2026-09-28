@@ -1,0 +1,47 @@
+[
+  {
+    "id": 35459,
+    "dimensions": "10x10 mm",
+    "thickness": 0.6,
+    "finish_surface": "طلایی میرور",
+    "brand_origin": "ساموین تایوان",
+    "calculated_price_per_kg": "1191672.00",
+    "calculated_total_price_per_unit": "2113000.00"
+  },
+  {
+    "id": 35460,
+    "dimensions": "10x10 mm",
+    "thickness": 0.6,
+    "finish_surface": "طلایی میرور",
+    "brand_origin": "سومار",
+    "calculated_price_per_kg": "1191672.00",
+    "calculated_total_price_per_unit": "2113000.00"
+  },
+  {
+    "id": 35461,
+    "dimensions": "10x10 mm",
+    "thickness": 0.6,
+    "finish_surface": "طلایی میرور",
+    "brand_origin": "چاینا (چین)",
+    "calculated_price_per_kg": "1149963.48",
+    "calculated_total_price_per_unit": "2039000.00"
+  },
+  {
+    "id": 35462,
+    "dimensions": "10x10 mm",
+    "thickness": 0.6,
+    "finish_surface": "نقرهای میرور",
+    "brand_origin": "ساموین تایوان",
+    "calculated_price_per_kg": "957751.20",
+    "calculated_total_price_per_unit": "1698000.00"
+  },
+  {
+    "id": 35463,
+    "dimensions": "10x10 mm",
+    "thickness": 0.6,
+    "finish_surface": "نقرهای میرور",
+    "brand_origin": "سومار",
+    "calculated_price_per_kg": "957751.20",
+    "calculated_total_price_per_unit": "1698000.00"
+  }
+]

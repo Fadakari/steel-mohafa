@@ -491,7 +491,7 @@
             ریشه‌های <strong class="text-white">استیل مهفا</strong> در قلب تپنده‌ی صنعت فولاد ایران، یعنی بازار آهن شادآباد شکل گرفت.
             ما از سال ۱۳۸۷ با هدفِ ایجاد شفافیت در قیمت‌گذاری و حذف دلالانِ واسطه، فعالیت خود را آغاز کردیم. در بازاری که اصالتِ آلیاژ
             همواره یک دغدغه است، ما با تکیه بر دانشِ مهندسیِ متالورژی، به واردکننده و توزیع‌کننده‌ی تخصصیِ
-            <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق، لوله و پروفیل استیل ۳۰۴ و ۳۱۶</NuxtLink> تبدیل شدیم.
+            <NuxtLink to="/category/ورق-استیل" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق، لوله و پروفیل استیل ۳۰۴ و ۳۱۶</NuxtLink> تبدیل شدیم.
           </p>
           <p>
             امروز، استیل مهفا با در اختیار داشتنِ انبارهای مجهز و شبکه‌ی تامینِ مستقیم از برترین کارخانجاتِ جهانی نظیر
@@ -576,7 +576,7 @@
             
             <h3 class="text-xl font-bold text-zinc-200 mt-8 mb-4 border-b border-white/5 pb-2 inline-block">تنوع گریدها در خرید ورق استیل (شیت و رول)</h3>
             <p>
-              تامین متریال پایه برای صنایع حساس نیازمند دقت متالورژیکی است. سبد محصولات ما شامل <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۰۴ (نگیر)</NuxtLink> به عنوان پرکاربردترین آلیاژ بازار، و <NuxtLink to="/products" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۱۶ (ضد اسید)</NuxtLink> ویژه صنایع پتروشیمی، دارویی و محیط‌های خورنده می‌باشد. افزون بر این، گریدهای تخصصی نظیر <strong>ورق استیل نسوز ۳۰۹ و ۳۱۰</strong> (مقاوم تا دمای ۱۱۵۰ درجه) و گریدهای اقتصادی <strong>ورق ۲۰۱ و ۴۳۰ (بگیر)</strong> به صورت رول، شیت‌ فابریک و برشی با پرداخت‌های سطحی براق (BA)، مات (2B)، خش‌دار (No.4) و آینه‌ای (Mirror) قابل عرضه می‌باشند.
+              تامین متریال پایه برای صنایع حساس نیازمند دقت متالورژیکی است. سبد محصولات ما شامل <NuxtLink to="/category/ورق-استیل/ورق-استیل-304" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۰۴ (نگیر)</NuxtLink> به عنوان پرکاربردترین آلیاژ بازار، و <NuxtLink to="/category/ورق-استیل" class="text-[#ff477e] hover:text-white transition-colors font-bold">ورق استیل ۳۱۶ (ضد اسید)</NuxtLink> ویژه صنایع پتروشیمی، دارویی و محیط‌های خورنده می‌باشد. افزون بر این، گریدهای تخصصی نظیر <strong>ورق استیل نسوز ۳۰۹ و ۳۱۰</strong> (مقاوم تا دمای ۱۱۵۰ درجه) و گریدهای اقتصادی <strong>ورق ۲۰۱ و ۴۳۰ (بگیر)</strong> به صورت رول، شیت‌ فابریک و برشی با پرداخت‌های سطحی براق (BA)، مات (2B)، خش‌دار (No.4) و آینه‌ای (Mirror) قابل عرضه می‌باشند.
             </p>
 
             <h3 class="text-xl font-bold text-zinc-200 mt-8 mb-4 border-b border-white/5 pb-2 inline-block">پروفیل دکوراتیو و لوله استیل صنعتی</h3>
@@ -643,10 +643,13 @@ const img = useImage()
 const isSeoTextExpanded = ref(false)
 
 const teamMembers = ref([
-  { id: 1, name: 'مهندس مریم مرادی', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', ext: '101', image: '/team/maryam-moradi-b2b-market-development.jpg' },
-  { id: 2, name: 'مهندس کیمیا نجفی', role: 'کارشناس مقاطع دکوراتیو', phone: '021-66391417', ext: '102', image: '/team/kimia-najafi-decorative-sections.jpg' },
-  { id: 3, name: 'مهندس اصغر فراهنیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', ext: '103', image: '/team/asghar-farahnia-pipes-fittings.jpg' },
-  { id: 4, name: 'مهندس افسانه مرادی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', ext: '105', image: '/team/afsaneh-moradi-quality-control-manager.jpg' }
+  { id: 1, name: 'مریم مرادی', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '101', image: '/team/maryam-moradi-steel-sales-manager.webp' },
+  { id: 2, name: 'حاج مالک فرخ نیا', role: 'مدیر فروش لوله و پروفیل', phone: '021-66391417', ext: '102', image: '/team/malek-farahnia-sales-manager.webp' },
+  { id: 3, name: 'کیمیا نجف زاده', role: 'ورق استیل و مقاطع ضخیم بار', phone: '021-66391417', ext: '103', image: '/team/kimia-najafzadeh-heavy-sections-sales.webp' },
+  { id: 4, name: 'ریحانه درخشان زاده', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '104', image: '/team/reyhaneh-derakhshanzadeh-sales-manager.webp' },
+  { id: 5, name: 'افسانه مرادی', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '105', image: '/team/afsaneh-moradi-quality-control-manager.jpg' },
+  { id: 6, name: 'حسابداری', role: 'حسابداری', phone: '021-66391417', ext: '201', image: '/header-logo.webp' },
+  { id: 7, name: 'مدیریت', role: 'مدیریت', phone: '021-66391417', ext: '301 و 302', image: '/header-logo.webp' }
 ]);
 
 
@@ -800,7 +803,7 @@ const localBusinessSchema = computed(() => {
           "itemOffered": {
             "@type": "Product",
             "name": "ورق استیل",
-            "url": "https://mohafa.com/products/ورق-استیل"
+            "url": "https://mohafa.com/category/ورق-استیل"
           }
         },
         {
@@ -808,7 +811,7 @@ const localBusinessSchema = computed(() => {
           "itemOffered": {
             "@type": "Product",
             "name": "لوله استیل صنعتی",
-            "url": "https://mohafa.com/products/لوله-استیل/لوله-استیل-صنعتی"
+            "url": "https://mohafa.com/category/لوله-استیل"
           }
         },
         {
@@ -816,7 +819,7 @@ const localBusinessSchema = computed(() => {
           "itemOffered": {
             "@type": "Product",
             "name": "پروفیل و دکوراتیو استیل",
-            "url": "https://mohafa.com/products/پروفیل-استیل/پروفیل-دکوراتیو-استیل"
+            "url": "https://mohafa.com/category/پروفیل-استیل/پروفیل-استیل-دکوراتیو"
           }
         }
       ]

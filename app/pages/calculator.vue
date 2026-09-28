@@ -346,7 +346,7 @@ useHead({
       </div>
     </section>
 
-    <section id="calculator-seo" class="calculator-seo w-[50%] m-auto mb-[5rem]">
+    <section id="calculator-seo" class="calculator-seo lg:w-[50%] w-[90%] m-auto mb-[5rem]">
       <h2>محاسبه وزن استیل، آهن و فولاد به صورت آنلاین</h2>
 
       <p>
@@ -554,6 +554,11 @@ useHead({
     color: #ffffff;
     margin-bottom: 5rem;
 }
+@media (max-width: 768px) {
+    .faq-section {
+        width: 95%;
+    }
+}
 
 .faq-item{
     margin-top:35px;
@@ -571,28 +576,23 @@ useHead({
 }
 
 .calculator-cta{
-
-margin-top:90px;
-
-padding:50px;
-
-border-radius:24px;
-
-background:linear-gradient(
-135deg,
-#84012B,
-#5f0120
-);
-
-text-align:center;
-
-color:white;
-
-box-shadow:0 15px 40px rgba(132,1,43,.35);
-width: 50%;
-margin: auto;
-margin-bottom: 5rem;
-
+  margin-top:90px;
+  padding:50px;
+  border-radius:24px;
+  background:linear-gradient(
+    135deg,
+    #84012B,
+    #5f0120
+  );
+  text-align:center;
+  color:white;
+  box-shadow:0 15px 40px rgba(132,1,43,.35);
+  width: 50%;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+  margin: auto;
+  margin-bottom: 5rem;
 }
 
 .calculator-cta h2{
@@ -663,6 +663,11 @@ box-shadow:0 10px 30px rgba(255,255,255,.25);
     font-size:2rem;
     font-weight:900;
     margin-bottom:15px;
+}
+@media (max-width: 768px) {
+    .weight-table-section {
+        width: 95%;
+    }
 }
 
 .table-intro{

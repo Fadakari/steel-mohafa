@@ -12,13 +12,13 @@ new_array = """const teamMembers = ref([
 ]);"""
 
 old_nuxt_img = """<NuxtImg :src="member.image"
-                    :alt="member.name + ' - کارشناس فروش شرکت استیل محفا برای مشاوره خرید ورق استیل'" 
-                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از محفا'"
+                    :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای مشاوره خرید ورق استیل'" 
+                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از مهفا'"
                     class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />"""
 
 new_nuxt_img = """<NuxtImg :src="member.image"
-                    :alt="member.name + ' - کارشناس فروش شرکت استیل محفا برای مشاوره خرید ورق استیل'" 
-                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از محفا'"
+                    :alt="member.name + ' - کارشناس فروش شرکت استیل مهفا برای مشاوره خرید ورق استیل'" 
+                    :title="'تماس با ' + member.name + ' برای دریافت لیست قیمت استیل از مهفا'"
                     width="200" height="200" format="webp" quality="80" loading="lazy"
                     class="w-full h-full rounded-full object-cover border-4 border-[#050505] shadow-[0_0_0_2px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_0_2px_#84012B] transition-all duration-300 grayscale group-hover:grayscale-0" />"""
 

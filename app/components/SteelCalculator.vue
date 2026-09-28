@@ -101,7 +101,7 @@ const copyToClipboard = async () => {
 </script>
 
 <template>
-  <div class="calculator-wrapper m-auto my-[4.5rem]">
+  <div class="calculator-wrapper m-auto my-[1rem]">
     
     <div class="material-switch">
       <button class="switch-btn" :class="{ active: material === 'stainless' }" @click="material = 'stainless'">استیل (۳۰۴/۳۱۶)</button>
@@ -263,6 +263,11 @@ input, select, button {
   flex-direction: column;
   gap: 20px;
   width: 50%;
+}
+@media (max-width: 898px) {
+  .calculator-wrapper {
+    width: 90%;
+  }
 }
 
 .divider {

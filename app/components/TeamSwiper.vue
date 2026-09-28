@@ -29,9 +29,9 @@
               <!-- دکمه بصری تماس -->
               <div class="w-full bg-[#050505] border border-white/5 group-hover:bg-[#84012B] group-hover:border-[#84012B] py-3 rounded-xl flex flex-col items-center justify-center transition-colors">
                   <span class="text-[10px] text-zinc-400 font-mono mb-0.5 group-hover:text-white/70 transition-colors">تماس مستقیم</span>
-                  <div class="flex items-center gap-1.5 justify-center">
-                    <span class="text-white font-bold tracking-wider" dir="ltr">{{ member.phone }}</span>
-                    <span v-if="member.ext" class="text-xs bg-white/10 px-1.5 py-0.5 rounded text-white" dir="rtl">داخلی {{ member.ext }}</span>
+                  <div class="flex items-center gap-1.5 justify-center flex-wrap">
+                    <span class="text-white font-bold tracking-wider whitespace-nowrap" dir="ltr">{{ member.phone }}</span>
+                    <span v-if="member.ext" class="text-xs bg-white/10 px-1.5 py-0.5 rounded text-white whitespace-nowrap" dir="rtl">داخلی {{ member.ext }}</span>
                   </div>
                 </div>
             </a>
@@ -48,9 +48,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const teamMembers = ref([
-  { id: 1, name: 'مهندس مریم مرادی', role: 'مدیر توسعه بازار (B2B)', phone: '021-66391417', ext: '101', image: '/team/maryam-moradi-b2b-market-development.jpg' },
-  { id: 2, name: 'مهندس کیمیا نجفی', role: 'سرپرست مقاطع دکوراتیو', phone: '021-66391417', ext: '102', image: '/team/kimia-najafi-decorative-sections.jpg' },
-  { id: 3, name: 'مهندس مالک فرخ‌نیا', role: 'کارشناس لوله و اتصالات', phone: '021-66393755', ext: '103', image: '/team/asghar-farahnia-pipes-fittings.jpg' },
-  { id: 4, name: 'مهندس افسانه مرادی', role: 'مدیر کنترل کیفیت (QC)', phone: '021-66391417', ext: '105', image: '/team/afsaneh-moradi-quality-control-manager.jpg' }
+  { id: 1, name: 'مریم مرادی', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '101', image: '/team/maryam-moradi-steel-sales-manager.webp' },
+  { id: 2, name: 'حاج مالک فرخ نیا', role: 'مدیر فروش لوله و پروفیل', phone: '021-66391417', ext: '102', image: '/team/malek-farahnia-sales-manager.webp' },
+  { id: 3, name: 'کیمیا نجف زاده', role: 'ورق استیل و مقاطع ضخیم بار', phone: '021-66391417', ext: '103', image: '/team/kimia-najafzadeh-heavy-sections-sales.webp' },
+  { id: 4, name: 'ریحانه درخشان زاده', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '104', image: '/team/reyhaneh-derakhshanzadeh-sales-manager.webp' },
+  { id: 5, name: 'افسانه مرادی', role: 'مدیر فروش ورق و مقاطع استیل', phone: '021-66391417', ext: '105', image: '/team/afsaneh-moradi-quality-control-manager.jpg' },
+  { id: 6, name: 'حسابداری', role: 'حسابداری', phone: '021-66391417', ext: '201', image: '/header-logo.webp' },
+  { id: 7, name: 'مدیریت', role: 'مدیریت', phone: '021-66391417', ext: '301 و 302', image: '/header-logo.webp' }
 ]);
 </script>
