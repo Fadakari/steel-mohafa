@@ -24,3 +24,10 @@ logs
 !.env.example
 
 *.zip
+# Temp scripts and logs
+*.py
+*.sql
+*.txt
+*_backup.json
+temp_*.json
+
